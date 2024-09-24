@@ -1,6 +1,7 @@
 #4 bit multiplier
 
 /*
+NOTES:
   B --> multiplier
     This determines we either add a shifted version of the multiplicand to the accumulator or just shift without adding
   A --> Accumulator
@@ -9,13 +10,8 @@
   S --> Multiplicand
     Number we are multiplying by the multiplier. Remains unchanged throughout the process. Shifted left by one
   After we are done multiplying the result should be stored in the Accumulator and Multiplier together. 
-
-
 */
-
-
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
 The multiplier determines whether we will be adding or not
@@ -29,5 +25,5 @@ module controller (input reset, run, clk
                    input [7:0] A, B,
                    output shift, add, sub, clr_ld)
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 module 9_bit_adder(input 
