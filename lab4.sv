@@ -48,34 +48,58 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
                   if(run)
                     next_state = AS0;
                 end 
-                
+
           always_comb
           begin    
             AS0: if(M == 1) 
-                    //add S and A and then shift
-                    next_state = AS1;  
+                  //add S and A and then shift
+                  assign Add = 1;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
+                  next_state = AS1;  
                 else if (M == 0) 
                   //just shift
+                  assign Add = 0;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
                   next_state = AS1;
           end
 
           always_comb
           begin
             AS1: if(M == 1) 
-                    //add S and A and then shift
-                    next_state = AS2;  
+                  //add S and A and then shift
+                  assign Add = 1;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
+                  next_state = AS2;  
                 else if (M == 0) 
                   //just shift
+                  assign Add = 0;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
                   next_state = AS2;
           end
 
           always_comb
           begin
             AS2: if(M == 1) 
-                    //add S and A and then shift
-                    next_state = AS3;  
+                  //add S and A and then shift
+                  assign Add = 1;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
+                  next_state = AS3;  
                 else if (M == 0) 
                   //just shift
+                  assign Add = 0;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
                   next_state = AS3;
           end
 
@@ -83,9 +107,17 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
           begin
             AS3: if(M == 1) 
                     //add S and A and then shift
-                    next_state = AS4;  
+                  assign Add = 1;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
+                  next_state = AS4;  
                 else if (M == 0) 
                   //just shift
+                  assign Add = 0;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
                   next_state = AS4;
           end
 
@@ -93,9 +125,17 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
           begin
             AS4: if(M == 1) 
                     //add S and A and then shift
-                    next_state = AS5;  
+                  assign Add = 1;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
+                  next_state = AS5;  
                 else if (M == 0) 
                   //just shift
+                  assign Add = 0;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
                   next_state = AS5;
           end
 
@@ -103,9 +143,17 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
           begin
             AS5: if(M == 1) 
                     //add S and A and then shift
+                    assign Add = 1;
+                    assign Shift = 1;
+                    assign Sub = 0;
+                    assign Clr_Ld = 0;
                     next_state = AS6;  
                 else if (M == 0) 
                   //just shift
+                  assign Add = 0;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
                   next_state = AS6;
           end 
 
@@ -113,9 +161,17 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
           begin
             AS6: if(M == 1) 
                     //add S and A and then shift
+                    assign Add = 1;
+                    assign Shift = 1;
+                    assign Sub = 0;
+                    assign Clr_Ld = 0;
                     next_state = SS;  
                 else if (M == 0) 
                   //just shift
+                  assign Add = 0;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
                   next_state = SS;
           end
 
@@ -123,9 +179,17 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
           begin
             SS: if(M == 1)
                   //A become A - S and shift
+                  assign Add = 0;
+                  assign Shift = 1;
+                  assign Sub = 1;
+                  assign Clr_Ld = 0;
                   next_state = HALT;
                 else 
-                  /just shift
+                  //just shift
+                  assign Add = 0;
+                  assign Shift = 1;
+                  assign Sub = 0;
+                  assign Clr_Ld = 0;
                   next_state = HALT;
           end
 
@@ -137,9 +201,9 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
         endcase
 
 endmodule
-  
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 module add_sub5(input     [7:0] A, B,
                 input       fn,
                 output    [4:0] S);
@@ -166,8 +230,6 @@ module add_sub5(input     [7:0] A, B,
     
 endmodule
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 module reg_8(input logic      Clk, Reset, Shift_In, Load, Shift_En,
@@ -192,5 +254,11 @@ module reg_8(input logic      Clk, Reset, Shift_In, Load, Shift_En,
  endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+module reg_S(input logic [7:0] S,
+             input logic Shift,
+             output logic [7:0] S_out);
+
+      //sliding switches
 
 
