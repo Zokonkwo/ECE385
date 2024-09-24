@@ -256,7 +256,6 @@ module reg_8(input logic      Clk, Reset, Shift_In, Load, Shift_En,
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 module reg_S(input logic [7:0] S,
-             input logic Shift,
              output logic [7:0] S_out);
 
       //sliding switches
