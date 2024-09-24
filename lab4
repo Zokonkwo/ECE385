@@ -1,16 +1,18 @@
-#4 bit multiplier
 
 /*
 NOTES:
   B --> multiplier
     This determines we either add a shifted version of the multiplicand to the accumulator or just shift without adding
   A --> Accumulator
-    Holds intermiediate results of the multiplication as we add/subtract. Should start at zero and accumulates shiftted multiplicand
-    
+    Holds intermiediate results of the multiplication as we add/subtract. 
+    Should start at zero and accumulates shiftted multiplicand   
   S --> Multiplicand
     Number we are multiplying by the multiplier. Remains unchanged throughout the process. Shifted left by one
   After we are done multiplying the result should be stored in the Accumulator and Multiplier together. 
+
+  Make a register module that has X, A, B input and output
 */
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
@@ -21,9 +23,42 @@ The multiplier determines whether we will be adding or not
   else if m == 0
       then shift XAB
 */
-module controller (input reset, run, clk 
-                   input [7:0] A, B,
-                   output shift, add, sub, clr_ld)
+module controllerFSM (input Reset, run, Clk, LoadA, LoadB,
+                      output Shift_En, Ld_A, Ld_B);
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module 9_bit_adder(input 
+    //declare signals curr_state, next_state of type enum
+    enum logic [3:0] {A,B,C,D,E,F} curr_state, next_state;
+
+    always_ff @ (posedge CLk)
+    begin
+      if (Reset) //Asychronous Reset
+        curr_state <= A; //A is the reset/start state
+      else
+        curr_state <= next_state;
+    end
+
+    //next state logic
+    always_comb
+    begin
+        case()
+
+
+
+
+        endcase
+
+endmodule
+  
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+module 9_bit_adder(input
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+module reg_(input logic      Clk, Reset, Shift_In, Load, Shift_En,
+            input logic      [7:0] D,
+            output logic     Shift_Out,
+            output logic     [7:0] Data_Out);
