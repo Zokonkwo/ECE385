@@ -12,7 +12,7 @@ module fa (input logic a, sw, fn, xsw, c, //sw = switch data & xsw = XORed switc
     
 endmodule
 //////////////////////////////////////////////////////
-module ripple_adder_3 (input logic [2:0] a, xsw,
+module ripple_adder_3 (input logic [2:0] a, sw, xsw,
                        input logic c_in,
                        output logic [2:0] s,
                        output logic c_out);
@@ -26,12 +26,11 @@ module ripple_adder_3 (input logic [2:0] a, xsw,
 endmodule
 ///////////////////////////////////////////////////////
 module ripple_adder (
-	input  logic  [8:0] a, 
-  input  logic  [8:0] xsw,
-	input  logic        cin,
+	input  logic  [8:0] a, sw, xsw,
+	input  logic  cin,
 	
 	output logic  [8:0] s,
-	output logic        cout
+	output logic  cout
 );
              
         logic c3, c6; 
