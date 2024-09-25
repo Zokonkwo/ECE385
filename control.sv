@@ -160,8 +160,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
           START: 
             if(Reset_Load_Clear)
                 next_state = LOADB;
-         else 
-           next_state = Reset_Load_Clear;
+            else 
+                next_state = START;
               
 
           LOADB: next_state = CXA;
@@ -171,7 +171,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
           CXA:  
             if(run)
               next_state = AS0;
-              
+            else 
+              next_state = CXA;
   
             AS0: next_state = AS1;  
             AS1: next_state = AS2;
@@ -204,31 +205,6 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
         curr_state <= next_state;
     end
       
-endmodule
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-module add_sub5(input     [7:0] A, B,
-                input       fn,
-                output    [4:0] S);
-
-    //useful shortcut - bit extension {4{fn}};
-
-    if (fn == 1)
-      //then inverting switches
-      //after inverting call CRA 9 times
-      //lastly add 1;
-      //send result to A
-      //send Cout from CRA to X
-  
-
-    else if (fn == 0)
-      //then add switches normally as postive number
-       //instantiate the CRA 9 times;
-       //send result to A
-       //send Cout from CRA to X
-
-    
 endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
