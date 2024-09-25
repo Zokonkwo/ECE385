@@ -22,6 +22,164 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
     //declare signals curr_state, next_state of type enum
     enum logic [3:0] {START,LOADB,CXA,AS0,AS1,AS2,AS3,AS4,AS5,AS6,SS,HALT} curr_state, next_state;
 
+    //assign outputs based on state
+    always_comb
+    begin 
+      unique case(curr_state)
+        START:
+          begin
+            Shift = 1'b0;
+            Add = 1'b0;
+            Sub = 1'b0;
+            Clr_Ld = 1'b0; 
+          end
+        LOADB:
+          begin
+            Shift = 1'b0;
+            Add = 1'b0;
+            Sub = 1'b0;
+            Clr_Ld = 1'b0;
+          end
+        CXA:
+          begin
+            Shift = 1'b0;
+            Add = 1'b0;
+            Sub = 1'b0;
+            Clr_Ld = 1'b1;  
+          end
+        AS0:
+          begin
+            Shift = 1'b1;
+             if(M == 1)
+              Add = 1'b1;
+            else
+              Add = 1'b0;
+            Sub = 1'b0;
+            Clr_Ld = 1'b0;  
+          end
+        AS1:
+          begin
+            Shift = 1'b1;
+             if(M == 1)
+              Add = 1'b1;
+            else
+              Add = 1'b0;
+            Sub = 1'b0;
+            Clr_Ld = 1'b0;
+          end
+        AS2:
+          begin
+            Shift = 1'b1;
+            if(M == 1)
+              Add = 1'b1;
+            else
+              Add = 1'b0;
+            Sub = 1'b0;
+            Clr_Ld = 1'b0;  
+          end
+        AS3:
+          begin
+            Shift = 1'b1;
+             if(M == 1)
+              Add = 1'b1;
+            else
+              Add = 1'b0;
+            Sub = 1'b0;
+            Clr_Ld = 1'b0;  
+          end
+        AS4:
+          begin
+            Shift = 1'b1;
+            if(M == 1)
+              Add = 1'b1;
+            else
+              Add = 1'b0;
+            Sub = 1'b0;
+            Clr_Ld = 1'b0; 
+          end
+        AS5:
+          begin
+            Shift = 1'b1; 
+            if(M == 1)
+              Add = 1'b1;
+            else
+              Add = 1'b0;
+            Sub = 1'b0;
+            Clr_Ld = 1'b0;   
+          end
+        AS6:
+          begin
+            Shift = 1'b1;
+             if(M == 1)
+              Add = 1'b1;
+            else
+              Add = 1'b0; 
+            Sub = 1'b0;
+            Clr_Ld = 1'b0; 
+          end
+        SS:
+          begin
+            Shift = 1'b1; 
+            Add = 1'b0;
+            Sub = 1'b1;
+            Clr_Ld = 1'b0; 
+          end
+        HALT:
+          begin
+            Shift = 1'b0;
+            Add = 1'b0; 
+            Sub = 1'b0;
+            Clr_Ld = 1'b0;  
+          end
+
+
+    //next state logic
+    always_comb
+    begin
+       unique case(curr_state)
+          START: 
+            if(Reset_Load_Clear)
+              begin
+                next_state = LOADB;
+              end
+
+          LOADB: 
+            begin
+              SW[7:0] = Bval[7:0];
+              next_state = CXA;
+            end
+
+          CXA:  
+            begin
+              Xval = 0;
+              Aval[7:0] = 0;
+              if(run)
+                begin
+                  next_state = AS0;
+                end
+            end  
+
+            AS0: next_state = AS1;  
+            AS1: next_state = AS2;
+            AS2: next_state = AS3;
+            AS3: next_state = AS4;     
+            AS4: next_state = AS5;          
+            AS5: next_state = AS6;                 
+            AS6: next_state = SS;           
+            SS: next_state = HALT;
+
+          HALT: 
+            if(run)
+              begin
+                next_state = CXA;
+              end
+
+          default: next_state = START;
+
+        endcase
+    end
+
+     //update flip-flops
     always_ff @ (posedge CLk)
     begin
       if (Reset_Load_Clear)       //Asychronous Reset
@@ -29,176 +187,6 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
       else
         curr_state <= next_state;
     end
-
-    //next state logic
-    always_comb
-    begin
-       unique case(curr_state)
-          START: if(Reset_Load_Clear)
-                  next_state = LOADB;
-
-          LOADB: begin
-                  SW[7:0] = Bval[7:0];
-                  next_state = CXA;
-                end
-
-          CXA:  begin
-                  Xval = 0;
-                  Aval[7:0] = 0;
-                  if(run)
-                    next_state = AS0;
-                end 
-
-          always_comb
-          begin    
-            AS0: if(M == 1) 
-                  //add S and A and then shift
-                  assign Add = 1;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS1;  
-                else if (M == 0) 
-                  //just shift
-                  assign Add = 0;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS1;
-          end
-
-          always_comb
-          begin
-            AS1: if(M == 1) 
-                  //add S and A and then shift
-                  assign Add = 1;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS2;  
-                else if (M == 0) 
-                  //just shift
-                  assign Add = 0;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS2;
-          end
-
-          always_comb
-          begin
-            AS2: if(M == 1) 
-                  //add S and A and then shift
-                  assign Add = 1;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS3;  
-                else if (M == 0) 
-                  //just shift
-                  assign Add = 0;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS3;
-          end
-
-          always_comb
-          begin
-            AS3: if(M == 1) 
-                    //add S and A and then shift
-                  assign Add = 1;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS4;  
-                else if (M == 0) 
-                  //just shift
-                  assign Add = 0;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS4;
-          end
-
-          always_comb
-          begin
-            AS4: if(M == 1) 
-                    //add S and A and then shift
-                  assign Add = 1;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS5;  
-                else if (M == 0) 
-                  //just shift
-                  assign Add = 0;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS5;
-          end
-
-          always_comb
-          begin
-            AS5: if(M == 1) 
-                    //add S and A and then shift
-                    assign Add = 1;
-                    assign Shift = 1;
-                    assign Sub = 0;
-                    assign Clr_Ld = 0;
-                    next_state = AS6;  
-                else if (M == 0) 
-                  //just shift
-                  assign Add = 0;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = AS6;
-          end 
-
-          always_comb
-          begin
-            AS6: if(M == 1) 
-                    //add S and A and then shift
-                    assign Add = 1;
-                    assign Shift = 1;
-                    assign Sub = 0;
-                    assign Clr_Ld = 0;
-                    next_state = SS;  
-                else if (M == 0) 
-                  //just shift
-                  assign Add = 0;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = SS;
-          end
-
-          always_comb
-          begin
-            SS: if(M == 1)
-                  //A become A - S and shift
-                  assign Add = 0;
-                  assign Shift = 1;
-                  assign Sub = 1;
-                  assign Clr_Ld = 0;
-                  next_state = HALT;
-                else 
-                  //just shift
-                  assign Add = 0;
-                  assign Shift = 1;
-                  assign Sub = 0;
-                  assign Clr_Ld = 0;
-                  next_state = HALT;
-          end
-
-          HALT: if(run)
-              next_state = CXA;
-
-          default: next_state = START;
-    end
-        endcase
 
 endmodule
 
