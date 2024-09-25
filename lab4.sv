@@ -10,14 +10,12 @@ NOTES:
     Number we are multiplying by the multiplier. Remains unchanged throughout the process. Shifted left by one
   After we are done multiplying the result should be stored in the Accumulator and Multiplier together. 
   X --> Carry bit
-
-  Make a register module that has X, A, B input and output
 */
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 module controllerFSM (input Reset_Load_Clear, run, Clk, M,
-                      output Shift, Add, Sub, Clr_Ld);
+                      output Shift, Add, Sub, Clr, LoadB);
 
     //declare signals curr_state, next_state of type enum
     enum logic [3:0] {START,LOADB,CXA,AS0,AS1,AS2,AS3,AS4,AS5,AS6,SS,HALT} curr_state, next_state;
@@ -31,7 +29,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             Shift = 1'b0;
             Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b0; 
+            Clr_Ld = 1'b0;
+            LoadB = 1'b0;  
           end
         LOADB:
           begin
@@ -39,13 +38,15 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             Add = 1'b0;
             Sub = 1'b0;
             Clr_Ld = 1'b0;
+            LoadB = 1'b1;
           end
         CXA:
           begin
             Shift = 1'b0;
             Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b1;  
+            Clr = 1'b1; 
+            LoadB = 1'b0; 
           end
         AS0:
           begin
@@ -55,7 +56,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             else
               Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b0;  
+            Clr = 1'b0;
+            LoadB = 1'b0;  
           end
         AS1:
           begin
@@ -65,7 +67,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             else
               Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;
           end
         AS2:
           begin
@@ -75,7 +78,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             else
               Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b0;  
+            Clr = 1'b0;  
+            LoadB = 1'b0;
           end
         AS3:
           begin
@@ -85,7 +89,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             else
               Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b0;  
+            Clr = 1'b0;
+            LoadB = 1'b0;  
           end
         AS4:
           begin
@@ -95,7 +100,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             else
               Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b0; 
+            Clr = 1'b0; 
+            LoadB = 1'b0;
           end
         AS5:
           begin
@@ -105,7 +111,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             else
               Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b0;   
+            Clr = 1'b0;
+            LoadB = 1'b0;   
           end
         AS6:
           begin
@@ -115,28 +122,32 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             else
               Add = 1'b0; 
             Sub = 1'b0;
-            Clr_Ld = 1'b0; 
+            Clr = 1'b0;
+            LoadB = 1'b0; 
           end
         SS:
           begin
             Shift = 1'b1; 
             Add = 1'b0;
             Sub = 1'b1;
-            Clr_Ld = 1'b0; 
+            Clr = 1'b0; 
+            LoadB = 1'b0;
           end
         HALT:
           begin
             Shift = 1'b0;
             Add = 1'b0; 
             Sub = 1'b0;
-            Clr_Ld = 1'b0;  
+            Clr = 1'b0;
+            LoadB = 1'b0;  
           end
         default:  //default case, can also have default assignments 
           begin 
             Shift = 1'b0;
             Add = 1'b0; 
             Sub = 1'b0;
-            Clr_Ld = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;
           end
     end
 
@@ -150,22 +161,14 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
                 next_state = LOADB;
               end
 
-          LOADB: 
-            begin
-              SW[7:0] = Bval[7:0];
-              next_state = CXA;
-            end
+          LOADB: next_state = CXA;
 
           CXA:  
-            begin
-              Xval = 0;
-              Aval[7:0] = 0;
-              if(run)
-                begin
-                  next_state = AS0;
-                end
-            end  
-
+            if(run)
+              begin
+                next_state = AS0;
+              end
+  
             AS0: next_state = AS1;  
             AS1: next_state = AS2;
             AS2: next_state = AS3;
@@ -186,7 +189,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
         endcase
     end
 
-     //update flip-flops
+    //update flip-flops
     always_ff @ (posedge CLk)
     begin
       if (Reset_Load_Clear)       //Asychronous Reset
@@ -204,9 +207,6 @@ module add_sub5(input     [7:0] A, B,
                 output    [4:0] S);
 
     //useful shortcut - bit extension {4{fn}};
-
-    logic [4:0] BB;
-    assign BB = B^fn;
 
     if (fn == 1)
       //then inverting switches
@@ -249,10 +249,5 @@ module reg_8(input logic      Clk, Reset, Shift_In, Load, Shift_En,
  endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-module reg_S(input logic [7:0] S,
-             output logic [7:0] S_out);
-
-      //sliding switches
 
 
