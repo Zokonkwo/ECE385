@@ -165,7 +165,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
 
           LOADB: next_state = CXA;
            begin 
-             Bval [7:0] = sw_s[7:0];
+            
            end
           CXA:  
             if(run)
