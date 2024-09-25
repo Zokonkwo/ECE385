@@ -15,8 +15,6 @@ module Lab4toplevel   (
 	output logic [7:0]  hex_segB,
 	output logic [3:0]  hex_gridB
 
-	
-	
 );
 
 	
