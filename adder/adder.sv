@@ -1,10 +1,10 @@
 
-module fa (input logic a, sw, fn, xsw, c, //sw = switch data and xsw = sw data XORed with fn select
+module fa (input logic a, sw, xsw, c, //sw = switch data and xsw = sw data XORed with fn select
            output logic s, c_out
            );
            
     always_comb begin 
-	xsw = sw^fn;
+	xsw = sw^c;
         s = a^xsw^c;
         c_out = (a&xsw)|(xsw&c)|(a&c);
         
