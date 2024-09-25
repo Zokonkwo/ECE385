@@ -183,10 +183,12 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             SS: next_state = HALT;
 
           HALT: 
-            if(run)
-              begin
-                next_state = CXA;
-              end
+            if(posedge run)
+            next_state = CXA;
+         else 
+           next_state = HALT;
+
+              
 
           default: next_state = START;
 
