@@ -37,14 +37,14 @@ module Lab4toplevel   (
 	// ie. converts an active low button press to a single clock cycle active high event
 	negedge_detector run_once ( 
 		.clk	(clk), 
-		.in	    (run_s), 
+		.in     (run_s), 
 		.out    (load)
 	);
 
 	// Register unit that holds the accumulated sum
 	load_reg #(
 	   .DATA_WIDTH(17) // specifying the data width of register through a parameter
-	) reg_unit ( 
+	) Register_unit ( 
 		.clk		(clk), 
 		.reset		(reset_s), 
 		.load		(load), 
@@ -54,7 +54,7 @@ module Lab4toplevel   (
 	);
 
 	// Addition unit
-	ripple_adder adder_ra (  
+	adder (  
 		.a	 	(sw_s), 
 		.b	 	(out[15:0]), 
 		.cin 	(1'b0), 
