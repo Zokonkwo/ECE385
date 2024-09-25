@@ -32,7 +32,7 @@ module ripple_adder_9 (input logic [8:0] XA, sw,
 
 
 		if(sub == 1)
-			add_1 add0 (.a(XA[0]), .b(1'b1), .c(), .s(s[0]), .c_out(c1));
+			add_1 add0 (.a(XA[0]), .b(1'b1), .c(1'b0), .s(s[0]), .c_out(c1));
 			add_1 add1 (.a(XA[1]), .b(1'b0), .c(c1), .s(s[1]), .c_out(c2));
 			add_1 add2 (.a(XA[2]), .b(1'b0), .c(c2), .s(s[2]), .c_out(c3));
 			add_1 add3 (.a(XA[3]), .b(1'b0), .c(c3), .s(s[3]), .c_out(c4));
