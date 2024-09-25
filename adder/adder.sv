@@ -29,6 +29,29 @@ module ripple_adder_9 (input logic [8:0] XA, sw,
 	fa fa6 (.a(XA[6]), .sw(sw[6]), .c(c6), .s(s[6]), .c_out(c7), .fn(fn));
 	fa fa7 (.a(XA[7]), .sw(sw[7]), .c(c7), .s(s[7]), .c_out(c8), .fn(fn));
 	fa fa8 (.a(XA[8]), .sw(sw[8]), .c(c8), .s(s[8]), .c_out(c_out), .fn(fn));
+
+
+		if(sub == 1)
+			add_1 add0 (.a(XA[0]), .b(1'b1), .c(), .s(s[0]), .c_out(c1));
+			add_1 add1 (.a(XA[1]), .b(1'b0), .c(c1), .s(s[1]), .c_out(c2));
+			add_1 add2 (.a(XA[2]), .b(1'b0), .c(c2), .s(s[2]), .c_out(c3));
+			add_1 add3 (.a(XA[3]), .b(1'b0), .c(c3), .s(s[3]), .c_out(c4));
+			add_1 add4 (.a(XA[4]), .b(1'b0), .c(c4), .s(s[4]), .c_out(c5));
+			add_1 add5 (.a(XA[5]), .b(1'b0), .c(c5), .s(s[5]), .c_out(c6));
+			add_1 add6 (.a(XA[6]), .b(1'b0), .c(c6), .s(s[6]), .c_out(c7));
+			add_1 add7 (.a(XA[7]), .b(1'b0), .c(c7), .s(s[7]), .c_out(c8));
+			add_1 add8 (.a(XA[8]), .b(1'b0), .c(c8), .s(s[8]), .c_out(c_out));	
     
 endmodule
+
+module add_1(input logic a, b, c, //sw = switch data and xsw = sw data XORed with fn select
+           output logic s, c_out
+           );
+    always_comb begin 
+        s = a^b^c;
+        c_out = (a&b)|(b&c)|(a&c);
+        
+    end
+endmodule
+
 
