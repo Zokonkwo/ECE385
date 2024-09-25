@@ -1,5 +1,3 @@
-//Top level for ECE 385 adders lab
-//modified for Spring 2024
 
 //Note: lowest 2 HEX digits will reflect lower 8 bits of switch input
 //Upper 4 HEX digits will reflect value in the accumulator
@@ -56,7 +54,7 @@ module Lab4toplevel   (
 	);
 
 	// Addition unit
-	ripple_adder adder_ra (    /////////////////////////////////////////////RENAME
+	ripple_adder adder_ra (  
 		.a	 	(sw_s), 
 		.b	 	(out[15:0]), 
 		.cin 	(1'b0), 
