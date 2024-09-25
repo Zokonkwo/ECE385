@@ -29,7 +29,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             Shift = 1'b0;
             Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b0;
+            Clr = 1'b0;
             LoadB = 1'b0;  
           end
         LOADB:
@@ -37,7 +37,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             Shift = 1'b0;
             Add = 1'b0;
             Sub = 1'b0;
-            Clr_Ld = 1'b0;
+            Clr = 1'b0;
             LoadB = 1'b1;
             Bval[7:0] = sw_s[7:0];
           end
