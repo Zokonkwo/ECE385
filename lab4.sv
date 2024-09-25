@@ -131,7 +131,14 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             Sub = 1'b0;
             Clr_Ld = 1'b0;  
           end
-
+        default:  //default case, can also have default assignments 
+          begin 
+            Shift = 1'b0;
+            Add = 1'b0; 
+            Sub = 1'b0;
+            Clr_Ld = 1'b0;
+          end
+    end
 
     //next state logic
     always_comb
