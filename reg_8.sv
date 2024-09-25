@@ -1,4 +1,4 @@
-module reg_4 (
+module reg_8 (
 	input  logic 		  Clk, 
 	input  logic 		  Reset, 
 	input  logic 		  Shift_In, 
