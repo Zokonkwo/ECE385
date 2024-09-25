@@ -13,9 +13,10 @@ module fa (input logic a, sw, fn, xsw, c, //sw = switch data and xsw = sw data X
 endmodule
 //////////////////////////////////////////////////////
 module ripple_adder_9 (input logic [8:0] XA, xsw,
-                       input logic  c_in, fn,
+                       input logic  fn,
 		       output logic [8:0] s,
-                       output logic c_out);
+                       output logic c_out // c_out is not needed
+		      );
                        
     logic c1, c2, c3, c4, c5, c6, c7, c8;
 
