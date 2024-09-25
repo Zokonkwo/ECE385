@@ -5,13 +5,13 @@
 //Upper 4 HEX digits will reflect value in the accumulator
 
 
-module adder_toplevel   (
+module Lab4toplevel   (
 	input  logic 		clk, 
 	input  logic		reset, 
 	input  logic 		run_i, // _i stands for input
 	input  logic [15:0] sw_i,
 
-	output logic 		sign_LED,
+	output logic        sign_LED,
 	output logic [7:0]  hex_segA,
 	output logic [3:0]  hex_gridA,
 	output logic [7:0]  hex_segB,
@@ -56,31 +56,13 @@ module adder_toplevel   (
 	);
 
 	// Addition unit
-	ripple_adder adder_ra (
+	ripple_adder adder_ra (    /////////////////////////////////////////////RENAME
 		.a	 	(sw_s), 
 		.b	 	(out[15:0]), 
 		.cin 	(1'b0), 
 		.cout	(s[16]), 
 		.s   	(s[15:0]) 
 	);
-	
-	
-//	 lookahead_adder adder_la (		
-//    	.a	 	(sw_s), 
-//    	.b	 	(out[15:0]), 
-//    	.cin 	(1'b0), 
-//    	.c_out	(s[16]), 
-//    	.s   	(s[15:0]) 
-//	 );
-	
-//	 select_adder adder_sa (	
-//	 	.a	 	(sw_s), 
-//	 	.b	 	(out[15:0]), 
-//	 	.cin 	(1'b0), 
-//	 	.cout	(s[16]), 
-//	 	.s   	(s[15:0]) 
-//	 );
-
 
 	// Hex units that display contents of sw and sum register in hex
 	hex_driver hex_a (
@@ -118,7 +100,7 @@ module adder_toplevel   (
 		
 		.data_q   	(sw_s) 
 	);
-							
+	
 	assign sign_LED = out[16]; // the sign bit of the output
 		
 endmodule
