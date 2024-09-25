@@ -159,19 +159,19 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
        unique case(curr_state)
           START: 
             if(Reset_Load_Clear)
-              begin
                 next_state = LOADB;
-              end
+         else 
+           next_state = Reset_Load_Clear;
+              
 
           LOADB: next_state = CXA;
            begin 
-            
+            //?when we instantiate the register unit module ein the top level (the parentheses data will be the switch data
            end
           CXA:  
             if(run)
-              begin
-                next_state = AS0;
-              end
+              next_state = AS0;
+              
   
             AS0: next_state = AS1;  
             AS1: next_state = AS2;
@@ -203,7 +203,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
       else
         curr_state <= next_state;
     end
-
+      
 endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
