@@ -12,8 +12,8 @@ module fa (input logic a, sw, fn, xsw, c, //sw = switch data and xsw = sw data X
     
 endmodule
 //////////////////////////////////////////////////////
-module ripple_adder_3 (input logic [2:0] a, sw, xsw,
-                       input logic  c_in
+module ripple_adder_3 (input logic [2:0] a, xsw,
+                       input logic  c_in, fn,
                        output logic [2:0] s,
                        output logic c_out);
                        
@@ -26,7 +26,7 @@ module ripple_adder_3 (input logic [2:0] a, sw, xsw,
 endmodule
 ///////////////////////////////////////////////////////
 module ripple_adder (
-	input  logic  [8:0] a, sw, xsw,
+	input  logic  [8:0] a, xsw,
 	input  logic  fn,
 	
 	output logic  [8:0] s,
@@ -34,8 +34,8 @@ module ripple_adder (
 );
              
         logic c3, c6; 
-        ripple_adder_3 ra4_0 (.a(a[2:0]),   .xsw(xsw[2:0]),   .c_in(fn), .s(s[2:0]),   .c_out(c3) );
-        ripple_adder_3 ra4_1 (.a(a[5:3]),   .xsw(xsw[5:3]),   .c_in(c3),  .s(s[5:3]),   .c_out(c6) );
-        ripple_adder_3 ra4_2 (.a(a[8:6]),  .xsw(xsw[8:6]),  .c_in(c6),  .s(s[8:6]),  .c_out(cout) );
+        ripple_adder_3 ra3_0 (.a(a[2:0]),   .xsw(xsw[2:0]),   .c_in(fn),  .s(s[2:0]),   .c_out(c3) );
+        ripple_adder_3 ra3_1 (.a(a[5:3]),   .xsw(xsw[5:3]),   .c_in(c3),  .s(s[5:3]),   .c_out(c6) );
+        ripple_adder_3 ra3_2 (.a(a[8:6]),   .xsw(xsw[8:6]),   .c_in(c6),  .s(s[8:6]),   .c_out(cout) );
        
 endmodule
