@@ -66,7 +66,7 @@ module Lab4toplevel   (
 	hex_driver hex_a (
 		.clk		(clk),
 		.reset		(reset_s),
-		.in			({sw_s[15:12], sw_s[11:8], sw_s[7:4], sw_s[3:0]}),
+		.in			({Aval[7:4], Aval[3:0]}),
 		.hex_seg	(hex_segA),
 		.hex_grid	(hex_gridA)
 	);
@@ -74,7 +74,7 @@ module Lab4toplevel   (
 	hex_driver hex_b (
 		.clk		(clk),
 		.reset		(reset_s),
-		.in			({out[15:12], out[11:8], out[7:4], out[3:0]}),
+		.in			({ Bval[7:4], Bval[3:0]}),
 		.hex_seg	(hex_segB),
 		.hex_grid	(hex_gridB)
 	);
