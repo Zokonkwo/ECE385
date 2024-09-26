@@ -1,17 +1,17 @@
-moduole flipflop_x(input Din, Clk, load, reset
+moduole flipflop_x(input D_in, Clk, load, reset
                  output Qout);
 	logic Din;
 
 	always_ff @ (posedge clk)
 	begin
-		Q = Din;
+		Qout = Din;
 	end
 
 	always_comb begin
 		if(reset)
 			Din = 1'b0;
 		else if(load)
-			Din = D;
+			Din = D_in;
 		else
 			Din = Q;
 	end 
