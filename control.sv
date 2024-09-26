@@ -14,8 +14,8 @@ NOTES:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-module controllerFSM (input Reset_Load_Clear, run, Clk, M,
-                      output Shift, Add, Sub, Clr, LoadB);
+module controllerFSM (input logic Reset_Load_Clear, run, Clk, M,
+                      output logic Shift, Add, Sub, Clr, LoadB);
 
     //declare signals curr_state, next_state of type enum
     enum logic [3:0] {START,LOADB,CXA,AS0,AS1,AS2,AS3,AS4,AS5,AS6,SS,HALT} curr_state, next_state;
