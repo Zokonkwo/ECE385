@@ -197,7 +197,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
     end
 
     //update flip-flops
-    always_ff @ (posedge CLk)
+    always_ff @ (posedge Clk)
     begin
       if (Reset_Load_Clear)       //Asychronous Reset
         curr_state <= START;       //A is the reset/start state
