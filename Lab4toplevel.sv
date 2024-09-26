@@ -85,7 +85,7 @@ module Lab4toplevel   (
 	sync_debounce button_sync [1:0] (
 	   .clk    (clk),
 	   
-	   .d      ({reset, run_i}),
+	   .d      ({reset_load_clr, run_i}),
 	   .q      ({reset_s, run_s})
 	);
 	
