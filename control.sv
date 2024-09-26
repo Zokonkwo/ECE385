@@ -14,7 +14,7 @@ NOTES:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-module controllerFSM (input logic Reset_Load_Clr, run, Clk, M,
+module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
                       output logic Shift, Add, Sub, Clr, LoadB);
 
     //declare signals curr_state, next_state of type enum
@@ -55,7 +55,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M,
         AS0:
           begin
             Shift = 1'b1;
-             if(M == 1)
+             if(M_val == 1)
               Add = 1'b1;
             else
               Add = 1'b0;
@@ -66,7 +66,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M,
         AS1:
           begin
             Shift = 1'b1;
-             if(M == 1)
+             if(M_val == 1)
               Add = 1'b1;
             else
               Add = 1'b0;
@@ -77,7 +77,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M,
         AS2:
           begin
             Shift = 1'b1;
-            if(M == 1)
+            if(M_val == 1)
               Add = 1'b1;
             else
               Add = 1'b0;
@@ -88,7 +88,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M,
         AS3:
           begin
             Shift = 1'b1;
-             if(M == 1)
+             if(M_val == 1)
               Add = 1'b1;
             else
               Add = 1'b0;
@@ -99,7 +99,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M,
         AS4:
           begin
             Shift = 1'b1;
-            if(M == 1)
+            if(M_val == 1)
               Add = 1'b1;
             else
               Add = 1'b0;
@@ -110,7 +110,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M,
         AS5:
           begin
             Shift = 1'b1; 
-            if(M == 1)
+            if(M_val == 1)
               Add = 1'b1;
             else
               Add = 1'b0;
@@ -121,7 +121,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M,
         AS6:
           begin
             Shift = 1'b1;
-             if(M == 1)
+             if(M_val == 1)
               Add = 1'b1;
             else
               Add = 1'b0; 
