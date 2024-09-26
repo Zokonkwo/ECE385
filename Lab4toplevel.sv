@@ -67,18 +67,18 @@ module Lab4toplevel   (
 	);
 
 	
-	reg_8 #(8) reg_B ( 
+	reg_8 reg_B ( 
 		.Clk		(Clk), 
 		.Reset		(Reset_Load_Clr), 
 		.Load		(loadb), 
-		.D		    (sw_i[7:0]),
+		.D		    (sw_i),
 		.Shift_In   (shift_inB),
 		.Shift_En   (shift),
 		.Shift_Out 	(shift_tmp),    
 		.Data_Out   (Bval)
 	);
 
-	reg_8 #(8)
+	reg_8
 	 reg_A ( 
 		.Clk		(Clk), 
 		.Reset		(Reset_Load_Clr), 
@@ -116,19 +116,19 @@ module Lab4toplevel   (
 	sync_debounce button_sync [1:0] (
 	   .Clk    (Clk),
 	   
-	   .d      ({reset_load_clr, run_i}),
+	   .d      ({Reset_Load_Clr, run_i}),
 	   .q      ({reset_s, run_s})
 	);
 	
 		
-	reg_8 #(8) // specifying the data width of synchronizer through a parameter
+	reg_8 // specifying the data width of synchronizer through a parameter
 	 sw_sync ( 
 		.Clk		(Clk), 
 		.Reset		(1'b0), // there is no reset for the inputs, so hardcode 0
 		.Load		(1'b1), // always load data_i into the register
-		.D		(sw_i), 
+		.D		    (sw_i) 
 		
-		.Data_Out  	(sw_i) 
+	//	.Data_Out  	(sw_i) 
 	);
 	
 	assign sign_LED = out[16]; // the sign bit of the output
