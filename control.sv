@@ -50,7 +50,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             Sub = 1'b0;
             Clr = 1'b1; 
             LoadB = 1'b0; 
-            
+    
           end
         AS0:
           begin
@@ -59,9 +59,9 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
               Add = 1'b1;
             else
               Add = 1'b0;
-            Sub = 1'b0;
-            Clr = 1'b0;
-            LoadB = 1'b0;  
+              Sub = 1'b0;
+              Clr = 1'b0;
+              LoadB = 1'b0;  
           end
         AS1:
           begin
@@ -70,9 +70,9 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
               Add = 1'b1;
             else
               Add = 1'b0;
-            Sub = 1'b0;
-            Clr = 1'b0;
-            LoadB = 1'b0;
+              Sub = 1'b0;
+              Clr = 1'b0;
+              LoadB = 1'b0;
           end
         AS2:
           begin
@@ -81,9 +81,9 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
               Add = 1'b1;
             else
               Add = 1'b0;
-            Sub = 1'b0;
-            Clr = 1'b0;  
-            LoadB = 1'b0;
+              Sub = 1'b0;
+              Clr = 1'b0;  
+              LoadB = 1'b0;
           end
         AS3:
           begin
@@ -92,9 +92,9 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
               Add = 1'b1;
             else
               Add = 1'b0;
-            Sub = 1'b0;
-            Clr = 1'b0;
-            LoadB = 1'b0;  
+              Sub = 1'b0;
+              Clr = 1'b0;
+              LoadB = 1'b0;  
           end
         AS4:
           begin
@@ -103,9 +103,9 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
               Add = 1'b1;
             else
               Add = 1'b0;
-            Sub = 1'b0;
-            Clr = 1'b0; 
-            LoadB = 1'b0;
+              Sub = 1'b0;
+              Clr = 1'b0; 
+              LoadB = 1'b0;
           end
         AS5:
           begin
@@ -114,9 +114,9 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
               Add = 1'b1;
             else
               Add = 1'b0;
-            Sub = 1'b0;
-            Clr = 1'b0;
-            LoadB = 1'b0;   
+              Sub = 1'b0;
+              Clr = 1'b0;
+              LoadB = 1'b0;   
           end
         AS6:
           begin
@@ -125,9 +125,9 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
               Add = 1'b1;
             else
               Add = 1'b0; 
-            Sub = 1'b0;
-            Clr = 1'b0;
-            LoadB = 1'b0; 
+              Sub = 1'b0;
+              Clr = 1'b0;
+              LoadB = 1'b0; 
           end
         SS:
           begin
