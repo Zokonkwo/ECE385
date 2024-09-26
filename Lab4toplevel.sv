@@ -16,7 +16,7 @@ module Lab4toplevel   (
 	output logic [3:0]  hex_gridB	
 );
 
-	// Declare temporary values used by other modules
+	// Declare temporary values used by other modules///////////////why???????????for c1-c8 too??
 	logic load;
 	//Out;
 	logic [16:0] s;
@@ -44,6 +44,7 @@ module Lab4toplevel   (
 	
 	// Allows the register to load once, and not during full duration of button press
 	// ie. converts an active low button press to a single clock cycle active high event
+	
 	negedge_detector run_once ( 
 		.clk	(clk), 
 		.in     (run_s), 
@@ -58,8 +59,8 @@ module Lab4toplevel   (
 		.Reset		(Reset_Load_Clear), 
 		.Load		(LoadB), 
 		.D		(sw_s[7:0]),
-		.Shift_In       (Aval[0])
-		.Shift_En       (Shift)       
+		.Shift_In       (Aval[0]),
+		.Shift_En       (Shift),       
 		
 		.Data_Out   	(Bval[7:0])
 	);
@@ -68,10 +69,10 @@ module Lab4toplevel   (
 		.DATA_WIDTH(9) // specifying the data width of register through a parameter
 	) reg_A ( 
 		.Clk		(Clk), 
-		.Reset		(reset_s), 
+		.Reset		(Reset_Load_Clear), 
 		.Load		(0), 
 		.D		(0), 
-		.Shift_In       (X)
+		.Shift_In       (s[8])
 		.Shift_En       (Shift) 
 		
 		.Data_Out  	(Aval[7:0])
@@ -82,19 +83,14 @@ module Lab4toplevel   (
 	) reg_X ( 
 		.Clk		(Clk), 
 		.Reset		(Reset_Load_Clear), 
-		.Load		(load), 
-		.D		(sw_s[7:0]), 
-		.Shift_In       (s[8]),
-		.Shift_En       (Shift_En) 
+		.Load		(Shift),  //// after it adds it will shift and then automatically load X
+		.D		(s[8]), ////correct?
+		.Shift_In       (0),    ///b/c we never shift X
+		.Shift_En       (Shift_En),
 		
-		.Data_Out  	(Aval[7:0])
+		.Data_Out  	(s[8])
 	);
 
-
-		
-	
-
-	
 	// Addition/subtraction unit
 
 	ripple_adder_9 ra_9 (
