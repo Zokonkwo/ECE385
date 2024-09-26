@@ -164,7 +164,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
            next_state = START;
               
 
-          LOADB: next_state = CXA;
+          LOADB: next_state = CXA;/////////////////////////////////////////enough time?
          
           CXA:  
             if(run)
