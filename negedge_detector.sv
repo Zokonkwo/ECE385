@@ -1,5 +1,5 @@
 module negedge_detector  (	
-	input  logic clk, 
+	input  logic Clk, 
 	input  logic in, 
 
 	output logic out
@@ -13,7 +13,7 @@ module negedge_detector  (
 	
 	// Waits for the negative edge of 'in' (ie. clk cycle when 'in' changes from 1->0)
 	// to raise 'out' to 1 for single clock cycle
-    always_ff @(posedge clk) begin
+    always_ff @(posedge Clk) begin
 		prev_in <= in;
 		out <= out_d;
     end
