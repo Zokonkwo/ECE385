@@ -5,16 +5,16 @@ timeprecision 1ns;
 
 // These signals are internal because the processor will be 
 // instantiated as a submodule in testbench
-input  logic 		clk, 
-input  logic		reset_load_clr, 
-input  logic 		run_i, // _i stands for input
-input  logic [7:0]     sw_i,
+logic 		clk; 
+logic		reset_load_clr; 
+logic 		run_i; // _i stands for input
+logic [7:0]     sw_i;
 
-output logic        sign_LED,
-output logic [7:0]  hex_segA,
-output logic [3:0]  hex_gridA,	
-output logic [7:0]  Aval
-output logic [7:0]  Bval 
+logic        sign_LED;
+logic [7:0]  hex_segA;
+logic [3:0]  hex_gridA;	
+logic [7:0]  Aval;
+logic [7:0]  Bval;
 //logic       LoadA; 
 //logic [2:0] F;
 //logic [1:0] R;
