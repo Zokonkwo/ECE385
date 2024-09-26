@@ -1,6 +1,8 @@
 
 //Note: lowest 2 HEX digits will reflect lower 8 bits of switch input
 //Upper 4 HEX digits will reflect value in the accumulator
+//how do we mult -1 * 1 over and over again in testbench ---> how to write
+//which bits are wrong and how to we find those errros
 
 
 module Lab4toplevel   (
