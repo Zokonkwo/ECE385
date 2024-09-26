@@ -161,7 +161,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             if(Reset_Load_Clear)
                 next_state = LOADB;
          else 
-           next_state = Reset_Load_Clear;
+           next_state = START;
               
 
           LOADB: next_state = CXA;
