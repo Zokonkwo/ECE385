@@ -11,7 +11,7 @@ module Lab4toplevel   (
 	input  logic        LoadB
 	input [7:0] 	    D
 	
-	output logic [3:0]  LED_
+	output logic [3:0]  Led
 	output logic        sign_LED,
 	output logic [7:0]  hex_segA,
 	output logic [3:0]  hex_gridA,	
