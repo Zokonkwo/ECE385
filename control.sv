@@ -1,4 +1,5 @@
 
+
 /*
 NOTES:
   B --> multiplier
@@ -170,22 +171,25 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
     ////////////////next state logic/////////////////////////////////////////////////////////////////////////////////
     always_comb
     begin
+     next_state = curr_state;
        unique case(curr_state)
           START: 
+          begin
             if(Reset_Load_Clr)
                 next_state = LOADB;
          else 
            next_state = START;
-              
+              end
 
           LOADB: next_state = CXA;
          
           CXA:  
+          begin
             if(run)
               next_state = AS0;
             else 
               next_state = CXA;
-  
+  end 
             AS0: next_state = AS1;  
             AS1: next_state = AS2;
             AS2: next_state = AS3;
@@ -196,16 +200,19 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
             SS: next_state = HALT;
 
           HALT: 
+          begin
            if (run==0) 
             next_state = HALT2;
          else 
            next_state = HALT;
+           end
 HALT2:
+begin
 if (run == 1)
     next_state = CXA;
 else
     next_state = HALT2;
-              
+              end
 
           default: next_state = START;
 
@@ -216,7 +223,7 @@ else
     always_ff @ (posedge Clk)
     begin
       if (Reset_Load_Clr)       //Asychronous Reset
-        curr_state <= START;       //A is the reset/start state
+        curr_state <= LOADB;       //A is the reset/start state
       else
         curr_state <= next_state;
     end
@@ -224,4 +231,3 @@ else
 endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
