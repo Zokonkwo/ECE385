@@ -5,8 +5,8 @@ timeprecision 1ns;
 
 // These signals are internal because the processor will be 
 // instantiated as a submodule in testbench
-logic 		clk; 
-logic		reset_load_clr; 
+logic 		Clk; 
+logic		Reset_Load_Clr; 
 logic 		run_i; // _i stands for input
 logic [7:0]     sw_i;
 
@@ -31,7 +31,7 @@ Lab4toplevel Lab4toplevel(.*);
 //assign out = adder_toplevel.out;
 
 initial begin: CLOCK_INITIALIZATION
-	clk = 1'b1;
+	Clk = 1'b1;
 end 
 
 // Toggle the clock
@@ -42,7 +42,7 @@ end
 // this is important because we need to know what the time scale is for how long to run
 // the simulation
 always begin : CLOCK_GENERATION
-	#1 clk = ~clk;
+	#1 Clk = ~Clk;
 end
 
 // Testing begins here
@@ -57,11 +57,11 @@ end
 // happens first. 
 initial begin: TEST_VECTORS
     run_i <= 0;
-	reset <= 1;
+	Reset_Load_Clr <= 1;
 	#20
-	reset <= 0;
+	Reset_Load_Clr <= 0;
 	#10
-	sw_i <= 'b1111;
+	sw_i <= 2'b10;
 	#10
 	run_i <= 1;
 	#10
