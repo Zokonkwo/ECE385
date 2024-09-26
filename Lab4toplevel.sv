@@ -34,7 +34,22 @@ module Lab4toplevel   (
 	
 	
 
-    
+	controllerFSM control_unit (
+		.Reset_Load_Clear (Reset_Load_Clear);
+		.run (run_s),
+		.Clk (Clk),///////////////caps?
+		.M (Bval[0]),//////////////correct?
+		.shift (Shift),
+		.Add (Add),
+		.Sub (Sub),
+		.Clr (Clr),
+		.LoadB (LoadB),
+	);
+
+	
+
+
+	
 	// Allows the register to load once, and not during full duration of button press
 	// ie. converts an active low button press to a single clock cycle active high event
 	negedge_detector run_once ( 
@@ -43,29 +58,71 @@ module Lab4toplevel   (
 		.out    (load)
 	);
 
-	// Register unit that holds the accumulated sum
-	load_reg #(
-	   .DATA_WIDTH(17) // specifying the data width of register through a parameter
-	) Register_unit ( 
-		.clk		(clk), 
-		.reset		(reset_s), 
-		.load		(load), 
-		.data_i		(s), 
+	
+	reg_8 #(
+		.DATA_WIDTH(8) // specifying the data width of register through a parameter
+	) reg_B ( 
+		.Clk		(Clk), 
+		.Reset		(reset_s), 
+		.Load		(LoadB), 
+		.D		(sw_s[7:0]),
+		.Shift_In       (Aval[0])
+		.Shift_En       (Shift)       
 		
-		.data_q   	(out)
+		.Data_Out   	(Bval[7:0])
 	);
 
+	reg_8 #(
+		.DATA_WIDTH(9) // specifying the data width of register through a parameter
+	) reg_A ( 
+		.Clk		(Clk), 
+		.Reset		(reset_s), 
+		.Load		(0), 
+		.D		(0), 
+		.Shift_In       (X)
+		.Shift_En       (Shift) 
+		
+		.Data_Out  	(Aval[7:0])
+	);
+
+	reg_8 #(
+		.DATA_WIDTH(1) // specifying the data width of register through a parameter
+	) reg_X ( 
+		.Clk		(Clk), 
+		.Reset		(reset_s), 
+		.Load		(load), 
+		.D		(sw_s[7:0]), 
+		.Shift_In       (s[8]),
+		.Shift_En       (Shift_En) 
+		
+		.Data_Out  	(Aval[7:0])
+	);
+
+
+		
+	
+
+	
 	// Addition unit
-	adder (  
-		.a	 	(sw_s), 
-		.b	 	(out[15:0]), 
+	fa (  
+		.a	(sw_s), 
+		.b	(out[15:0]), 
 		.cin 	(1'b0), 
 		.cout	(s[16]), 
 		.s   	(s[15:0]) 
 	);
 
+	ripple_adder_9 (
+		.XA  (XA[8:0]),
+		.sw  (sw[8:0]),
+		.fn  (fn),
+		.s  (s[8:0]),
+		.c_out  (c_out)
+	);
+	
+
 	// Hex units that display contents of sw and sum register in hex
-	hex_driver hex_a (
+	HexDriver hex_a (
 		.clk		(clk),
 		.reset		(reset_s),
 		.in			({Aval[7:4], Aval[3:0]}),
@@ -73,7 +130,7 @@ module Lab4toplevel   (
 		.hex_grid	(hex_gridA)
 	);
 	
-	hex_driver hex_b (
+	HexDriver hex_b (
 		.clk		(clk),
 		.reset		(reset_s),
 		.in			({ Bval[7:4], Bval[3:0]}),
