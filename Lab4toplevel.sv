@@ -7,11 +7,8 @@ module Lab4toplevel   (
 	input  logic 		clk, 
 	input  logic		reset_load_clr, 
 	input  logic 		run_i, // _i stands for input
-	input  logic [15:0] sw_i,
-	input  logic        LoadB
-	input [7:0] 	    D
+	input  logic [7:0]     sw_i,
 	
-	output logic [3:0]  Led
 	output logic        sign_LED,
 	output logic [7:0]  hex_segA,
 	output logic [3:0]  hex_gridA,	
