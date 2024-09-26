@@ -41,7 +41,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             Sub = 1'b0;
             Clr = 1'b0;
             LoadB = 1'b1;
-            Bval[7:0] = sw_s[7:0];
+            
           end
         CXA:
           begin
@@ -50,7 +50,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             Sub = 1'b0;
             Clr = 1'b1; 
             LoadB = 1'b0; 
-            Aval [9:0] = 0;
+            
           end
         AS0:
           begin
