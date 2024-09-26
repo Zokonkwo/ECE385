@@ -1,4 +1,4 @@
-module fa (input logic a, sw, c, fn //sw = switch data and xsw = sw data XORed with fn select
+module fa (input logic a, sw, c, fn, //sw = switch data and xsw = sw data XORed with fn select
            output logic s, c_out
            );
            logic xsw;
