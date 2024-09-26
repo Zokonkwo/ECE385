@@ -56,14 +56,16 @@ end
 // same simulation timestep. The exception is for reset, which we want to make sure
 // happens first. 
 initial begin: TEST_VECTORS
-    run_i <= 0;
-	Reset_Load_Clr <= 1;
-	#20
-	Reset_Load_Clr <= 1;
-	#10
-	Reset_Load_Clr <= 0;
-	#10
-	sw_i <= 2'b10;
+    run_i = 0;
+    Reset_Load_Clr = 0;
+    #10
+    #10
+    sw_i <= 2'b10;
+    #20
+	Reset_Load_Clr = 1;
+	#25
+	Reset_Load_Clr = 0;
+	sw_i <= 2'b11;
 	#10
 	run_i <= 1;
 	#10
@@ -73,6 +75,7 @@ initial begin: TEST_VECTORS
 	#10
 	run_i <= 0;
 	
+		$finish(); //this task will end the simulation if the Vivado settings are properly configured
 
 
 end
