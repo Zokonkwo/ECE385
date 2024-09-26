@@ -4,20 +4,22 @@
 
 
 module Lab4toplevel   (
-	input  logic 		clk, 
-	input  logic		reset_load_clr, 
+	input  logic 		Clk, 
+	input  logic		Reset_Load_Clr, 
 	input  logic 		run_i, // _i stands for input
-	input  logic [7:0]     sw_i,
+	input  logic [7:0] sw_i,
 	
+	
+
 	output logic        sign_LED,
 	output logic [7:0]  hex_segA,
-	output logic [3:0]  hex_gridA,	
-	output logic [7:0]  Aval
-	output logic [7:0]  Bval
+	output logic [3:0]  hex_gridA,
+	output logic [7:0] Aval, Bval
 );
 
 	// Declare temporary values used by other modules///////////////why???????????for c1-c8 too??
 	logic load;
+	logic LoadB;
 	//Out;
 	logic [16:0] s;
 	logic [16:0] out;
@@ -25,71 +27,64 @@ module Lab4toplevel   (
 	// Synchronized inputs (denoted by _s in naming convention)
 	logic run_s;
 	logic reset_s;
-	logic [15:0] sw_s;
-	
+	logic [8:0] XA ;
+	logic [8:0] sw ;
 	
 
 	controllerFSM control_unit (
-		.Reset_Load_Clear (Reset_Load_Clear);
+		.Reset_Load_Clr (Reset_Load_Clr),
 		.run (run_s),
 		.Clk (Clk),
-		.M (Bval[0]),///////correct???
-		.shift (Shift),
+		.M (Bval[0]),
+		.Shift (Shift),
 		.Add (Add),
 		.Sub (Sub),
 		.Clr (Clr),
-		.LoadB (LoadB),
+		.LoadB (LoadB)
 	);
 
+
+    flipflop_x flipflop(
+        .D_in (s[8]),
+        .Clk (Clk),
+        .load (load),
+        .reset (Reset_Load_Clr),
+        .Qout (Aval[7])
+
+    );
 	
 	// Allows the register to load once, and not during full duration of button press
 	// ie. converts an active low button press to a single clock cycle active high event
-	
 	negedge_detector run_once ( 
-		.clk	(clk), 
+		.Clk	(Clk), 
 		.in     (run_s), 
 		.out    (load)
 	);
 
 	
-	reg_8 #(
-		.DATA_WIDTH(8) // specifying the data width of register through a parameter
-	) reg_B ( 
+	reg_8 #(8) reg_B ( 
 		.Clk		(Clk), 
-		.Reset		(Reset_Load_Clear), 
+		.Reset		(Reset_Load_Clr), 
 		.Load		(LoadB), 
-		.D		(sw_s[7:0]),
-		.Shift_In       (Aval[0]),
-		.Shift_En       (Shift),       
-		
-		.Data_Out   	(Bval[7:0])
+		.D		    (sw_i[7:0]),
+		.Shift_In   (Aval[0]),
+		.Shift_En   (Shift),       
+		.Data_Out   (Bval)
 	);
 
-	reg_8 #(
-		.DATA_WIDTH(9) // specifying the data width of register through a parameter
-	) reg_A ( 
+	reg_8 #(8)
+	 reg_A ( 
 		.Clk		(Clk), 
-		.Reset		(Reset_Load_Clear), 
+		.Reset		(Reset_Load_Clr), 
 		.Load		(0), 
-		.D		(0), 
-		.Shift_In       (s[8])
-		.Shift_En       (Shift) 
+		.D		    (0), 
+		.Shift_In   (s[8]),
+		.Shift_En   (Shift), 
 		
-		.Data_Out  	(Aval[7:0])
+		.Data_Out  	(Aval)
 	);
 
-	reg_8 #(
-		.DATA_WIDTH(1) // specifying the data width of register through a parameter
-	) reg_X ( 
-		.Clk		(Clk), 
-		.Reset		(Reset_Load_Clear), 
-		.Load		(Shift),  //// after it adds it will shift and then automatically load X
-		.D		(s[8]), ////correct?
-		.Shift_In       (0),    ///b/c we never shift X
-		.Shift_En       (Shift_En),
-		
-		.Data_Out  	(s[8])
-	);
+
 
 	// Addition/subtraction unit
 
@@ -102,39 +97,32 @@ module Lab4toplevel   (
 	);
 	
 	HexDriver hex_a (
-		.clk		(clk),
-		.reset		(Reset_Load_Clear),
-		.in			({Aval[7:4], Aval[3:0]}),
+		.Clk		(Clk),
+		.reset		(Reset_Load_Clr),
+		.in			({Bval[7:4], Bval[3:0], Aval[7:4], Aval[3:0]}),
 		.hex_seg	(hex_segA),
 		.hex_grid	(hex_gridA)
 	);
 	
-	HexDriver hex_b (
-		.clk		(clk),
-		.reset		(Reset_Load_Clear),
-		.in			({ Bval[7:4], Bval[3:0]}),
-		.hex_seg	(hex_segB),
-		.hex_grid	(hex_gridB)
-	);
+
 	
 	// Synchchronizers/debouncers
 	sync_debounce button_sync [1:0] (
-	   .clk    (clk),
+	   .Clk    (Clk),
 	   
 	   .d      ({reset_load_clr, run_i}),
 	   .q      ({reset_s, run_s})
 	);
 	
 		
-	load_reg #(
-	   .DATA_WIDTH(16) // specifying the data width of synchronizer through a parameter
-	) sw_sync ( 
-		.clk		(clk), 
-		.reset		(1'b0), // there is no reset for the inputs, so hardcode 0
-		.load		(1'b1), // always load data_i into the register
-		.data_i		(sw_i), 
+	reg_8 #(8) // specifying the data width of synchronizer through a parameter
+	 sw_sync ( 
+		.Clk		(Clk), 
+		.Reset		(1'b0), // there is no reset for the inputs, so hardcode 0
+		.Load		(1'b1), // always load data_i into the register
+		.D		(sw_i), 
 		
-		.data_q   	(sw_s) 
+		.Data_Out  	(sw_i) 
 	);
 	
 	assign sign_LED = out[16]; // the sign bit of the output
