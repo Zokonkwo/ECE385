@@ -1,10 +1,11 @@
-moduole flipflop_x(input D_in, Clk, load, reset
-                 output Qout);
-	logic Din;
 
-	always_ff @ (posedge clk)
+module flipflop_x(input logic D_in, Clk, load, reset,
+                 output logic Qout);
+
+    logic Din;
+	always_ff @ (posedge Clk)
 	begin
-		Qout = Din;
+		Qout = D_in;
 	end
 
 	always_comb begin
@@ -13,9 +14,7 @@ moduole flipflop_x(input D_in, Clk, load, reset
 		else if(load)
 			Din = D_in;
 		else
-			Din = Q;
+			Din = Qout;
 	end 
 
 endmodule
-
-
