@@ -6,7 +6,7 @@ timeprecision 1ns;
 // These signals are internal because the processor will be 
 // instantiated as a submodule in testbench.
 logic       clk;
-logic       reset; 
+logic       reset_load_clr,; 
 //logic       LoadA; 
 logic       LoadB; 
 logic       run_i;
