@@ -5,7 +5,7 @@
 
 module Lab4toplevel   (
 	input  logic 		clk, 
-	input  logic		reset, 
+	input  logic		reset_load_clr, 
 	input  logic 		run_i, // _i stands for input
 	input  logic [15:0] sw_i,
 
