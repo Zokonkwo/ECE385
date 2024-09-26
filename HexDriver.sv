@@ -1,5 +1,5 @@
 module HexDriver (
-    input   logic           clk,
+    input   logic           Clk,
     input   logic           reset,
 
     input   logic   [3:0]   in[4],
@@ -49,7 +49,7 @@ module HexDriver (
 
     logic [16:0] counter;
 
-    always_ff @( posedge clk ) begin
+    always_ff @( posedge Clk ) begin
         if (reset) begin
             counter <= '0;
         end else begin
