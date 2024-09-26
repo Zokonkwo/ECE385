@@ -13,13 +13,8 @@ module Lab4toplevel   (
 	output logic [7:0]  hex_segA,
 	output logic [3:0]  hex_gridA,
 	output logic [7:0]  hex_segB,
-	output logic [3:0]  hex_gridB
-
-	
-	
+	output logic [3:0]  hex_gridB	
 );
-
-	
 
 	// Declare temporary values used by other modules
 	logic load;
@@ -37,17 +32,14 @@ module Lab4toplevel   (
 	controllerFSM control_unit (
 		.Reset_Load_Clear (Reset_Load_Clear);
 		.run (run_s),
-		.Clk (Clk),///////////////caps?
-		.M (Bval[0]),//////////////correct?
+		.Clk (Clk),
+		.M (Bval[0]),///////correct???
 		.shift (Shift),
 		.Add (Add),
 		.Sub (Sub),
 		.Clr (Clr),
 		.LoadB (LoadB),
 	);
-
-	
-
 
 	
 	// Allows the register to load once, and not during full duration of button press
@@ -63,7 +55,7 @@ module Lab4toplevel   (
 		.DATA_WIDTH(8) // specifying the data width of register through a parameter
 	) reg_B ( 
 		.Clk		(Clk), 
-		.Reset		(reset_s), 
+		.Reset		(Reset_Load_Clear), 
 		.Load		(LoadB), 
 		.D		(sw_s[7:0]),
 		.Shift_In       (Aval[0])
@@ -89,7 +81,7 @@ module Lab4toplevel   (
 		.DATA_WIDTH(1) // specifying the data width of register through a parameter
 	) reg_X ( 
 		.Clk		(Clk), 
-		.Reset		(reset_s), 
+		.Reset		(Reset_Load_Clear), 
 		.Load		(load), 
 		.D		(sw_s[7:0]), 
 		.Shift_In       (s[8]),
@@ -103,14 +95,7 @@ module Lab4toplevel   (
 	
 
 	
-	// Addition unit
-	fa (  
-		.a	(sw_s), 
-		.b	(out[15:0]), 
-		.cin 	(1'b0), 
-		.cout	(s[16]), 
-		.s   	(s[15:0]) 
-	);
+	// Addition/subtraction unit
 
 	ripple_adder_9 (
 		.XA  (XA[8:0]),
@@ -120,11 +105,9 @@ module Lab4toplevel   (
 		.c_out  (c_out)
 	);
 	
-
-	// Hex units that display contents of sw and sum register in hex
 	HexDriver hex_a (
 		.clk		(clk),
-		.reset		(reset_s),
+		.reset		(Reset_Load_Clear),
 		.in			({Aval[7:4], Aval[3:0]}),
 		.hex_seg	(hex_segA),
 		.hex_grid	(hex_gridA)
@@ -132,7 +115,7 @@ module Lab4toplevel   (
 	
 	HexDriver hex_b (
 		.clk		(clk),
-		.reset		(reset_s),
+		.reset		(Reset_Load_Clear),
 		.in			({ Bval[7:4], Bval[3:0]}),
 		.hex_seg	(hex_segB),
 		.hex_grid	(hex_gridB)
