@@ -184,7 +184,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             SS: next_state = HALT;
 
           HALT: 
-            if @ (posedge run)
+            if (posedge run)
             next_state = CXA;
          else 
            next_state = HALT;
