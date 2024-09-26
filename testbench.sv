@@ -4,23 +4,22 @@ timeunit 10ns;  // This is the amount of time represented by #1
 timeprecision 1ns;
 
 // These signals are internal because the processor will be 
-// instantiated as a submodule in testbench.
-logic       clk;
-logic       reset_load_clr,; 
+// instantiated as a submodule in testbench
+input  logic 		clk, 
+input  logic		reset_load_clr, 
+input  logic 		run_i, // _i stands for input
+input  logic [7:0]     sw_i,
+
+output logic        sign_LED,
+output logic [7:0]  hex_segA,
+output logic [3:0]  hex_gridA,	
+output logic [7:0]  Aval
+output logic [7:0]  Bval 
 //logic       LoadA; 
-logic       LoadB; 
-logic       run_i;
-logic [15:0] sw_i;
 //logic [2:0] F;
 //logic [1:0] R;
-logic sign_LED;
-
-logic c_in;
-logic [7:0] hex_segA;
-logic [3:0] hex_gridA;
 
 // To store expected results
-logic [16:0] out;
 
 
 // Instantiating the DUT (Device Under Test)
