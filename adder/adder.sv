@@ -29,5 +29,5 @@ module ripple_adder_9 (input logic [8:0] XA, sw,
 	fa fa5 (.a(XA[5]), .sw(sw[5]), .c(c5), .s(s[5]), .c_out(c6), .fn(fn));
 	fa fa6 (.a(XA[6]), .sw(sw[6]), .c(c6), .s(s[6]), .c_out(c7), .fn(fn));
 	fa fa7 (.a(XA[7]), .sw(sw[7]), .c(c7), .s(s[7]), .c_out(c8), .fn(fn));
-	fa fa8 (.a(XA[8]), .sw(sw[8]), .c(c8), .s(s[8]), .c_out(c_out), .fn(fn));
+	fa fa8 (.a(XA[7]), .sw(sw[7]), .c(c8), .s(s[8]), .c_out(c9), .fn(fn));
 endmodule
