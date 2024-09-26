@@ -1,15 +1,16 @@
-module hex_driver (
+module HexDriver (
     input   logic           clk,
     input   logic           reset,
 
     input   logic   [3:0]   in[4],
 
-    output  logic   [7:0]   hex_seg,
+    output  logic   [7:0]   hex_seg, 
     output  logic   [3:0]   hex_grid
 );
     
     module nibble_to_hex(
         input   logic   [3:0]   nibble,
+        
         output  logic   [7:0]   hex
     );
         always_comb begin
@@ -34,7 +35,7 @@ module hex_driver (
         end
     endmodule
 
-    logic [7:0] hex [4];
+    logic [7:0] hex [4]; 
 
     genvar i;
     generate
