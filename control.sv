@@ -161,7 +161,7 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
             if(Reset_Load_Clear)
                 next_state = LOADB;
          else 
-           next_state = Reset_Load_Clear;
+           next_state = START;
               
 
           LOADB: next_state = CXA;
@@ -171,7 +171,8 @@ module controllerFSM (input Reset_Load_Clear, run, Clk, M,
           CXA:  
             if(run)
               next_state = AS0;
-              
+            else 
+              next_state = CXA
   
             AS0: next_state = AS1;  
             AS1: next_state = AS2;
@@ -208,31 +209,6 @@ endmodule
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-module add_sub5(input     [7:0] A, B,
-                input       fn,
-                output    [4:0] S);
-
-    //useful shortcut - bit extension {4{fn}};
-
-    if (fn == 1)
-      //then inverting switches
-      //after inverting call CRA 9 times
-      //lastly add 1;
-      //send result to A
-      //send Cout from CRA to X
-  
-
-    else if (fn == 0)
-      //then add switches normally as postive number
-       //instantiate the CRA 9 times;
-       //send result to A
-       //send Cout from CRA to X
-
-    
-endmodule
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 module reg_8(input logic      Clk, Reset, Shift_In, Load, Shift_En,
             input logic      [7:0] D,
             output logic     Shift_Out,
@@ -256,4 +232,22 @@ module reg_8(input logic      Clk, Reset, Shift_In, Load, Shift_En,
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+module reg_1(input logic      Clk, Reset, Shift_In, Load, Shift_En,
+            input logic       D,
+            output logic      Shift_Out,
+            output logic      Data_Out);
 
+
+    always_ff @ (posedge Clk)
+    begin
+      if(Reset)
+        Data_Out <= 8'h0;
+      else if (Load)
+        Data_Out <= D;
+      else if (Shift_En)
+        Data_Out <= {Shift_In, Data_Out[7:1]};
+    end
+    
+    assign Shift_Out = Data_Out[0];
+
+endmodule
