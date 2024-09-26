@@ -196,7 +196,8 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
             AS3: next_state = AS4;     
             AS4: next_state = AS5;          
             AS5: next_state = AS6;                 
-            AS6: next_state = SS;           
+            AS6: 
+              ifnext_state = SS;           
             SS: next_state = HALT;
 
           HALT: 
