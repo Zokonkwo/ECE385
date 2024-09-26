@@ -17,9 +17,7 @@ logic sign_LED;
 
 logic c_in;
 logic [7:0] hex_segA;
-logic [7:0] hex_segB;
 logic [3:0] hex_gridA;
-logic [3:0] hex_gridB;
 
 // To store expected results
 logic [16:0] out;
@@ -32,7 +30,6 @@ Lab4toplevel Lab4toplevel(.*);
 //assign c_in = adder_toplevel.adder_la.cin;////////////////////////////////////////////////////////////////////////////////////////////
 //assign cin = adder_toplevel.adder_sa.cin;///////////////////////////////////////////////////////////////////////////////
 //assign out = adder_toplevel.out;
-assign c_in = Lab4toplevel.adder_sa.cin // fix
 assign out = Lab4toplevel.out
 
 initial begin: CLOCK_INITIALIZATION
