@@ -8,7 +8,7 @@ timeprecision 1ns;
 logic       clk;
 logic       reset; 
 //logic       LoadA; 
-//logic       LoadB; 
+logic       LoadB; 
 logic       run_i;
 logic [15:0] sw_i;
 //logic [2:0] F;
@@ -27,11 +27,13 @@ logic [16:0] out;
 
 // Instantiating the DUT (Device Under Test)
 // Make sure the module and signal names match with those in your design
-adder_toplevel adder_toplevel(.*);	
+Lab4toplevel Lab4toplevel(.*);	
 
 //assign c_in = adder_toplevel.adder_la.cin;////////////////////////////////////////////////////////////////////////////////////////////
-assign cin = adder_toplevel.adder_sa.cin;///////////////////////////////////////////////////////////////////////////////
-assign out = adder_toplevel.out;
+//assign cin = adder_toplevel.adder_sa.cin;///////////////////////////////////////////////////////////////////////////////
+//assign out = adder_toplevel.out;
+assign c_in = Lab4toplevel.adder
+assign out = Lab4toplevel.out
 
 initial begin: CLOCK_INITIALIZATION
 	clk = 1'b1;
