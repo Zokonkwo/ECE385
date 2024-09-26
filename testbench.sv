@@ -61,7 +61,7 @@ initial begin: TEST_VECTORS
 	#20
 	reset <= 0;
 	#10
-	sw_i <= 16'b1111;
+	sw_i <= 'b1111;
 	#10
 	run_i <= 1;
 	#10
