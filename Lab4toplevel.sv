@@ -97,7 +97,7 @@ module Lab4toplevel   (
 	
 	// Addition/subtraction unit
 
-	ripple_adder_9 (
+	ripple_adder_9 ra_9 (
 		.XA  (XA[8:0]),
 		.sw  (sw[8:0]),
 		.fn  (fn),
