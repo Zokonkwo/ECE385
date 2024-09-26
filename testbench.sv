@@ -59,6 +59,8 @@ initial begin: TEST_VECTORS
     run_i <= 0;
 	Reset_Load_Clr <= 1;
 	#20
+	Reset_Load_Clr <= 1;
+	#10
 	Reset_Load_Clr <= 0;
 	#10
 	sw_i <= 2'b10;

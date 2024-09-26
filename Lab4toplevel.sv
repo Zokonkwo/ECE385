@@ -18,11 +18,14 @@ module Lab4toplevel   (
 );
 
 	// Declare temporary values used by other modules///////////////why???????????for c1-c8 too??
-	logic load;
-	logic LoadB;
+	logic load, loadb;
+	logic add, sub, clr;
+	logic shift, shift_inA, shift_inB, shift_tmp;
+
 	//Out;
 	logic [16:0] s;
 	logic [16:0] out;
+	logic cout;
 	
 	// Synchronized inputs (denoted by _s in naming convention)
 	logic run_s;
@@ -30,26 +33,28 @@ module Lab4toplevel   (
 	logic [8:0] XA ;
 	logic [8:0] sw ;
 	
+//loadB never goes high
+//too many parameter overmides for module reg_8
 
 	controllerFSM control_unit (
 		.Reset_Load_Clr (Reset_Load_Clr),
-		.run (run_s),
-		.Clk (Clk),
-		.M (Bval[0]),
-		.Shift (Shift),
-		.Add (Add),
-		.Sub (Sub),
-		.Clr (Clr),
-		.LoadB (LoadB)
+		.run (run_i),
+		.Clk (Clk), 		//Clk gets put into Clk
+		.M_val (Bval[0]), 	//Bval[0] gets put into M_val
+		.Shift (shift), 	//output Shift get stored at wire shift to be used other places for inputs
+		.Add (add), 		//output Add get stored at wire add to be used other places for inputs
+		.Sub (sub), 		//output Sub get stored at wire sub to be used other places for inputs
+		.Clr (clr), 		//output Clr get stored at wire clr to be used other places for inputs
+		.LoadB (loadb) 		//output LoadB get stored at wire loadb to be used other places for inputs
 	);
 
 
     flipflop_x flipflop(
         .D_in (s[8]),
         .Clk (Clk),
-        .load (load),
+        .load (load), //what signal should be sent to tell the flipflop to load in the new signal
         .reset (Reset_Load_Clr),
-        .Qout (Aval[7])
+        .Qout (shift_inA)
 
     );
 	
@@ -65,10 +70,11 @@ module Lab4toplevel   (
 	reg_8 #(8) reg_B ( 
 		.Clk		(Clk), 
 		.Reset		(Reset_Load_Clr), 
-		.Load		(LoadB), 
+		.Load		(loadb), 
 		.D		    (sw_i[7:0]),
-		.Shift_In   (Aval[0]),
-		.Shift_En   (Shift),       
+		.Shift_In   (shift_inB),
+		.Shift_En   (shift),
+		.Shift_Out 	(shift_tmp),    
 		.Data_Out   (Bval)
 	);
 
@@ -76,11 +82,11 @@ module Lab4toplevel   (
 	 reg_A ( 
 		.Clk		(Clk), 
 		.Reset		(Reset_Load_Clr), 
-		.Load		(0), 
-		.D		    (0), 
-		.Shift_In   (s[8]),
-		.Shift_En   (Shift), 
-		
+		.Load		(add), 
+		.D		    (s[7:0]), 
+		.Shift_In   (shift_inA),
+		.Shift_En   (shift), 
+		.Shift_Out 	(shift_inB),
 		.Data_Out  	(Aval)
 	);
 
@@ -89,11 +95,11 @@ module Lab4toplevel   (
 	// Addition/subtraction unit
 
 	ripple_adder_9 ra_9 (
-		.XA  (XA[8:0]),
-		.sw  (sw[8:0]),
-		.fn  (fn),
+		.XA  ({Aval[7], Aval}), //sign extension
+		.sw  ({Bval[7], Bval}), //sign extension
+		.fn  (sub),
 		.s  (s[8:0]),
-		.c_out  (c_out)
+		.c_out  (cout)
 	);
 	
 	HexDriver hex_a (
