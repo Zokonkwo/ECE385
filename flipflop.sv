@@ -4,7 +4,7 @@ moduole flipflop_x(input D, Clk, load, reset
 
 	always_ff @ (posedge clk)
 	begin
-		dout = Din;
+		Q = Din;
 	end
 
 	always_comb begin
