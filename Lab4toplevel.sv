@@ -8,12 +8,15 @@ module Lab4toplevel   (
 	input  logic		reset_load_clr, 
 	input  logic 		run_i, // _i stands for input
 	input  logic [15:0] sw_i,
-
+	input  logic        LoadB
+	input [7:0] 	    D
+	
+	output logic [3:0]  LED
 	output logic        sign_LED,
 	output logic [7:0]  hex_segA,
-	output logic [3:0]  hex_gridA,
-	output logic [7:0]  hex_segB,
-	output logic [3:0]  hex_gridB	
+	output logic [3:0]  hex_gridA,	
+	output logic [7:0]  Aval
+	output logic [7:0]  Bval
 );
 
 	// Declare temporary values used by other modules///////////////why???????????for c1-c8 too??
