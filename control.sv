@@ -14,11 +14,11 @@ NOTES:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-module controllerFSM (input logic Reset_Load_Clear, run, Clk, M,
+module controllerFSM (input logic Reset_Load_Clr, run, Clk, M,
                       output logic Shift, Add, Sub, Clr, LoadB);
 
     //declare signals curr_state, next_state of type enum
-    enum logic [3:0] {START,LOADB,CXA,AS0,AS1,AS2,AS3,AS4,AS5,AS6,SS,HALT} curr_state, next_state;
+    enum logic [3:0] {START,LOADB,CXA,AS0,AS1,AS2,AS3,AS4,AS5,AS6,SS,HALT, HALT2} curr_state, next_state;
 
   logic [7:0] Bval;
   logic [7:0] Aval;
@@ -26,8 +26,8 @@ module controllerFSM (input logic Reset_Load_Clear, run, Clk, M,
     always_comb
     begin 
       unique case(curr_state)
-        START:
-          begin
+        START: 
+            begin
             Shift = 1'b0;
             Add = 1'b0;
             Sub = 1'b0;
@@ -143,7 +143,18 @@ module controllerFSM (input logic Reset_Load_Clear, run, Clk, M,
             Add = 1'b0; 
             Sub = 1'b0;
             Clr = 1'b0;
-            LoadB = 1'b0;  
+            LoadB = 1'b0;
+              
+          end
+          
+          HALT2:
+          begin
+            Shift = 1'b0;
+            Add = 1'b0; 
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;
+              
           end
         default:  //default case, can also have default assignments 
           begin 
@@ -153,26 +164,27 @@ module controllerFSM (input logic Reset_Load_Clear, run, Clk, M,
             Clr = 1'b0;
             LoadB = 1'b0;
           end
+          endcase
     end
 
-    //next state logic
+    ////////////////next state logic/////////////////////////////////////////////////////////////////////////////////
     always_comb
     begin
        unique case(curr_state)
           START: 
-            if(Reset_Load_Clear)
+            if(Reset_Load_Clr)
                 next_state = LOADB;
          else 
            next_state = START;
               
 
-          LOADB: next_state = CXA;/////////////////////////////////////////enough time?
+          LOADB: next_state = CXA;
          
           CXA:  
             if(run)
               next_state = AS0;
             else 
-              next_state = CXA
+              next_state = CXA;
   
             AS0: next_state = AS1;  
             AS1: next_state = AS2;
@@ -184,11 +196,15 @@ module controllerFSM (input logic Reset_Load_Clear, run, Clk, M,
             SS: next_state = HALT;
 
           HALT: 
-            if (posedge run)
-            next_state = CXA;
+           if (run==0) 
+            next_state = HALT2;
          else 
            next_state = HALT;
-
+HALT2:
+if (run == 1)
+    next_state = CXA;
+else
+    next_state = HALT2;
               
 
           default: next_state = START;
@@ -199,7 +215,7 @@ module controllerFSM (input logic Reset_Load_Clear, run, Clk, M,
     //update flip-flops
     always_ff @ (posedge Clk)
     begin
-      if (Reset_Load_Clear)       //Asychronous Reset
+      if (Reset_Load_Clr)       //Asychronous Reset
         curr_state <= START;       //A is the reset/start state
       else
         curr_state <= next_state;
