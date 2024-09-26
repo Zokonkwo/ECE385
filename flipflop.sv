@@ -1,5 +1,5 @@
-moduole flipflop_x(input D, Clk, load, reset
-                 output Q);
+moduole flipflop_x(input Din, Clk, load, reset
+                 output Qout);
 	logic Din;
 
 	always_ff @ (posedge clk)
