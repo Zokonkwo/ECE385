@@ -12,8 +12,10 @@ module reg_8(
         Data_Out <= 0;
       else if (Load)
         Data_Out <= D;
-                else if (Shift_En)
-                     Data_Out <= {Shift_In, Data_Out[7:1]};
+        else if (Shift_En)
+             Data_Out <= {Shift_In, Data_Out[7:1]};
+      else 
+        Data_Out<= Data_Out;
     end
     
     assign Shift_Out = Data_Out[0];
