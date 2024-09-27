@@ -9,7 +9,7 @@ module reg_8(
     always_ff @ (posedge Clk)
     begin
       if(Reset)
-        Data_Out <= '0;
+        Data_Out <= 0;
       else if (Load)
         Data_Out <= D;
                 else if (Shift_En)
