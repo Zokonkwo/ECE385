@@ -17,7 +17,7 @@ module ripple_adder_9 (input logic [8:0] XA, sw,
                        output logic c_out // c_out is not needed
 		      );
                        
-    logic c1, c2, c3, c4, c5, c6, c7, c8, c9;
+    logic c1, c2, c3, c4, c5, c6, c7, c8;
 
 	fa fa0 (.a(XA[0]), .sw(sw[0]), .c(fn), .s(s[0]), .c_out(c1), .fn(fn));
 	fa fa1 (.a(XA[1]), .sw(sw[1]), .c(c1), .s(s[1]), .c_out(c2), .fn(fn));
