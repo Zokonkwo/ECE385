@@ -26,7 +26,7 @@ logic [7:0]  Bval;
 // Make sure the module and signal names match with those in your design
 Lab4toplevel Lab4toplevel(.*);	
 
-//assign c_in = adder_toplevel.adder_la.cin;////////////////////////////////////////////////////////////////////////////////////////////
+//assign xsw = Lab4toplevel.ripple_adder_9.fa.xsw;////////////////////////////////////////////////////////////////////////////////////////////
 //assign cin = adder_toplevel.adder_sa.cin;///////////////////////////////////////////////////////////////////////////////
 //assign out = adder_toplevel.out;
 
@@ -57,26 +57,27 @@ end
 // happens first. 
 initial begin: TEST_VECTORS
     run_i = 0;
+    #10
     Reset_Load_Clr = 0;
-    #10
-    #10
-    sw_i <= 8'hc5;
     #20
-	Reset_Load_Clr = 1;
-	#25
-	Reset_Load_Clr = 0;
-	#10
-	sw_i <= 8'h07;
-	#10
+    sw_i <= 8'hFF;
+    #10
+     Reset_Load_Clr = 1;
+    #20
+      Reset_Load_Clr = 0;
+    #20
+    sw_i <= 8'h01;
+    #25
+   run_i <= 1;
+    #20
+   run_i <= 0;
+   #100
+    
+	
+//	//change switches, reset_clr_ld, press run again
 	run_i <= 1;
 	#10
 	run_i <= 0;
-	#100
-	
-//	//change switches, reset_clr_ld, press run again
-//	run_i <= 1;
-//	#10
-//	run_i <= 0;
 	
 		$finish(); //this task will end the simulation if the Vivado settings are properly configured
 
