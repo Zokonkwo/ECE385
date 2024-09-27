@@ -57,26 +57,26 @@ end
 // happens first. 
 initial begin: TEST_VECTORS
     run_i = 0;
-    Reset_Load_Clr = 1;
+    Reset_Load_Clr = 0;
     #10
     #10
-    sw_i <= 2'b10;
+    sw_i <= 8'hc5;
     #20
 	Reset_Load_Clr = 1;
 	#25
 	Reset_Load_Clr = 0;
 	#10
-	sw_i <= 2'b11;
+	sw_i <= 8'h07;
 	#10
 	run_i <= 1;
 	#10
 	run_i <= 0;
-	#10
+	#100
 	
-	//change switches, reset_clr_ld, press run again
-	run_i <= 1;
-	#10
-	run_i <= 0;
+//	//change switches, reset_clr_ld, press run again
+//	run_i <= 1;
+//	#10
+//	run_i <= 0;
 	
 		$finish(); //this task will end the simulation if the Vivado settings are properly configured
 
