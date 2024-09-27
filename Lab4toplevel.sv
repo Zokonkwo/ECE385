@@ -31,7 +31,7 @@ module Lab4toplevel   (
 	logic run_s;
 	logic reset_s;
 	logic [8:0] XA ;
-	logic [8:0] sw ;
+	logic [8:0] sw, xsw;
 	
 //loadB never goes high
 //too many parameter overmides for module reg_8
@@ -52,7 +52,7 @@ module Lab4toplevel   (
 //timing seems to be off when we are in state to everything else updating
 
     flipflop_x flipflop(
-        .D_in (s[8]),
+        .D_in (cout),
         .Clk (Clk),
         .load (shift), //what signal should be sent to tell the flipflop to load in the new signal
         .reset (Reset_Load_Clr),
@@ -100,8 +100,9 @@ module Lab4toplevel   (
 		.XA  ({Aval[7], Aval}), //sign extension
 		.sw  ({sw_i[7], sw_i}), //sign extension
 		.fn  (sub),
-		.s  (s[8:0]),
+		.s  (s[7:0]),
 		.c_out  (cout)
+
 	);
 	
 	HexDriver hex_a (
