@@ -1,8 +1,6 @@
 
 //Note: lowest 2 HEX digits will reflect lower 8 bits of switch input
 //Upper 4 HEX digits will reflect value in the accumulator
-//how do we mult -1 * 1 over and over again in testbench ---> how to write
-//which bits are wrong and how to we find those errros
 
 
 module Lab4toplevel   (
@@ -50,11 +48,13 @@ module Lab4toplevel   (
 		.LoadB (loadb) 		//output LoadB get stored at wire loadb to be used other places for inputs
 	);
 
+//where do we put the clr signal for the registers --> what does it mean exactly
+//timing seems to be off when we are in state to everything else updating
 
     flipflop_x flipflop(
         .D_in (s[8]),
         .Clk (Clk),
-        .load (load), //what signal should be sent to tell the flipflop to load in the new signal
+        .load (shift), //what signal should be sent to tell the flipflop to load in the new signal
         .reset (Reset_Load_Clr),
         .Qout (shift_inA)
 
@@ -71,7 +71,7 @@ module Lab4toplevel   (
 	
 	reg_8 reg_B ( 
 		.Clk		(Clk), 
-		.Reset		(Reset_Load_Clr), 
+		.Reset		(1'b0), 
 		.Load		(loadb), 
 		.D		    (sw_i),
 		.Shift_In   (shift_inB),
@@ -83,7 +83,7 @@ module Lab4toplevel   (
 	reg_8
 	 reg_A ( 
 		.Clk		(Clk), 
-		.Reset		(Reset_Load_Clr), 
+		.Reset		(reset_s), 
 		.Load		(add), 
 		.D		    (s[7:0]), 
 		.Shift_In   (shift_inA),
