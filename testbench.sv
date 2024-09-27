@@ -57,7 +57,7 @@ end
 // happens first. 
 initial begin: TEST_VECTORS
     run_i = 0;
-    Reset_Load_Clr = 0;
+    Reset_Load_Clr = 1;
     #10
     #10
     sw_i <= 2'b10;
@@ -65,12 +65,15 @@ initial begin: TEST_VECTORS
 	Reset_Load_Clr = 1;
 	#25
 	Reset_Load_Clr = 0;
+	#10
 	sw_i <= 2'b11;
 	#10
 	run_i <= 1;
 	#10
 	run_i <= 0;
 	#10
+	
+	//change switches, reset_clr_ld, press run again
 	run_i <= 1;
 	#10
 	run_i <= 0;
