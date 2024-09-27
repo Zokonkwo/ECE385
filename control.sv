@@ -19,7 +19,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
                       output logic Shift, Add, Sub, Clr, LoadB);
 
     //declare signals curr_state, next_state of type enum
-    enum logic [9:0]{START,CXA_LOADB,IDLE,A0,SH0,A1,SH1,A2,SH2,A3,SH3,A4,SH4,A5,SH5,A6,SH6,SS,HALT, HALT2} curr_state, next_state;
+    enum logic [9:0]{START,CXA_LOADB,IDLE,A0,SH0,A1,SH1,A2,SH2,A3,SH3,A4,SH4,A5,SH5,SH7,A6,SH6,SS,HALT, HALT2} curr_state, next_state;
 
   logic [7:0] Bval;
   logic [7:0] Aval;
@@ -157,6 +157,14 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
             Clr = 1'b0;
             LoadB = 1'b0;
         end
+        SH7:
+        begin
+            Shift = 1'b1;
+            Add = 1'b0;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;
+        end
         SS:
           begin
             Shift = 1'b0;
@@ -263,18 +271,19 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
                     next_state = SH6;
                 end
             A6: next_state = SH6;
-            SH6:
-                begin
+            SH6: begin
                    if(M_val == 1)
                        next_state = SS;
                    else 
-                       next_state = HALT;
-                end       
-            SS: next_state = HALT;
+                       next_state = SH7;
+                end
+            SH7: next_state = HALT;
+                  
+            SS: next_state = SH7;
 
           HALT: 
           begin
-           if (run==1)
+           if (run == 1)
             next_state = CXA_LOADB;
          else 
            next_state = HALT;
