@@ -13,12 +13,13 @@ NOTES:
   X --> Carry bit
 */
 
-//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
                       output logic Shift, Add, Sub, Clr, LoadB);
 
     //declare signals curr_state, next_state of type enum
-    enum logic [3:0] {START,LOADB,CXA,AS0,AS1,AS2,AS3,AS4,AS5,AS6,SS,HALT, HALT2} curr_state, next_state;
+    enum logic [9:0]{START,CXA_LOADB,IDLE,A0,SH0,A1,SH1,A2,SH2,A3,SH3,A4,SH4,A5,SH5,A6,SH6,SS,HALT, HALT2} curr_state, next_state;
 
   logic [7:0] Bval;
   logic [7:0] Aval;
@@ -34,104 +35,131 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
             Clr = 1'b0;
             LoadB = 1'b0;  
           end
-        LOADB:
-          begin
-            Shift = 1'b0;
-            Add = 1'b0;
-            Sub = 1'b0;
-            Clr = 1'b0;
-            LoadB = 1'b1;
-            
-          end
-        CXA:
+      
+        CXA_LOADB:
           begin
             Shift = 1'b0;
             Add = 1'b0;
             Sub = 1'b0;
             Clr = 1'b1; 
-            LoadB = 1'b0; 
+            LoadB = 1'b1;
     
           end
-        AS0:
+        A0:
           begin
+            Shift = 1'b0; 
+            Add = 1'b1;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;  
+          end
+        SH0:
+            begin
+                Shift = 1'b1;
+                Add = 1'b0;
+                Sub = 1'b0;
+                Clr = 1'b0;
+                LoadB = 1'b0;
+            end
+        A1:
+          begin
+           Shift = 1'b0; 
+            Add = 1'b1;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0; 
+          end
+        SH1:
+            begin
+                Shift = 1'b1;
+                Add = 1'b0;
+                Sub = 1'b0;
+                Clr = 1'b0;
+                LoadB = 1'b0;
+            end
+        A2:
+          begin
+            Shift = 1'b0; 
+            Add = 1'b1;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0; 
+          end
+        SH2:
+        begin
             Shift = 1'b1;
-             if(M_val == 1)
-              Add = 1'b1;
-            else
-              Add = 1'b0;
-              Sub = 1'b0;
-              Clr = 1'b0;
-              LoadB = 1'b0;  
-          end
-        AS1:
+            Add = 1'b0;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;
+        end
+        A3:
           begin
+            Shift = 1'b0; 
+            Add = 1'b1;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;  
+          end
+       SH3:
+        begin
             Shift = 1'b1;
-             if(M_val == 1)
-              Add = 1'b1;
-            else
-              Add = 1'b0;
-              Sub = 1'b0;
-              Clr = 1'b0;
-              LoadB = 1'b0;
-          end
-        AS2:
+            Add = 1'b0;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;
+        end
+        A4:
           begin
+            Shift = 1'b0; 
+            Add = 1'b1;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0; 
+          end
+       SH4:
+        begin
             Shift = 1'b1;
-            if(M_val == 1)
-              Add = 1'b1;
-            else
-              Add = 1'b0;
-              Sub = 1'b0;
-              Clr = 1'b0;  
-              LoadB = 1'b0;
-          end
-        AS3:
+            Add = 1'b0;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;
+        end
+        A5:
           begin
+           Shift = 1'b0; 
+            Add = 1'b1;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;   
+          end
+       SH5:
+        begin
             Shift = 1'b1;
-             if(M_val == 1)
-              Add = 1'b1;
-            else
-              Add = 1'b0;
-              Sub = 1'b0;
-              Clr = 1'b0;
-              LoadB = 1'b0;  
-          end
-        AS4:
+            Add = 1'b0;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;
+        end
+        A6:
           begin
+            Shift = 1'b0;
+            Add = 1'b1;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0; 
+          end
+       SH6:
+        begin
             Shift = 1'b1;
-            if(M_val == 1)
-              Add = 1'b1;
-            else
-              Add = 1'b0;
-              Sub = 1'b0;
-              Clr = 1'b0; 
-              LoadB = 1'b0;
-          end
-        AS5:
-          begin
-            Shift = 1'b1; 
-            if(M_val == 1)
-              Add = 1'b1;
-            else
-              Add = 1'b0;
-              Sub = 1'b0;
-              Clr = 1'b0;
-              LoadB = 1'b0;   
-          end
-        AS6:
-          begin
-            Shift = 1'b1;
-             if(M_val == 1)
-              Add = 1'b1;
-            else
-              Add = 1'b0; 
-              Sub = 1'b0;
-              Clr = 1'b0;
-              LoadB = 1'b0; 
-          end
+            Add = 1'b0;
+            Sub = 1'b0;
+            Clr = 1'b0;
+            LoadB = 1'b0;
+        end
         SS:
           begin
-            Shift = 1'b1; 
+            Shift = 1'b0;
             Add = 1'b0;
             Sub = 1'b1;
             Clr = 1'b0; 
@@ -143,8 +171,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
             Add = 1'b0; 
             Sub = 1'b0;
             Clr = 1'b0;
-            LoadB = 1'b0;
-              
+            LoadB = 1'b0;     
           end
           
           HALT2:
@@ -167,7 +194,7 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
           endcase
     end
 
-    ////////////////next state logic////////////////////////////////
+    ////////////////next state logic/////////////////////////////////////////////////////////////////////////////////
     always_comb
     begin
      next_state = curr_state;
@@ -175,46 +202,83 @@ module controllerFSM (input logic Reset_Load_Clr, run, Clk, M_val,
           START: 
           begin
             if(Reset_Load_Clr)
-                next_state = LOADB;
+                next_state = CXA_LOADB;
          else 
            next_state = START;
               end
-
-          LOADB: next_state = CXA;
          
-          CXA:  
-          begin
-            if(run)
-              next_state = AS0;
-            else 
-              next_state = CXA;
-  end 
-            AS0: next_state = AS1;  
-            AS1: next_state = AS2;
-            AS2: next_state = AS3;
-            AS3: next_state = AS4;     
-            AS4: next_state = AS5;          
-            AS5: next_state = AS6;                 
-            AS6: 
-              ifnext_state = SS;           
+          CXA_LOADB:
+            begin
+                if(M_val == 1)
+                    next_state = A0;
+                 else
+                    next_state = SH0; 
+            end
+            A0: next_state = SH0; 
+            SH0:
+               begin
+                if(M_val == 1)
+                    next_state = A1;
+                 else
+                    next_state = SH1; 
+                end
+            A1: next_state = SH1;
+            SH1:
+               begin
+                if(M_val == 1)
+                    next_state = A2;
+                 else
+                    next_state = SH2;
+                end
+            A2: next_state = SH2;
+            SH2:
+               begin
+                if(M_val == 1)
+                    next_state = A3;
+                 else
+                    next_state = SH3;
+                end
+            A3: next_state = SH3;
+            SH3:
+               begin
+                if(M_val == 1)
+                    next_state = A4;
+                 else
+                    next_state = SH4;
+                end
+            A4: next_state = SH4;
+            SH4:
+               begin
+                if(M_val == 1)
+                    next_state = A5;
+                 else
+                    next_state = SH5;
+                end
+            A5: next_state = SH5;
+            SH5:
+               begin
+                if(M_val == 1)
+                    next_state = A6;
+                 else
+                    next_state = SH6;
+                end
+            A6: next_state = SH6;
+            SH6:
+                begin
+                   if(M_val == 1)
+                       next_state = SS;
+                   else 
+                       next_state = HALT;
+                end       
             SS: next_state = HALT;
 
           HALT: 
           begin
-           if (run==0) 
-            next_state = HALT2;
+           if (run==1)
+            next_state = CXA_LOADB;
          else 
            next_state = HALT;
            end
-HALT2:
-begin
-if (run == 1)
-    next_state = CXA;
-else
-    next_state = HALT2;
-              end
-
-          default: next_state = START;
 
         endcase
     end
@@ -223,11 +287,11 @@ else
     always_ff @ (posedge Clk)
     begin
       if (Reset_Load_Clr)       //Asychronous Reset
-        curr_state <= LOADB;       //A is the reset/start state
+        curr_state <= HALT;       //A is the reset/start state
       else
         curr_state <= next_state;
     end
       
 endmodule
 
-////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
