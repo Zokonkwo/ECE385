@@ -98,7 +98,7 @@ module Lab4toplevel   (
 
 	ripple_adder_9 ra_9 (
 		.XA  ({Aval[7], Aval}), //sign extension
-		.sw  ({Bval[7], Bval}), //sign extension
+		.sw  ({sw_i[7], sw_i}), //sign extension
 		.fn  (sub),
 		.s  (s[8:0]),
 		.c_out  (cout)
