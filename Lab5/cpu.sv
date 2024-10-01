@@ -90,6 +90,24 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
 
     .data_q(pc)
 );
+    load_reg #(.DATA_WIDTH(16)) mar_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(ld_mar),
+    .data_i(pc),
+
+    .data_q(mar)
+);
+    load_reg #(.DATA_WIDTH(16)) MDR (
+    .clk(clk),
+    .reset(reset),
+
+    .load(ld_pc),
+    .data_i(),
+
+    .data_q()
+);
 
 
 
