@@ -1,13 +1,13 @@
 module mux_2_1 (input logic mio_en
-                input logic [15:0] bus_data, mar_in
-                output logic [15:0] rdata
+                input logic [15:0] bus_data, rdata
+                output logic [15:0] mdr_in
 );
 
 always_comb
   begin
     if(mio_en == 1)
-        rdata = mar_in;
+        mdr_in = rdata;
     else
-        rdata = bus_data;
+        mdr_in = bus_data;
   end
 endmodule
