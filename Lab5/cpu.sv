@@ -55,6 +55,7 @@ logic [15:0] mdr;
 logic [15:0] ir;
 logic [15:0] pc;
 logic [15:0] pc_in;
+logic [15:0] pc_1;
 assign pc_1 = pc + 1;
 logic [15:0] rdata;
 logic ben;
