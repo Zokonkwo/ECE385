@@ -104,7 +104,7 @@ cpu_to_io io(
 );
     
 mux_2_1 mux(
-    .mio_en   (mem_mem_ena), //is this the mio_en
+    .mio_en   (mem_mem_ena), 
     
     .bus_data (),
     .rdata   (),
