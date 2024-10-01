@@ -102,7 +102,7 @@ mux_2_1 mux(
     .bus_data (),
     .rdata   (),
     
-     .mdr_in  (mdr_in)
+     .mux_out  (mdr_in)
     
 );
 load_reg #(.DATA_WIDTH(16)) ir_reg (
