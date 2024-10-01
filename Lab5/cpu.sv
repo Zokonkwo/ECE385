@@ -76,7 +76,13 @@ cpu_to_io io(
 
     
 );
-
+mux_2_1 mux(
+    .mio_en   (mem_mem_ena),
+    .bus_data (),
+    
+    .r
+    
+);
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
     .reset  (reset),
