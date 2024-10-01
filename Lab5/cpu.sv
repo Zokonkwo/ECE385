@@ -107,7 +107,7 @@ mux_2_1 mux(
     .mio_en   (mem_mem_ena), 
     
     .bus_data (),
-    .rdata   (),
+    .rdata   (rdata),
     
      .mux_out  (mdr_in)
     
