@@ -54,7 +54,7 @@ logic [15:0] mdr_in;
 logic [15:0] mdr;
 logic [15:0] ir;
 logic [15:0] pc;
-logic [15:0] rdata_out;
+logic [15:0] rdata;
 logic ben;
 
 
@@ -77,11 +77,11 @@ cpu_to_io io(
     .clk   (clk), 
     .reset (reset),
 
-    .cpu_addr (), 
-    .cpu_mem_ena (), 
-    .cpu_wr_ena (),
-    .cpu_wdata (),
-    .cpu_rdata (),
+    .cpu_addr (mar), 
+    .cpu_mem_ena (mem_mem_ena), 
+    .cpu_wr_ena (mem_wr_ena),
+    .cpu_wdata (mdr),
+    .cpu_rdata (rdata),
 
     .sram_addr (), 
     .sram_mem_ena (), 
