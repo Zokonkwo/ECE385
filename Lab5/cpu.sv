@@ -100,11 +100,9 @@ cpu_to_io io(
 
     .sw_i (sw_i),	
     .hex_grid_o (hex_grid_o),
-    .hex_seg_o (hex_seg_o)
-
-
-    
+    .hex_seg_o (hex_seg_o) 
 );
+    
 mux_2_1 mux(
     .mio_en   (mem_mem_ena), //is this the mio_en
     
@@ -114,6 +112,7 @@ mux_2_1 mux(
      .mux_out  (mdr_in)
     
 );
+    
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
     .reset  (reset),
