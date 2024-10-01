@@ -133,7 +133,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
 
     .data_q(mar)
 );
-    load_reg #(.DATA_WIDTH(16)) MDR (
+    load_reg #(.DATA_WIDTH(16)) mdr_reg (
     .clk(clk),
     .reset(reset),
 
