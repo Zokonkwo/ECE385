@@ -103,7 +103,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .clk(clk),
     .reset(reset),
 
-    .load(ld_pc),
+    .load(ld_mdr),
     .data_i(),
 
     .data_q()
