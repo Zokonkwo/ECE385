@@ -83,15 +83,15 @@ assign led_o = ir;
 assign hex_display_debug = ir;
 
     
-mux_2_1 mux(
-    .mio_en   (mem_mem_ena), 
+// mux_2_1 mux(
+//     .mio_en   (mem_mem_ena), 
     
-    .bus_data (),
-    .rdata   (cpu_rdata),
+//     .bus_data (),
+//     .rdata   (cpu_rdata),
     
-     .mux_out  (mdr_in)
+//      .mux_out  (mdr_in)
     
-);
+// );
     
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
@@ -108,7 +108,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .reset(reset),
 
     .load(ld_pc),
-    .data_i(),
+    .data_i(sw_i),
 
     .data_q(pc)
 );
