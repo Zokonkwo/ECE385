@@ -55,6 +55,15 @@ logic [15:0] mdr;
 logic [15:0] ir;
 logic [15:0] pc;
 logic [15:0] rdata;
+logic [15:0] sram_addr, 
+logic        sram_mem_ena, 
+logic        sram_wr_ena,
+logic [15:0] sram_wdata,
+logic [15:0] sram_rdata,
+
+logic [15:0] sw_i,	
+logic [3:0]  hex_grid_o,
+logic [7:0]  hex_seg_o
 logic ben;
 
 
@@ -83,15 +92,15 @@ cpu_to_io io(
     .cpu_wdata (mdr),
     .cpu_rdata (rdata),
 
-    .sram_addr (), 
-    .sram_mem_ena (), 
-    .sram_wr_ena (),
-    .sram_wdata (),
-    .sram_rdata (),
+    .sram_addr (sram_addr), 
+    .sram_mem_ena (sram_mem_ena), 
+    .sram_wr_ena (sram_wr_ena),
+    .sram_wdata (sram_wdata),
+    .sram_rdata (sram_rdata),
 
-    .sw_i (),	
-    .hex_grid_o (),
-    .hex_seg_o ()
+    .sw_i (sw_i),	
+    .hex_grid_o (hex_grid_o),
+    .hex_seg_o (hex_seg_o)
 
 
     
