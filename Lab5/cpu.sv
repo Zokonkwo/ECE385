@@ -71,6 +71,12 @@ control cpu_control (
 assign led_o = ir;
 assign hex_display_debug = ir;
 
+cpu_to_io io(
+
+
+    
+);
+
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
     .reset  (reset),
