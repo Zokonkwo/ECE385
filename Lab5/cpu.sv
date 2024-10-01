@@ -82,32 +82,12 @@ control cpu_control (
 assign led_o = ir;
 assign hex_display_debug = ir;
 
-cpu_to_io io(
-    .clk   (clk), 
-    .reset (reset),
-
-    .cpu_addr (mar), 
-    .cpu_mem_ena (mem_mem_ena), 
-    .cpu_wr_ena (mem_wr_ena),
-    .cpu_wdata (mdr),
-    .cpu_rdata (rdata),
-
-    .sram_addr (sram_addr), 
-    .sram_mem_ena (sram_mem_ena), 
-    .sram_wr_ena (sram_wr_ena),
-    .sram_wdata (sram_wdata),
-    .sram_rdata (sram_rdata),
-
-    .sw_i (sw_i),	
-    .hex_grid_o (hex_grid_o),
-    .hex_seg_o (hex_seg_o) 
-);
     
 mux_2_1 mux(
     .mio_en   (mem_mem_ena), 
     
     .bus_data (),
-    .rdata   (rdata),
+    .rdata   (cpu_rdata),
     
      .mux_out  (mdr_in)
     
@@ -146,7 +126,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .reset(reset),
 
     .load(ld_mdr),
-    .data_i(mdr_in),
+    .data_i(cpu_rdata),
 
     .data_q(mdr)
 );
