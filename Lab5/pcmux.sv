@@ -1,4 +1,4 @@
-module(input logic [15:0] bus_data, adder, pc_plus_one,
+module pcmux (input logic [15:0] bus_data, adder, pc_plus_one,
        input logic [1:0] pc_select,
        output logic [15:0] pcmux_out);
   
