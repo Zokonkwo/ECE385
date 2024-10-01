@@ -74,6 +74,24 @@ assign led_o = ir;
 assign hex_display_debug = ir;
 
 cpu_to_io io(
+    .clk   (clk), 
+    .reset (reset),
+
+    .cpu_addr (), 
+    .cpu_mem_ena (), 
+    .cpu_wr_ena (),
+    .cpu_wdata (),
+    .cpu_rdata (),
+
+    .sram_addr (), 
+    .sram_mem_ena (), 
+    .sram_wr_ena (),
+    .sram_wdata (),
+    .sram_rdata (),
+
+    .sw_i (),	
+    .hex_grid_o (),
+    .hex_seg_o ()
 
 
     
