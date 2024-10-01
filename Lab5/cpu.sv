@@ -49,7 +49,8 @@ logic gate_mdr;
 
 logic [1:0] pcmux;
 
-logic [15:0] mar; 
+logic [15:0] mar;
+logic [15:0] mdr_in;
 logic [15:0] mdr;
 logic [15:0] ir;
 logic [15:0] pc;
@@ -81,9 +82,9 @@ mux_2_1 mux(
     .mio_en   (mem_mem_ena),
     
     .bus_data (),
-    .mar_in   (mar),
+    .rdata   (),
     
-     .rdata    ()
+     .mdr_in  (mdr_in)
     
 );
 load_reg #(.DATA_WIDTH(16)) ir_reg (
@@ -119,9 +120,9 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .reset(reset),
 
     .load(ld_mdr),
-    .data_i(),
+    .data_i(mdr_in),
 
-    .data_q()
+    .data_q(mar)
 );
 
 
