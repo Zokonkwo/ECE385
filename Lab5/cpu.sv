@@ -92,7 +92,7 @@ load_reg #(.DATA_WIDTH(16)) ir_reg (
     .reset  (reset),
 
     .load   (ld_ir),
-    .data_i (),
+    .data_i (mar),
 
     .data_q (ir)
 );
