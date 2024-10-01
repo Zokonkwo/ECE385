@@ -83,6 +83,7 @@ assign hex_display_debug = ir;
 //      .mux_out  (mdr_in)
     
 // );
+pcmux
     
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
