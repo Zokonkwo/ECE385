@@ -53,6 +53,7 @@ logic [15:0] mar;
 logic [15:0] mdr;
 logic [15:0] ir;
 logic [15:0] pc;
+logic [15:0] rdata_out;
 logic ben;
 
 
@@ -78,9 +79,11 @@ cpu_to_io io(
 );
 mux_2_1 mux(
     .mio_en   (mem_mem_ena),
-    .bus_data (),
     
-    .r
+    .bus_data (),
+    .mar_in   (mar),
+    
+     .rdata    ()
     
 );
 load_reg #(.DATA_WIDTH(16)) ir_reg (
