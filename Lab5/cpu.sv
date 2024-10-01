@@ -54,6 +54,8 @@ logic [15:0] mdr_in;
 logic [15:0] mdr;
 logic [15:0] ir;
 logic [15:0] pc;
+logic [15:0] pc_in;
+assign pc_1 = pc + 1;
 logic [15:0] rdata;
 logic ben;
 
@@ -83,7 +85,13 @@ assign hex_display_debug = ir;
 //      .mux_out  (mdr_in)
     
 // );
-pcmux
+pcmux pcmux_unit(
+    .pc_select (pcmux),
+    .bus_data  (16'b0000000000000000),
+    .adder     (16'b0000000000000000),
+    .pc_plus_one (pc_1),
+    .pcmux_out   (pc_in)
+    );
     
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
@@ -100,7 +108,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .reset(reset),
 
     .load(ld_pc),
-    .data_i(sw_i),
+    .data_i(pc_in),
 
     .data_q(pc)
 );
