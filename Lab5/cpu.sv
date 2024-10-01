@@ -110,7 +110,7 @@ load_reg #(.DATA_WIDTH(16)) ir_reg (
     .reset  (reset),
 
     .load   (ld_ir),
-    .data_i (mar),
+    .data_i (mdr),
 
     .data_q (ir)
 );
@@ -140,7 +140,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .load(ld_mdr),
     .data_i(mdr_in),
 
-    .data_q(mar)
+    .data_q(mdr)
 );
 
 
