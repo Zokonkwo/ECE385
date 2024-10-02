@@ -72,6 +72,9 @@ logic n, z, p;
 assign mem_addr = mar;
 assign mem_wdata = mdr;
 
+assign led_o = ir;
+assign hex_display_debug = ir;
+
 // State machine, you need to fill in the code here as well
 // .* auto-infers module input/output connections which have the same name
 // This can help visually condense modules with large instantiations, 
@@ -79,15 +82,9 @@ assign mem_wdata = mdr;
 control cpu_control (
     .*
 );
-
-
-assign led_o = ir;
-assign hex_display_debug = ir;
-
 // decoder ir_decoder(
     
 // );
-
 alu cpu_alu(
     
 );
@@ -100,17 +97,14 @@ mux_2_1 mux2(
     
      .mux_out  (mdr_in)
     
-);
-    
+);   
 pcmux pcmux_unit(
     .pc_select (pcmux),
     .bus_data  (bus),
     .adder     (16'b0000000000000000),
     .pc_plus_one (pc_1),
     .pcmux_out   (pc_in)
-);
-
-   
+);  
 data_bus bus_mux(
     .gateMDR (gate_mdr),
     .gateMARMUX (gate_marmux),
@@ -130,7 +124,6 @@ load_reg #(.DATA_WIDTH(16)) ir_reg (
 
     .data_q (ir)
 );
-
 load_reg #(.DATA_WIDTH(16)) pc_reg (
     .clk(clk),
     .reset(reset),
@@ -158,7 +151,8 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
 
     .data_q(mdr)
 );
-    load_reg #(.DATA_WIDTH(1)) n_reg (
+    
+load_reg #(.DATA_WIDTH(1)) n_reg (
     .clk(clk),
     .reset(reset),
 
@@ -167,7 +161,7 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
 
     .data_q(n)
 );
-    load_reg #(.DATA_WIDTH(1)) z_reg (
+load_reg #(.DATA_WIDTH(1)) z_reg (
     .clk(clk),
     .reset(reset),
 
@@ -176,7 +170,7 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
 
     .data_q(z)
 );
-    load_reg #(.DATA_WIDTH(1)) p_reg (
+load_reg #(.DATA_WIDTH(1)) p_reg (
     .clk(clk),
     .reset(reset),
 
@@ -184,6 +178,79 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
     .data_i(),
 
     .data_q(p)
+);
+
+load_reg #(.DATA_WIDTH(16)) gp1_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
+load_reg #(.DATA_WIDTH(16)) gp2_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
+load_reg #(.DATA_WIDTH(16)) gp3_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
+load_reg #(.DATA_WIDTH(16)) gp4_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
+load_reg #(.DATA_WIDTH(16)) gp5_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
+load_reg #(.DATA_WIDTH(16)) gp6_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
+load_reg #(.DATA_WIDTH(16)) gp7_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
+load_reg #(.DATA_WIDTH(16)) gp8_reg (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
 );
 
 
