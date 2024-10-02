@@ -138,6 +138,15 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
         .data_i (),
         .data_q ()
     );
+    data_bus bus(
+        .gateMDR (),
+        .gateMARMUX (),
+        .gatePC (),
+        .gateALU (),
+        .databus_select (),
+        
+        .databus_out ()   
+    );
 
 
 
