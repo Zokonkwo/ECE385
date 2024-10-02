@@ -84,9 +84,9 @@ control cpu_control (
 assign led_o = ir;
 assign hex_display_debug = ir;
 
-decoder ir_decoder(
+// decoder ir_decoder(
     
-);
+// );
 
 alu cpu_alu(
     
