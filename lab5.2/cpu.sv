@@ -113,7 +113,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
 
     .data_q(pc)
 );
-    load_reg #(.DATA_WIDTH(16)) mar_reg (
+load_reg #(.DATA_WIDTH(16)) mar_reg (
     .clk(clk),
     .reset(reset),
 
@@ -122,7 +122,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
 
     .data_q(mar)
 );
-    load_reg #(.DATA_WIDTH(16)) mdr_reg (
+load_reg #(.DATA_WIDTH(16)) mdr_reg (
     .clk(clk),
     .reset(reset),
 
@@ -131,7 +131,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
 
     .data_q(mdr)
 );
-    load_reg #(.DATA_WIDTH(1)) n (
+load_reg #(.DATA_WIDTH(1)) n (
     .clk(clk),
     .reset(reset),
 
@@ -140,7 +140,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
 
     .data_q()
 );
-    load_reg #(.DATA_WIDTH(1)) z (
+load_reg #(.DATA_WIDTH(1)) z (
     .clk(clk),
     .reset(reset),
 
@@ -149,7 +149,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
 
     .data_q()
 );
-    load_reg #(.DATA_WIDTH(1)) p (
+load_reg #(.DATA_WIDTH(1)) p (
     .clk(clk),
     .reset(reset),
 
@@ -159,14 +159,14 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .data_q()
 );
    
-    data_bus bus(
-        .gateMDR (),
-        .gateMARMUX (),
-        .gatePC (),
-        .gateALU (),
-        .databus_select (),
+data_bus bus(
+    .gateMDR (),
+    .gateMARMUX (),
+    .gatePC (),
+    .gateALU (),
+    .databus_select (),
         
-        .databus_out ()   
+    .databus_out ()   
     );
 
 
