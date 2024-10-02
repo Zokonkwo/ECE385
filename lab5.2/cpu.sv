@@ -88,7 +88,8 @@ control cpu_control (
 alu cpu_alu(
     
 );
-    
+
+//muxes
 mux_2_1 mux2(
     .mio_en   (mem_mem_ena), 
     
@@ -114,7 +115,8 @@ data_bus bus_mux(
         
     .databus_out (bus)   
 );
-    
+
+//fetch registers
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
     .reset  (reset),
@@ -151,7 +153,8 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
 
     .data_q(mdr)
 );
-    
+
+//status registers
 load_reg #(.DATA_WIDTH(1)) n_reg (
     .clk(clk),
     .reset(reset),
@@ -180,6 +183,7 @@ load_reg #(.DATA_WIDTH(1)) p_reg (
     .data_q(p)
 );
 
+//general purpose registers
 load_reg #(.DATA_WIDTH(16)) gp1_reg (
     .clk(clk),
     .reset(reset),
