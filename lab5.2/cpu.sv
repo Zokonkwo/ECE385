@@ -84,6 +84,13 @@ control cpu_control (
 assign led_o = ir;
 assign hex_display_debug = ir;
 
+decoder ir_decoder(
+    
+);
+
+alu cpu_alu(
+    
+);
     
 mux_2_1 mux2(
     .mio_en   (mem_mem_ena), 
@@ -101,7 +108,18 @@ pcmux pcmux_unit(
     .adder     (16'b0000000000000000),
     .pc_plus_one (pc_1),
     .pcmux_out   (pc_in)
-    );
+);
+
+   
+data_bus bus_mux(
+    .gateMDR (gate_mdr),
+    .gateMARMUX (gate_marmux),
+    .gatePC (gate_pc),
+    .gateALU (gate_alu),
+    .databus_select (),
+        
+    .databus_out (bus)   
+);
     
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
@@ -167,16 +185,7 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
 
     .data_q(p)
 );
-   
-data_bus bus_mux(
-    .gateMDR (gate_mdr),
-    .gateMARMUX (gate_marmux),
-    .gatePC (gate_pc),
-    .gateALU (gate_alu),
-    .databus_select (),
-        
-    .databus_out (bus)   
-    );
+
 
 
 
