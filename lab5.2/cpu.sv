@@ -131,6 +131,33 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
 
     .data_q(mdr)
 );
+    load_reg #(.DATA_WIDTH(1)) n (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
+    load_reg #(.DATA_WIDTH(1)) z (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
+    load_reg #(.DATA_WIDTH(1)) p (
+    .clk(clk),
+    .reset(reset),
+
+    .load(),
+    .data_i(),
+
+    .data_q()
+);
    
     data_bus bus(
         .gateMDR (),
