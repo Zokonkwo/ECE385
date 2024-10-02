@@ -46,20 +46,28 @@ logic ld_led;
 
 logic gate_pc;
 logic gate_mdr;
-
-logic [1:0] pcmux;
+logic gate_alu;
+logic gate_marmux;
 
 logic [15:0] mar;
 logic [15:0] mdr_in;
 logic [15:0] mdr;
-logic [15:0] ir;
+    
+logic [1:0] pcmux; 
 logic [15:0] pc;
 logic [15:0] pc_in;
 logic [15:0] pc_1;
-assign pc_1 = pc + 1;
+assign pc_1 = pc + 1;  
+    
+logic [15:0] ir;
+    
 logic [15:0] rdata;
+
+logic [15:0] bus;
+    
 logic ben;
 
+logic n, z, p;
 
 assign mem_addr = mar;
 assign mem_wdata = mdr;
@@ -77,18 +85,19 @@ assign led_o = ir;
 assign hex_display_debug = ir;
 
     
-// mux_2_1 mux(
-//     .mio_en   (mem_mem_ena), 
+mux_2_1 mux2(
+    .mio_en   (mem_mem_ena), 
     
-//     .bus_data (),
-//     .rdata   (cpu_rdata),
+    .bus_data (),
+    .rdata   (cpu_rdata),
     
-//      .mux_out  (mdr_in)
+     .mux_out  (mdr_in)
     
-// );
+);
+    
 pcmux pcmux_unit(
     .pc_select (pcmux),
-    .bus_data  (16'b0000000000000000),
+    .bus_data  (bus),
     .adder     (16'b0000000000000000),
     .pc_plus_one (pc_1),
     .pcmux_out   (pc_in)
@@ -131,42 +140,42 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
 
     .data_q(mdr)
 );
-load_reg #(.DATA_WIDTH(1)) n (
+    load_reg #(.DATA_WIDTH(1)) n_reg (
     .clk(clk),
     .reset(reset),
 
     .load(),
     .data_i(),
 
-    .data_q()
+    .data_q(n)
 );
-load_reg #(.DATA_WIDTH(1)) z (
+    load_reg #(.DATA_WIDTH(1)) z_reg (
     .clk(clk),
     .reset(reset),
 
     .load(),
     .data_i(),
 
-    .data_q()
+    .data_q(z)
 );
-load_reg #(.DATA_WIDTH(1)) p (
+    load_reg #(.DATA_WIDTH(1)) p_reg (
     .clk(clk),
     .reset(reset),
 
     .load(),
     .data_i(),
 
-    .data_q()
+    .data_q(p)
 );
    
-data_bus bus(
-    .gateMDR (),
-    .gateMARMUX (),
-    .gatePC (),
-    .gateALU (),
+data_bus bus_mux(
+    .gateMDR (gate_mdr),
+    .gateMARMUX (gate_marmux),
+    .gatePC (gate_pc),
+    .gateALU (gate_alu),
     .databus_select (),
         
-    .databus_out ()   
+    .databus_out (bus)   
     );
 
 
