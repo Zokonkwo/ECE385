@@ -101,10 +101,26 @@ mux_2_1 mio_mux(
      .mux_2_1_out  (mdr_in)
     
 );
-mux_2_1 dr_mux();
-mux_2_1 sr1_mux();
-mux_2_1 sr2_mux();
-mux_2_1 addr1_mux();
+mux_2_1 sr2_mux(
+    .select (),
+
+    .input1    (),
+    .input2    (),
+
+    .mux_2_1_out ()
+    );
+mux_2_1 addr1_mux( 
+    .select (),
+
+    .input1    (),
+    .input2    (),
+
+    .mux_2_1_out ()
+);
+    
+dr_mux();
+sr1_mux();
+
 
 pcmux pcmux_unit(
     .pc_select (pcmux),
