@@ -93,7 +93,7 @@ alu cpu_alu(
 mux_2_1 mux2(
     .mio_en   (mem_mem_ena), 
     
-    .bus_data (),
+    .bus_data (bus),
     .rdata   (cpu_rdata),
     
      .mux_out  (mdr_in)
