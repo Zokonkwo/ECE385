@@ -137,8 +137,16 @@ bit3_mux_2_1 sr1_mux(
 );
 
 mux_4_1 adder2_mux(
-    
+    .adder2_select (),
+
+    .sext1  (),
+    .sext2  (),
+    .sext3  (),
+    .zero_input (),
+
+    .adder2_mux_out ()
 ); 
+    
 pcmux pcmux_unit(
     .pc_select (pcmux),
     
