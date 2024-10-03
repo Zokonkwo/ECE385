@@ -160,7 +160,7 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
     .reset(reset),
 
     .load(ld_mdr),
-    .data_i(cpu_rdata),
+    .data_i(mdr_in),
 
     .data_q(gate_mdr)
 );
