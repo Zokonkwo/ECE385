@@ -183,81 +183,81 @@ load_reg #(.DATA_WIDTH(1)) p_reg (
     .data_q(p)
 );
 
-//general purpose registers
-load_reg #(.DATA_WIDTH(16)) gp1_reg (
-    .clk(clk),
-    .reset(reset),
+// //general purpose registers
+// load_reg #(.DATA_WIDTH(16)) gp1_reg (
+//     .clk(clk),
+//     .reset(reset),
 
-    .load(),
-    .data_i(),
+//     .load(),
+//     .data_i(),
 
-    .data_q()
-);
-load_reg #(.DATA_WIDTH(16)) gp2_reg (
-    .clk(clk),
-    .reset(reset),
+//     .data_q()
+// );
+// load_reg #(.DATA_WIDTH(16)) gp2_reg (
+//     .clk(clk),
+//     .reset(reset),
 
-    .load(),
-    .data_i(),
+//     .load(),
+//     .data_i(),
 
-    .data_q()
-);
-load_reg #(.DATA_WIDTH(16)) gp3_reg (
-    .clk(clk),
-    .reset(reset),
+//     .data_q()
+// );
+// load_reg #(.DATA_WIDTH(16)) gp3_reg (
+//     .clk(clk),
+//     .reset(reset),
 
-    .load(),
-    .data_i(),
+//     .load(),
+//     .data_i(),
 
-    .data_q()
-);
-load_reg #(.DATA_WIDTH(16)) gp4_reg (
-    .clk(clk),
-    .reset(reset),
+//     .data_q()
+// );
+// load_reg #(.DATA_WIDTH(16)) gp4_reg (
+//     .clk(clk),
+//     .reset(reset),
 
-    .load(),
-    .data_i(),
+//     .load(),
+//     .data_i(),
 
-    .data_q()
-);
-load_reg #(.DATA_WIDTH(16)) gp5_reg (
-    .clk(clk),
-    .reset(reset),
+//     .data_q()
+// );
+// load_reg #(.DATA_WIDTH(16)) gp5_reg (
+//     .clk(clk),
+//     .reset(reset),
 
-    .load(),
-    .data_i(),
+//     .load(),
+//     .data_i(),
 
-    .data_q()
-);
-load_reg #(.DATA_WIDTH(16)) gp6_reg (
-    .clk(clk),
-    .reset(reset),
+//     .data_q()
+// );
+// load_reg #(.DATA_WIDTH(16)) gp6_reg (
+//     .clk(clk),
+//     .reset(reset),
 
-    .load(),
-    .data_i(),
+//     .load(),
+//     .data_i(),
 
-    .data_q()
-);
-load_reg #(.DATA_WIDTH(16)) gp7_reg (
-    .clk(clk),
-    .reset(reset),
+//     .data_q()
+// );
+// load_reg #(.DATA_WIDTH(16)) gp7_reg (
+//     .clk(clk),
+//     .reset(reset),
 
-    .load(),
-    .data_i(),
+//     .load(),
+//     .data_i(),
 
-    .data_q()
-);
-load_reg #(.DATA_WIDTH(16)) gp8_reg (
-    .clk(clk),
-    .reset(reset),
+//     .data_q()
+// );
+// load_reg #(.DATA_WIDTH(16)) gp8_reg (
+//     .clk(clk),
+//     .reset(reset),
 
-    .load(),
-    .data_i(),
+//     .load(),
+//     .data_i(),
 
-    .data_q()
-);
-
-
+//     .data_q()
+// );
 
 
-endmodule
+
+
+// endmodule
