@@ -11,4 +11,6 @@ module data_bus (input logic [15:0] gateMDR, gateALU, gatePC, gateMARMUX, defaul
       databus_out = gatePC;
   else if(databus_select == 4'b1000)
       databus_out = gateMARMUX;
+  else
+      databus_out = default_x;
 endmodule
