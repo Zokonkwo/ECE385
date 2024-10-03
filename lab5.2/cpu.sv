@@ -104,7 +104,7 @@ pcmux pcmux_unit(
     .bus_data  (bus),
     .adder     (16'b0000000000000000),
     .pc_plus_one (pc_1),
-    .pcmux_out   (pc_in)
+    .pcmux_out   (gate_pc)
 );  
 data_bus bus_mux(
     .gateMDR (gate_mdr),
