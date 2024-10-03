@@ -136,6 +136,7 @@ bit3_mux_2_1 sr1_mux(
     .mux_2_1_out ()  
 );
 
+//adder2 mux
 mux_4_1 adder2_mux(
     .adder2_select (),
 
@@ -146,7 +147,8 @@ mux_4_1 adder2_mux(
 
     .adder2_mux_out ()
 ); 
-    
+
+//pc mux
 pcmux pcmux_unit(
     .pc_select (pcmux),
     
@@ -156,6 +158,8 @@ pcmux pcmux_unit(
     
     .pcmux_out   (pc_in)
 );  
+
+//bus mux
 data_bus bus_mux(
      .databus_select (),
     
@@ -166,6 +170,7 @@ data_bus bus_mux(
     
     .databus_out (bus)   
 );
+    
 //general purpose register
 reg_file gp_reg (
     .dr   (),
@@ -176,6 +181,7 @@ reg_file gp_reg (
     .sr2_out (),
     .sr1_out (),
 );
+    
 //fetch registers
 load_reg #(.DATA_WIDTH(16)) ir_reg (
     .clk    (clk),
