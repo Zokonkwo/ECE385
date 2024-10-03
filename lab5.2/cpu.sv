@@ -49,12 +49,12 @@ logic [15:0] ir;
 logic [15:0] rdata;
 logic [15:0] bus;
 
-logic [15:0] sr2_mux_in, alu_a_in, alu_b_in, adder_a_in, adder_b_in;
+logic [15:0] sr2_mux_in1, sr2_mux_in2, alu_a_in, alu_b_in, adder_a_in, adder_b_in, sext1_in, sext2_in, sext3_in, sext4_in;
 logic [2:0] sr1_in, sr2_in, dr_in;
 logic [1:0] aluk_in;
 
 logic ben;
-logic n, z, p;
+logic n, z, p, n_in, z_in, p_in;
 
 assign pc_1 = pc + 1; 
 
@@ -71,7 +71,7 @@ assign hex_display_debug = ir;
 control cpu_control (
     .*
 );
-x
+
 alu cpu_alu(
     .aluk.  (aluk_in)
 
@@ -81,29 +81,55 @@ alu cpu_alu(
     .alu_out (gate_alu)
 );
 
+//logic
+logic logic_unit(
+    .bus_data (bus)
+
+    .n (n_in)
+    .z (z_in)
+    .p (p_in)
+);
+
+//sign extension
+sext #(.IN_WIDTH(11), .OUT_WIDTH(16)) sext1(
+    .in    (ir[10:0]),
+    .out.  (sext1_in)
+);
+sext #(.IN_WIDTH(9), .OUT_WIDTH(16)) sext2(
+    .in    (ir[8:0]),
+    .out.  (sext2_in)
+);
+sext #(.IN_WIDTH(6), .OUT_WIDTH(16)) sext3(
+    .in    (ir[5:0]),
+    .out.  (sext3_in)
+);
+sext #(.IN_WIDTH(5), .OUT_WIDTH(16)) sext4(
+    .in    (ir[4:0]),
+    .out.  (sr2_mux_in2)
+);
+
 //16 bits 2:1 muxes
 mux_2_1 mio_mux(
-    .select   (mem_mem_ena), 
+    .select       (mem_mem_ena), 
     
-    .input1   (bus),
-    .input2   (cpu_rdata),
+    .input1       (bus),
+    .input2       (cpu_rdata),
     
-     .mux_2_1_out  (mdr_in)
-    
+    .mux_2_1_out  (mdr_in)  
 );
 mux_2_1 sr2_mux(
     .select (),
 
-    .input1    (sr2_mux_in),
-    .input2    (),
+    .input1      (sr2_mux_in1),
+    .input2      (sr2_mux_in2),
 
     .mux_2_1_out (alu_b_in)
-    );
+);
 mux_2_1 addr1_mux( 
-    .select (),
+    .select      (),
 
-    .input1    (gate_pc),
-    .input2    (alu_a_in),
+    .input1      (gate_pc),
+    .input2      (alu_a_in),
 
     .mux_2_1_out (adder_b_in)
 );
@@ -130,9 +156,9 @@ bit3_mux_2_1 sr1_mux(
 mux_4_1 adder2_mux(
     .adder2_select (),
 
-    .sext1  (),
-    .sext2  (),
-    .sext3  (),
+    .sext1  (sext1_in),
+    .sext2  (sext2_in),
+    .sext3  (sext2_in),
     .zero_input (16'b0000000000000000),
 
     .adder2_mux_out (adder_a_in)
@@ -168,7 +194,7 @@ reg_file gp_reg (
     .sr1  (sr1_in),
     .bus_data (bus),
     .ld_reg (),
-    .sr2_out (sr2_mux_in),
+    .sr2_out (sr2_mux_in1),
     .sr1_out (alu_a_in),
 );
     
@@ -216,7 +242,7 @@ load_reg #(.DATA_WIDTH(1)) n_reg (
     .reset(reset),
 
     .load(),
-    .data_i(),
+    .data_i(n_in),
 
     .data_q(n)
 );
@@ -225,7 +251,7 @@ load_reg #(.DATA_WIDTH(1)) z_reg (
     .reset(reset),
 
     .load(),
-    .data_i(),
+    .data_i(z_in),
 
     .data_q(z)
 );
@@ -234,7 +260,7 @@ load_reg #(.DATA_WIDTH(1)) p_reg (
     .reset(reset),
 
     .load(),
-    .data_i(),
+    .data_i(p_in),
 
     .data_q(p)
 );
