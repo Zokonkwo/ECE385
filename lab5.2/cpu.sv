@@ -91,7 +91,7 @@ alu cpu_alu(
     .alu_out (gate_alu)
 );
 
-//muxes
+//2:1 muxes
 mux_2_1 mio_mux(
     .select   (mem_mem_ena), 
     
