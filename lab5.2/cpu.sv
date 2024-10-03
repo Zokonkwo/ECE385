@@ -92,74 +92,74 @@ logic logic_unit(
 
 //sign extension
 sext #(.IN_WIDTH(11), .OUT_WIDTH(16)) sext1(
-    .in    (ir[10:0]),
-    .out.  (sext1_in)
+    .in             (ir[10:0]),
+    .out.           (sext1_in)
 );
 sext #(.IN_WIDTH(9), .OUT_WIDTH(16)) sext2(
-    .in    (ir[8:0]),
-    .out.  (sext2_in)
+    .in             (ir[8:0]),
+    .out.           (sext2_in)
 );
 sext #(.IN_WIDTH(6), .OUT_WIDTH(16)) sext3(
-    .in    (ir[5:0]),
-    .out.  (sext3_in)
+    .in             (ir[5:0]),
+    .out.           (sext3_in)
 );
 sext #(.IN_WIDTH(5), .OUT_WIDTH(16)) sext4(
-    .in    (ir[4:0]),
-    .out.  (sr2_mux_in2)
+    .in             (ir[4:0]),
+    .out.           (sr2_mux_in2)
 );
 
 //16 bits 2:1 muxes
 mux_2_1 mio_mux(
-    .select       (mem_mem_ena), 
+    .select         (mem_mem_ena), 
     
-    .input1       (bus),
-    .input2       (cpu_rdata),
+    .input1         (bus),
+    .input2         (cpu_rdata),
     
-    .mux_2_1_out  (mdr_in)  
+    .mux_2_1_out    (mdr_in)  
 );
 mux_2_1 sr2_mux(
     .select (),
 
-    .input1      (sr2_mux_in1),
-    .input2      (sr2_mux_in2),
+    .input1         (sr2_mux_in1),
+    .input2         (sr2_mux_in2),
 
-    .mux_2_1_out (alu_b_in)
+    .mux_2_1_out    (alu_b_in)
 );
 mux_2_1 addr1_mux( 
-    .select      (),
+    .select         (),
 
-    .input1      (gate_pc),
-    .input2      (alu_a_in),
+    .input1         (gate_pc),
+    .input2         (alu_a_in),
 
-    .mux_2_1_out (adder_b_in)
+    .mux_2_1_out    (adder_b_in)
 );
 
 //3 bit2 2:1 muxes
 bit3_mux_2_1 dr_mux(
-    .select (),
+    .select         (),
     
-    .input1 (),
-    .input2 (),
+    .input1         (),
+    .input2         (),
 
-    .mux_2_1_out (dr_in)
+    .mux_2_1_out    (dr_in)
 );
 bit3_mux_2_1 sr1_mux(
-     .select (),
+     .select        (),
     
-    .input1 (),
-    .input2 (),
+    .input1         (),
+    .input2         (),
 
-    .mux_2_1_out (sr1_in)  
+    .mux_2_1_out    (sr1_in)  
 );
 
 //adder2 mux
 mux_4_1 adder2_mux(
     .adder2_select (),
 
-    .sext1  (sext1_in),
-    .sext2  (sext2_in),
-    .sext3  (sext2_in),
-    .zero_input (16'b0000000000000000),
+    .sext1          (sext1_in),
+    .sext2          (sext2_in),
+    .sext3          (sext2_in),
+    .zero_input     (16'b0000000000000000),
 
     .adder2_mux_out (adder_a_in)
 ); 
@@ -168,101 +168,101 @@ mux_4_1 adder2_mux(
 pcmux pcmux_unit(
     .pc_select (pcmux),
     
-    .bus_data  (bus),
-    .adder     (16'b0000000000000000),
-    .pc_plus_one (pc_1),
+    .bus_data       (bus),
+    .adder          (16'b0000000000000000),
+    .pc_plus_one    (pc_1),
     
-    .pcmux_out   (pc_in)
+    .pcmux_out      (pc_in)
 );  
 
 //bus mux
 data_bus bus_mux(
      .databus_select (),
     
-    .gateMDR (gate_mdr),
+    .gateMDR    (gate_mdr),
     .gateMARMUX (gate_marmux),
-    .gatePC (gate_pc),
-    .gateALU (gate_alu),
+    .gatePC     (gate_pc),
+    .gateALU    (gate_alu),
     
     .databus_out (bus)   
 );
     
 //general purpose register
 reg_file gp_reg (
-    .dr   (dr_in),
-    .sr2  (sr2_in),
-    .sr1  (sr1_in),
-    .bus_data (bus),
-    .ld_reg (),
-    .sr2_out (sr2_mux_in1),
-    .sr1_out (alu_a_in),
+    .dr         (dr_in),
+    .sr2        (sr2_in),
+    .sr1        (sr1_in),
+    .bus_data   (bus),
+    .ld_reg     (),
+    .sr2_out    (sr2_mux_in1),
+    .sr1_out    (alu_a_in),
 );
     
 //fetch registers
 load_reg #(.DATA_WIDTH(16)) ir_reg (
-    .clk    (clk),
-    .reset  (reset),
+    .clk        (clk),
+    .reset      (reset),
 
-    .load   (ld_ir),
-    .data_i (bus),
+    .load       (ld_ir),
+    .data_i     (bus),
 
-    .data_q (ir)
+    .data_q     (ir)
 );
 load_reg #(.DATA_WIDTH(16)) pc_reg (
-    .clk(clk),
-    .reset(reset),
+    .clk        (clk),
+    .reset      (reset),
 
-    .load(ld_pc),
-    .data_i(pc_in),
+    .load       (ld_pc),
+    .data_i     (pc_in),
 
-    .data_q(gate_pc)
+    .data_q     (gate_pc)
 );
 load_reg #(.DATA_WIDTH(16)) mar_reg (
-    .clk(clk),
-    .reset(reset),
+    .clk        (clk),
+    .reset      (reset),
 
-    .load(ld_mar),
-    .data_i(bus),
+    .load       (ld_mar),
+    .data_i     (bus),
 
-    .data_q(mar)
+    .data_q     (mar)
 );
 load_reg #(.DATA_WIDTH(16)) mdr_reg (
-    .clk(clk),
-    .reset(reset),
+    .clk        (clk),
+    .reset      (reset),
 
-    .load(ld_mdr),
-    .data_i(mdr_in),
+    .load       (ld_mdr),
+    .data_i     (mdr_in),
 
-    .data_q(gate_mdr)
+    .data_q     (gate_mdr)
 );
 
 //status registers
 load_reg #(.DATA_WIDTH(1)) n_reg (
-    .clk(clk),
-    .reset(reset),
+    .clk        (clk),
+    .reset      (reset),
 
-    .load(),
-    .data_i(n_in),
+    .load       (),
+    .data_i     (n_in),
 
-    .data_q(n)
+    .data_q     (n)
 );
 load_reg #(.DATA_WIDTH(1)) z_reg (
-    .clk(clk),
-    .reset(reset),
+    .clk        (clk),
+    .reset      (reset),
 
     .load(),
-    .data_i(z_in),
+    .data_i     (z_in),
 
-    .data_q(z)
+    .data_q     (z)
 );
 load_reg #(.DATA_WIDTH(1)) p_reg (
-    .clk(clk),
-    .reset(reset),
+    .clk        (clk),
+    .reset      (reset),
 
-    .load(),
-    .data_i(p_in),
+    .load       (),
+    .data_i     (p_in),
 
-    .data_q(p)
+    .data_q     (p)
 );
 
 endmodule
