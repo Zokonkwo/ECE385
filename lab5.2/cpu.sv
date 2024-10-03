@@ -124,7 +124,7 @@ mux_2_1 mio_mux(
     .select         (mem_mem_ena), 
     
     .input1         (bus),
-    .input2         (cpu_rdata),
+    .input2         (cpu_rdata), //fix
     
     .mux_2_1_out    (mdr_in)  
 );
