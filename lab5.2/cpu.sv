@@ -135,23 +135,25 @@ bit3_mux_2_1 sr1_mux(
 
     .mux_2_1_out ()  
 );
+
     
-
-
 pcmux pcmux_unit(
     .pc_select (pcmux),
+    
     .bus_data  (bus),
     .adder     (16'b0000000000000000),
     .pc_plus_one (pc_1),
+    
     .pcmux_out   (pc_in)
 );  
 data_bus bus_mux(
+     .databus_select (),
+    
     .gateMDR (gate_mdr),
     .gateMARMUX (gate_marmux),
     .gatePC (gate_pc),
     .gateALU (gate_alu),
-    .databus_select (),
-        
+    
     .databus_out (bus)   
 );
 //general purpose register
