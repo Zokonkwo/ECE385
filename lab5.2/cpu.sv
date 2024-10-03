@@ -86,7 +86,9 @@ control cpu_control (
     
 // );
 alu cpu_alu(
-    
+
+
+    .alu_out (gate_alu)
 );
 
 //muxes
@@ -104,7 +106,7 @@ pcmux pcmux_unit(
     .bus_data  (bus),
     .adder     (16'b0000000000000000),
     .pc_plus_one (pc_1),
-    .pcmux_out   (gate_pc)
+    .pcmux_out   (pc_in)
 );  
 data_bus bus_mux(
     .gateMDR (gate_mdr),
@@ -131,7 +133,7 @@ load_reg #(.DATA_WIDTH(16)) ir_reg (
     .reset  (reset),
 
     .load   (ld_ir),
-    .data_i (mdr),
+    .data_i (bus),
 
     .data_q (ir)
 );
@@ -142,14 +144,14 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .load(ld_pc),
     .data_i(pc_in),
 
-    .data_q(pc)
+    .data_q(gate_pc)
 );
 load_reg #(.DATA_WIDTH(16)) mar_reg (
     .clk(clk),
     .reset(reset),
 
     .load(ld_mar),
-    .data_i(pc),
+    .data_i(bus),
 
     .data_q(mar)
 );
@@ -160,7 +162,7 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
     .load(ld_mdr),
     .data_i(cpu_rdata),
 
-    .data_q(mdr)
+    .data_q(gate_mdr)
 );
 
 //status registers
