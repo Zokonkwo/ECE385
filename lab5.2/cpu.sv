@@ -42,10 +42,8 @@ logic ld_mar, d_mdr, ld_ir, ld_pc, ld_led;
 logic gate_pc, gate_mdr, gate_alu, gate_marmux;
 
 logic [15:0] mar, mdr_in, mdr;   
-logic [1:0] pcmux; 
 logic [15:0] pc, pc_in, pc_1;
-
-assign pc_1 = pc + 1;  
+logic [1:0] pcmux; 
     
 logic [15:0] ir;  
 logic [15:0] rdata;
@@ -53,9 +51,12 @@ logic [15:0] bus;
 
 logic [15:0] sr2_mux_in, alu_a_in, alu_b_in, adder_a_in, adder_b_in;
 logic [2:0] sr1_in, sr2_in, dr_in;
-    
+logic [1:0] aluk_in;
+
 logic ben;
 logic n, z, p;
+
+assign pc_1 = pc + 1; 
 
 assign mem_addr = mar;
 assign mem_wdata = mdr;
@@ -70,11 +71,12 @@ assign hex_display_debug = ir;
 control cpu_control (
     .*
 );
-// decoder ir_decoder(
-    
-// );
+x
 alu cpu_alu(
+    .aluk.  (aluk_in)
 
+    .sr2mux (alu_b_in),
+    .sr1out (alu_a_in),
 
     .alu_out (gate_alu)
 );
