@@ -120,6 +120,7 @@ reg_file gp_reg (
     .dr   (),
     .sr2  (),
     .sr1  (),
+    .bus_data (bus),
     .ld_reg (),
     .sr2_out (),
     .sr1_out (),
