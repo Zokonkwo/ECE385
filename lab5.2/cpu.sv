@@ -35,7 +35,7 @@ module cpu (
     output  logic        mem_mem_ena,
     output  logic        mem_wr_ena
 );
-
+////add in stuff we fixed in cpu.sv in 5.1
 
 // Internal connections, follow the datapath block diagram and add the additional needed signals
 logic ld_mar, d_mdr, ld_ir, ld_pc, ld_led, ld_cc, ld_reg; 
