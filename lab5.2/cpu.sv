@@ -91,7 +91,7 @@ alu cpu_alu(
     .alu_out (gate_alu)
 );
 
-//2:1 muxes
+//16 bits 2:1 muxes
 mux_2_1 mio_mux(
     .select   (mem_mem_ena), 
     
@@ -117,9 +117,25 @@ mux_2_1 addr1_mux(
 
     .mux_2_1_out ()
 );
+
+//3 bit2 2:1 muxes
+bit3_mux_2_1 dr_mux(
+    .select (),
     
-dr_mux();
-sr1_mux();
+    .input1 (),
+    .input2 (),
+
+    .mux_2_1_out ()
+);
+bit3_mux_2_1 sr1_mux(
+     .select (),
+    
+    .input1 (),
+    .input2 (),
+
+    .mux_2_1_out ()  
+);
+    
 
 
 pcmux pcmux_unit(
