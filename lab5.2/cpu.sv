@@ -138,16 +138,16 @@ mux_2_1 addr1_mux(
 bit3_mux_2_1 dr_mux(
     .select         (),
     
-    .input1         (),
-    .input2         (),
+    .input1         (ir[11:9]),
+    .input2         (3'b111),
 
     .mux_2_1_out    (dr_in)
 );
 bit3_mux_2_1 sr1_mux(
      .select        (),
     
-    .input1         (),
-    .input2         (),
+    .input1         (ir[11:9]),
+    .input2         (ir[8:6]),
 
     .mux_2_1_out    (sr1_in)  
 );
@@ -250,7 +250,7 @@ load_reg #(.DATA_WIDTH(1)) z_reg (
     .clk        (clk),
     .reset      (reset),
 
-    .load(),
+    .load       (),
     .data_i     (z_in),
 
     .data_q     (z)
