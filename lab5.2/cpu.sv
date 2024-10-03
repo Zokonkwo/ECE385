@@ -95,10 +95,10 @@ alu cpu_alu(
 mux_2_1 mio_mux(
     .select   (mem_mem_ena), 
     
-    .input_1 (bus),
-    .input_2   (cpu_rdata),
+    .input1   (bus),
+    .input2   (cpu_rdata),
     
-     .mux_out  (mdr_in)
+     .mux_2_1_out  (mdr_in)
     
 );
 mux_2_1 dr_mux();
