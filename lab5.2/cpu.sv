@@ -38,35 +38,23 @@ module cpu (
 
 
 // Internal connections, follow the datapath block diagram and add the additional needed signals
-logic ld_mar; 
-logic ld_mdr; 
-logic ld_ir; 
-logic ld_pc; 
-logic ld_led;
+logic ld_mar, d_mdr, ld_ir, ld_pc, ld_led; 
+logic gate_pc, gate_mdr, gate_alu, gate_marmux;
 
-logic gate_pc;
-logic gate_mdr;
-logic gate_alu;
-logic gate_marmux;
-
-logic [15:0] mar;
-logic [15:0] mdr_in;
-logic [15:0] mdr;
-    
+logic [15:0] mar, mdr_in, mdr;   
 logic [1:0] pcmux; 
-logic [15:0] pc;
-logic [15:0] pc_in;
-logic [15:0] pc_1;
+logic [15:0] pc, pc_in, pc_1;
+
 assign pc_1 = pc + 1;  
     
-logic [15:0] ir;
-    
+logic [15:0] ir;  
 logic [15:0] rdata;
-
 logic [15:0] bus;
+
+logic [15:0] sr2_mux_in, alu_a_in, alu_b_in, adder_a_in, adder_b_in;
+logic [2:0] sr1_in, sr2_in, dr_in;
     
 logic ben;
-
 logic n, z, p;
 
 assign mem_addr = mar;
@@ -104,18 +92,18 @@ mux_2_1 mio_mux(
 mux_2_1 sr2_mux(
     .select (),
 
-    .input1    (),
+    .input1    (sr2_mux_in),
     .input2    (),
 
-    .mux_2_1_out ()
+    .mux_2_1_out (alu_b_in)
     );
 mux_2_1 addr1_mux( 
     .select (),
 
-    .input1    (),
-    .input2    (),
+    .input1    (gate_pc),
+    .input2    (alu_a_in),
 
-    .mux_2_1_out ()
+    .mux_2_1_out (adder_b_in)
 );
 
 //3 bit2 2:1 muxes
@@ -125,7 +113,7 @@ bit3_mux_2_1 dr_mux(
     .input1 (),
     .input2 (),
 
-    .mux_2_1_out ()
+    .mux_2_1_out (dr_in)
 );
 bit3_mux_2_1 sr1_mux(
      .select (),
@@ -133,7 +121,7 @@ bit3_mux_2_1 sr1_mux(
     .input1 (),
     .input2 (),
 
-    .mux_2_1_out ()  
+    .mux_2_1_out (sr1_in)  
 );
 
 //adder2 mux
@@ -143,9 +131,9 @@ mux_4_1 adder2_mux(
     .sext1  (),
     .sext2  (),
     .sext3  (),
-    .zero_input (),
+    .zero_input (16'b0000000000000000),
 
-    .adder2_mux_out ()
+    .adder2_mux_out (adder_a_in)
 ); 
 
 //pc mux
@@ -173,13 +161,13 @@ data_bus bus_mux(
     
 //general purpose register
 reg_file gp_reg (
-    .dr   (),
-    .sr2  (),
-    .sr1  (),
+    .dr   (dr_in),
+    .sr2  (sr2_in),
+    .sr1  (sr1_in),
     .bus_data (bus),
     .ld_reg (),
-    .sr2_out (),
-    .sr1_out (),
+    .sr2_out (sr2_mux_in),
+    .sr1_out (alu_a_in),
 );
     
 //fetch registers
