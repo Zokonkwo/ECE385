@@ -92,7 +92,7 @@ alu cpu_alu(
 );
 
 //muxes
-mux_2_1 mux2(
+mux_2_1 mio_mux(
     .mio_en   (mem_mem_ena), 
     
     .bus_data (bus),
@@ -100,7 +100,12 @@ mux_2_1 mux2(
     
      .mux_out  (mdr_in)
     
-);   
+);
+mux_2_1 dr_mux();
+mux_2_1 sr1_mux();
+mux_2_1 sr2_mux();
+mux_2_1 addr1_mux();
+
 pcmux pcmux_unit(
     .pc_select (pcmux),
     .bus_data  (bus),
