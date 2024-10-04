@@ -22,5 +22,6 @@ module logic (input logic [15:0] bus_data,
                     p = 1;
                 end
         end
+    end
 
 endmodule

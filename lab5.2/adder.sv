@@ -5,4 +5,5 @@ module adder (input logic [15:0] a, b
         begin
             adder_out = a + b;
         end
+    end
 endmodule

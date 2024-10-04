@@ -12,4 +12,5 @@ module mux_4_1 (input logic [2:0] adder2_select,
       else if (adder2_select == 3'b011)
         adder2_mux_out = sext3;
     end
+  end
 endmodule

@@ -9,4 +9,5 @@ module mux_2_1 (input logic select,
       else
           mux_2_1_out = input1;
     end
+  end
 endmodule

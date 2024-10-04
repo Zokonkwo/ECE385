@@ -3,8 +3,10 @@ module sext #(parameter IN_WIDTH = 5, parameter OUT_WIDTH = 16) (
      output logic [OUT_WIDTH-1:0] out
 );
 
-always_comb begin
+always_comb 
+    begin
         out = {{(OUT_WIDTH-IN_WIDTH){in[IN_WIDTH-1]}}, in};
     end
+end
 
 endmodule
