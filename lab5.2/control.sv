@@ -236,8 +236,9 @@ module control (
 		          pcmux = 2'b00;
 			end
 			
-			s_7 :
+			s_7 :  //start of STR
 			begin
+				//srmux = 
 			     ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
