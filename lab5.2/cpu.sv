@@ -46,10 +46,7 @@ logic [15:0] mar, mdr_in, mdr;
 logic [15:0] pc, pc_in, pc_1;
 logic [1:0] pcmux, addr2_mux_select; 
     
-logic [15:0] ir;  
-// Internal connections, follow the datapath block diagram and add the additional needed signals
-
-assign pc_1 = pc + 1;
+logic [15:0] ir; 
 logic [15:0] rdata;
 logic [15:0] bus;
 logic [15:0] sr2_mux_in1, sr2_mux_in2, alu_a_in, alu_b_in, adder_a_in, adder_b_in, sext1_in, sext2_in, sext3_in, sext4_in;
