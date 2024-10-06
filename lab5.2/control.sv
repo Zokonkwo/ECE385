@@ -33,11 +33,13 @@ module control (
 	input logic 		continue_i,
 	input logic 		run_i,
 
+	input logic 		n,z,p,
+
 	output logic		ld_mar,
 	output logic		ld_mdr,
 	output logic		ld_ir,
 	output logic		ld_pc,
-	output logic        ld_led,
+	output logic           ld_led,
 						
 	output logic		gate_pc,
 	output logic		gate_mdr,
