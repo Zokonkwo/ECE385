@@ -235,7 +235,7 @@ load_reg #(.DATA_WIDTH(1)) ben_reg (
     .clk        (clk),
     .reset      (reset),
     .load       (ld_ben),
-    .data_i     (),
+    .data_i     ((n & ir[11]) | (z & ir[10]) | (p & ir[15:12])),
     .data_q     (ben)
 );
 
