@@ -26,7 +26,7 @@ module cpu (
 
     input   logic        run_i,
     input   logic        continue_i,
-    input logic[15:0]    cpu_rdata,//added
+    input   logic [15:0] cpu_rdata,//added
     output  logic [15:0] hex_display_debug,
     output  logic [15:0] led_o,
 
