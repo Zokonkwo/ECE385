@@ -50,7 +50,13 @@ module control (
 	//You should add additional control signals according to the SLC-3 datapath design
 
 	output logic		mem_mem_ena, // Mem Operation Enable
-	output logic		mem_wr_ena  // Mem Write Enable
+	output logic		mem_wr_ena,  // Mem Write Enable
+
+	output logic 		sr1_select, addr1_mux_select,
+	output logic [1:0]	addr2_mux_select,
+	output logic [3:0]	data_select,
+
+			
 );
 
 	enum logic [5:0] { //was 4
