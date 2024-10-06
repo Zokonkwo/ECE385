@@ -49,11 +49,15 @@ logic [1:0] pcmux, addr2_mux_select;
 logic [15:0] ir; 
 logic [15:0] rdata;
 logic [15:0] bus;
+    
 logic [15:0] sr2_mux_in1, sr2_mux_in2, alu_a_in, alu_b_in, adder_a_in, adder_b_in, sext1_in, sext2_in, sext3_in, sext4_in;
 logic [2:0] sr1_in, sr2_in, dr_in;
 logic [1:0] aluk_in;
+    
 logic n, z, p, n_in, z_in, p_in;
+    
 logic dr_select, sr1_select, sr2_mux_select, addr1_mux_select; 
+    
 logic ben;
 
 assign pc_1 = pc + 1; 
