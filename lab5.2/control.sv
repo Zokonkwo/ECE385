@@ -40,6 +40,7 @@ module control (
 	output logic		ld_ir,
 	output logic		ld_pc,
 	output logic           ld_led,
+	output logic  	       ld_ben,//added
 						
 	output logic		gate_pc,
 	output logic		gate_mdr,
