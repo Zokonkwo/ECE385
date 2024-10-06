@@ -144,6 +144,7 @@ module control (
 		ld_ir = 1'b0;
 		ld_pc = 1'b0;
 		ld_led = 1'b0;
+		ld_ben = 1'b1;
 		
 		gate_pc = 1'b0;
 		gate_mdr = 1'b0;
