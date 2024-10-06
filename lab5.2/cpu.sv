@@ -89,7 +89,7 @@ control cpu_control (
 );
 
 alu cpu_alu(
-    .aluk.      (aluk_in)
+    .aluk      (aluk_in),
     .sr2mux     (alu_b_in),
     .sr1out     (alu_a_in),
     .alu_out    (gate_alu)
@@ -104,8 +104,8 @@ adder adder_unit(
 //logic
 logic logic_unit(
     .bus_data (bus)
-    .n      (n_in)
-    .z      (z_in)
+    .n      (n_in),
+    .z      (z_in),
     .p      (p_in)
 );
 //sign extension
