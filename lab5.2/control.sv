@@ -371,12 +371,12 @@ begin
 			s_33_3 : 
 				state_nxt = s_35;
 			s_35 : 
-				state_nxt = pause_ir1;
+				state_nxt = 32;
 				
 				
 				
 			s_32 :
-			
+				if (
 			s_1 :	
 			
 			s_5 :
