@@ -15,7 +15,7 @@ module logic (input logic [15:0] bus_data,
                     z = 0;
                     p = 0;
                 end
-            else 
+          else if(bus_data[15] == 1'b0)
                 begin 
                     n = 0;
                     z = 0;
