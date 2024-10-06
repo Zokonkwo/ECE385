@@ -126,6 +126,8 @@ module control (
 			halted : 
 				if (run_i) 
 					state_nxt = s_18;
+				else 
+					state_nxt = state;
 			s_18 : 
 				state_nxt = s_33_1; //notice that we usually have 'r' here, but you will need to add extra states instead 
 			s_33_1 :                 //e.g. s_33_2, etc. how many? as a hint, note that the bram is synchronous, in addition, 
