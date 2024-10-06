@@ -56,7 +56,7 @@ logic [1:0] aluk_in;
     
 logic n, z, p, n_in, z_in, p_in;
     
-logic dr_select, sr1_select, sr2_mux_select, addr1_mux_select; 
+logic dr_select, sr1_select, sr2_mux_select, addr1_mux_select, data_select; 
     
 logic ben;
 
@@ -179,7 +179,7 @@ pcmux pcmux_unit(
 );  
 //bus mux
 data_bus bus_mux(
-     .databus_select (),
+     .databus_select (data_select),
    
     .gateMDR    (gate_mdr),
     .gateMARMUX (gate_marmux),
