@@ -54,7 +54,7 @@ module slc3 (
 	cpu cpu (
 		.clk				(clk),
 		.reset				(reset),
-
+		.cpu_rdata			(cpu_rdata),
 		.continue_i			(continue_i),
 		.run_i				(run_i),
 		.hex_display_debug	(hex_display_debug),
