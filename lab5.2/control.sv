@@ -380,27 +380,27 @@ begin
 				
 				
 			s_32 :
-				if (ir[15:12] = 4'b0001 & ir[5] = 1'b0)//ADD
+				if (ir[15:12] == 4'b0001 & ir[5] == 1'b0)//ADD
 					state_nxt = s_1;
-			else if (ir[15:12] = 4'b0001 & ir[5] = 1'b1) //ADDi
+			else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1) //ADDi
 					state_nxt = s_1;
-			else if (ir[15:12] = 4'b0101 & ir[5] = 1'b0) //AND
+			else if (ir[15:12] == 4'b0101 & ir[5] == 1'b0) //AND
 					state_nxt = s_5;
-			else if (ir[15:12] = 4'b0001 & ir[5] = 1'b1)  // ANDi
+			else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1)  // ANDi
 					state_nxt = s_5;
-			else if (ir[15:12] = 4'b1001) //NOT
+			else if (ir[15:12] == 4'b1001) //NOT
 					state_nxt = s_9;
-			else if (ir[15:12] = 4'b0110) //LDR
+			else if (ir[15:12] == 4'b0110) //LDR
 					state_nxt = s_6;
-			else if (ir[15:12] = 4'0111) //STR
+			else if (ir[15:12] == 4'0111) //STR
 					state_nxt = s_7;
-			else if (ir[15:12] = 4'b0100) //JSR
+			else if (ir[15:12] == 4'b0100) //JSR
 					state_nxt = s_4;
-			else if (ir[15:12] = 4'b1100) //JMP
+			else if (ir[15:12] == 4'b1100) //JMP
 					state_nxt = s_12;
-			else if (ir[15:12] = 4'b0000) //BR
+			else if (ir[15:12] == 4'b0000) //BR
 					state_nxt = s_0;
-			else if (ir[15:12] = 4'b1101) //PSE
+			else if (ir[15:12] == 4'b1101) //PSE
 					state_nxt = pause_ir1;
 	
 			
