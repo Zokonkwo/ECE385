@@ -380,6 +380,7 @@ begin
 				
 				
 			s_32 :
+				begin
 				if (ir[15:12] == 4'b0001 & ir[5] == 1'b0)//ADD
 					state_nxt = s_1;
 			else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1) //ADDi
@@ -402,7 +403,9 @@ begin
 					state_nxt = s_0;
 			else if (ir[15:12] == 4'b1101) //PSE
 					state_nxt = pause_ir1;
-	
+			else 
+				state_nxt = s_18;
+				end
 			
 			s_1 :	
 			
