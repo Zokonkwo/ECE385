@@ -182,7 +182,7 @@ module control (
 			
 			s_9 :
 			begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b1;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
@@ -253,8 +253,8 @@ module control (
 			
 			s_23 :
 			begin
-			     ld_mar = 1'b0;
-		          ld_mdr = 1'b0;
+			  ld_mar = 1'b0;
+		          ld_mdr = 1'b1;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
