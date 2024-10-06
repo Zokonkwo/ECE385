@@ -245,7 +245,7 @@ module control (
 				mdr_in = bus;//we dont need to include bus logic at top since cpu handles it
 				ld_mar = 1'b1; //set laod mar high to load bus data to mar register
 				
-			     ld_mar = 1'b0;
+			
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
