@@ -267,6 +267,17 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .clk(clk),
     .reset(reset),
 
+//branch enable
+load_reg #(.DATA_WIDTH(1)) ben_reg (
+    .clk        (clk),
+    .reset      (reset),
+
+    .load       (),
+    .data_i     (),
+
+    .data_q     ()
+);
+
 //status registers
 load_reg #(.DATA_WIDTH(1)) n_reg (
     .clk        (clk),
