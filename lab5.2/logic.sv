@@ -21,6 +21,12 @@ module logic (input logic [15:0] bus_data,
                     z = 0;
                     p = 1;
                 end
+          else
+              begin
+                    n = x;
+                    z = x;
+                    p = x;
+              end
         end
     end
 
