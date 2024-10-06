@@ -42,7 +42,7 @@ module control (
 	output logic		gate_pc,
 	output logic		gate_mdr,
 						
-	output logic [1:0]	pcmux,
+	output logic [1:0]	pcmux,//select signal for pc mux
 	
 	//You should add additional control signals according to the SLC-3 datapath design
 
@@ -50,7 +50,7 @@ module control (
 	output logic		mem_wr_ena  // Mem Write Enable
 );
 
-	enum logic [4:0] {
+	enum logic [5:0] { //was 4
 		halted, 
 		pause_ir1,
 		pause_ir2, 
@@ -58,7 +58,23 @@ module control (
 		s_33_1,
 		s_33_2,
 		s_33_3,
-		s_35
+		s_35,
+		s_32,
+		s_1,
+		s_5,
+		s_9,
+		s_6,
+		s_25,
+		s_27,
+		s_7,
+		s_23,
+		s_16,
+		s_4,
+		s_21,
+		s_12,
+		s_0,
+		s_22
+		
 	} state, state_nxt;   // Internal state logic
 
 
@@ -89,6 +105,11 @@ module control (
 		
 	
 		// Assign relevant control signals based on current state
+		//relevant control signals already set for the three fetch states (Week 1 state machine is orivded) 
+		//we need to fill out the data paths so we ahve the xetra registers and a couple of 
+		//extra muxes we need) 
+		//fill in the relevant modules within the cpu module such that it resembles the data path of 
+		// the slides (for minimum fetch operation) 
 		case (state)
 			halted: ; 
 			s_18 : 
@@ -111,6 +132,219 @@ module control (
 			pause_ir1: ld_led = 1'b1; 
 			pause_ir2: ld_led = 1'b1; 
 			// you need to finish the rest of state output logic..... 
+			
+			
+			s_32 :
+			begin
+			ld_mar = 1'b0;
+		ld_mdr = 1'b0;
+		ld_ir = 1'b0;
+		ld_pc = 1'b0;
+		ld_led = 1'b0;
+		
+		gate_pc = 1'b0;
+		gate_mdr = 1'b0;
+		 
+		pcmux = 2'b00;
+			end
+			
+			s_1 :
+			 begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_5 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_9 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_6 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_25 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_27 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_7 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_23 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_16 :
+begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_4 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_21 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_12 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_0 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			s_22 :
+			begin
+			     ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			end
+			
+			
 
 			default : ;
 		endcase
@@ -126,8 +360,8 @@ module control (
 			halted : 
 				if (run_i) 
 					state_nxt = s_18;
-				else 
-					state_nxt = state;
+				else
+				    state_nxt = halted;//added to avoid inferred latch
 			s_18 : 
 				state_nxt = s_33_1; //notice that we usually have 'r' here, but you will need to add extra states instead 
 			s_33_1 :                 //e.g. s_33_2, etc. how many? as a hint, note that the bram is synchronous, in addition, 
@@ -138,14 +372,54 @@ module control (
 				state_nxt = s_35;
 			s_35 : 
 				state_nxt = pause_ir1;
+				
+				
+				
+			s_32 :
+			
+			s_1 :	
+			
+			s_5 :
+			
+			s_9 :
+			
+			s_6 :
+			
+			s_25 :
+			
+			s_27:
+			
+			s_7 :
+			
+			s_23 :
+			
+			s_16 :
+			
+			s_4 :
+			
+			s_21 :
+			
+			s_12 :
+			
+			s_0 :
+			
+			s_22 :
+			
+			
+			
+				
 			// pause_ir1 and pause_ir2 are only for week 1 such that TAs can see 
 			// the values in ir.
 			pause_ir1 : 
 				if (continue_i) 
 					state_nxt = pause_ir2;
+				else
+				    state_nxt = pause_ir1;
 			pause_ir2 : 
 				if (~continue_i)
 					state_nxt = s_18;
+			     else
+				    state_nxt = pause_ir2;
 			// you need to finish the rest of state transition logic.....
 			
 			default :;
