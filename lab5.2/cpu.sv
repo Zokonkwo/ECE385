@@ -39,7 +39,7 @@ module cpu (
 
 
 // Internal connections, follow the datapath block diagram and add the additional needed signals
-logic ld_mar, d_mdr, ld_ir, ld_pc, ld_led, ld_cc, ld_reg; 
+logic ld_mar, d_mdr, ld_ir, ld_pc, ld_led, ld_cc, ld_reg, ld_ben; 
 logic gate_pc, gate_mdr, gate_alu, gate_marmux;
 
 logic [15:0] mar, mdr_in, mdr;   
@@ -48,21 +48,7 @@ logic [1:0] pcmux, addr2_mux_select;
     
 logic [15:0] ir;  
 // Internal connections, follow the datapath block diagram and add the additional needed signals
-logic ld_mar; 
-logic ld_mdr; 
-logic ld_ir; 
-logic ld_pc; 
-logic ld_led;
-logic gate_pc;
-logic gate_mdr;
-logic [1:0] pcmux;
-logic [15:0] mar;
-logic [15:0] mdr_in;
-logic [15:0] mdr;
-logic [15:0] ir;
-logic [15:0] pc;
-logic [15:0] pc_in;
-logic [15:0] pc_1;
+
 assign pc_1 = pc + 1;
 logic [15:0] rdata;
 logic [15:0] bus;
@@ -272,10 +258,10 @@ load_reg #(.DATA_WIDTH(1)) ben_reg (
     .clk        (clk),
     .reset      (reset),
 
-    .load       (),
+    .load       (ld_ben),
     .data_i     (),
 
-    .data_q     ()
+    .data_q     (ben)
 );
 
 //status registers
