@@ -300,11 +300,6 @@ module control (
 			
 			s_6 :
 			begin
-			  sr1_select = 1b'1; //SR1MUX select chooses output 1 being IR[8:6]
-			  addr1_mux_select = 1'b1; //addr1mux select chooses input 1 being sr1 out
-			  addr2_mux_select = 2'b01; //addr2mux selects the [5:0] sign extension
-			  data_select = 4'b1000;
-				
 			  ld_mar = 1'b1;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b1;
@@ -319,13 +314,12 @@ module control (
 		 
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; 
-			  sr1_select = 1'b0; 
+			  sr1_select = 1'b1; //SR1MUX select chooses output 1 being IR[8:6]
 			  sr2_mux_select = 1'b0; 
-			  addr1_mux_select = 1'b0;
-			  addr2_mux_select = 2'b00;
-			  aluk_in = 2'b00;   
-			  data_select = 4'b0000; //Default x
-				
+			  addr1_mux_select = 1'b1; //addr1mux select chooses input 1 being sr1 out
+			  addr2_mux_select = 2'b01; //addr2mux selects the [5:0] sign extension
+			  aluk_in = 2'b00; 
+			  data_select = 4'b1000; //GateMARMUX	
 			end
 			
 			s_25 :
