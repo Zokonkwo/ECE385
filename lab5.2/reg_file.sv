@@ -7,6 +7,7 @@ module reg_file(input logic [2:0] dr, sr1, sr2,
 logic load1, load2, load3, load4, load5, load6, load7, load8;
 logic [15:0] gp1_out, gp2_out, gp3_out, gp4_out, gp5_out, gp6_out, gp7_out, gp8_out;
 
+  //destination register
   always_comb
     begin
       if(dr == 3'b000 && ld_reg == 1'b1)
@@ -26,6 +27,8 @@ logic [15:0] gp1_out, gp2_out, gp3_out, gp4_out, gp5_out, gp6_out, gp7_out, gp8_
       else if(dr == 3'b111 && ld_reg == 1'b1)
         load8 = 1'b1;
     end
+
+  //source register 1
    always_comb
     begin
       if(sr1 == 3'b000 && ld_reg == 1'b1)
@@ -45,6 +48,8 @@ logic [15:0] gp1_out, gp2_out, gp3_out, gp4_out, gp5_out, gp6_out, gp7_out, gp8_
       else if(sr1 == 3'b111 && ld_reg == 1'b1)
         sr1_out = gp8_out;
     end
+
+  //source register 2
    always_comb
     begin
       if(sr2 == 3'b000 && ld_reg == 1'b1)
