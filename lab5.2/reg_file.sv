@@ -4,7 +4,7 @@ module reg_file(input logic [2:0] dr, sr1, sr2,
                 output logic [15:0] sr2_out,
                 output logic [15:0] sr1_out,);
 
-
+logic load1, load2, load3, load4, load5, load6, load7, load8;
 // //general purpose registers
 load_reg #(.DATA_WIDTH(16)) gp1_reg (
     .clk(clk),
