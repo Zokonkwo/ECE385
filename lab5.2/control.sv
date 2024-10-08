@@ -55,7 +55,7 @@ module control (
 	output logic		mem_wr_ena,  // Mem Write Enable
 
 	output logic 		sr1_select, addr1_mux_select, dr_select, sr2_mux_select
-	output logic [1:0]	addr2_mux_select,
+	output logic [1:0]	addr2_mux_select, aluk_in, pcmux,
 	output logic [3:0]	data_select,
 
 			
@@ -74,6 +74,7 @@ module control (
 		s_1,
 		s_1_i,
 		s_5,
+		s_5_i,
 		s_9,
 		s_6,
 		s_25_1,
@@ -176,12 +177,14 @@ module control (
 		
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
-		 
+
+			  //add in sr2_in	 
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; //select ir[11:9]
 			  sr1_select = 1'b1; //select ir[8:6]
 			  sr2_mux_select = 1'b0; //ir[5] = 0
-			  data_select = 4'b0010; //add
+			  aluk_in = 2'b00;   //select ADD
+			  data_select = 4'b0010; //GateALU
 			end
 			
 			s_1_i :
@@ -195,12 +198,13 @@ module control (
 		
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
-		 
+			
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; //select ir[11:9]
 			  sr1_select = 1'b1; //select ir[8:6]
 			  sr2_mux_select = 1'b1; //ir[5] = 1
-			  data_select = 4'b0010; //addi
+			  aluk_in = 2'b00;   //select ADD
+			  data_select = 4'b0010; //GateALU
 			end
 			
 			s_5 :
@@ -210,11 +214,37 @@ module control (
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0; //load reg file
 		
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
+			  dr_select = 1'b0; //select ir[11:9]
+			  sr1_select = 1'b1; //select ir[8:6]
+			  sr2_mux_select = 1'b0; //ir[5] = 0
+			  aluk_in = 2'b01;   //select AND
+			  data_select = 4'b0010; //GateALU
+			end
+
+			s_5_i :
+			begin
+			  ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+			  ld_reg = 1'b0; //load reg file
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			  dr_select = 1'b0; //select ir[11:9]
+			  sr1_select = 1'b1; //select ir[8:6]
+			  sr2_mux_select = 1'b1; //ir[5] = 1
+			  aluk_in = 2'b01;   //select AND
+			  data_select = 4'b0010; //GateALU
 			end
 			
 			s_9 :
@@ -240,9 +270,10 @@ module control (
 			begin
 			  sr1_select = 1b'1; //SR1MUX select chooses output 1 being IR[8:6]
 			  addr1_mux_select = 1'b1; //addr1mux select chooses input 1 being sr1 out
-				addr2_mux_select = 2'b01; //addr2mux selects the [5:0] sign extension
-				data_select = 4'b1000;
-			     ld_mar = 1'b1;
+			  addr2_mux_select = 2'b01; //addr2mux selects the [5:0] sign extension
+			  data_select = 4'b1000;
+				
+			  ld_mar = 1'b1;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b1;
 		          ld_pc = 1'b0;
@@ -442,7 +473,7 @@ begin
 			else if (ir[15:12] == 4'b0101 & ir[5] == 1'b0) //AND
 					state_nxt = s_5;
 			else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1)  // ANDi
-					state_nxt = s_5;
+					state_nxt = s_5_i;
 			else if (ir[15:12] == 4'b1001) //NOT
 					state_nxt = s_9;
 			else if (ir[15:12] == 4'b0110) //LDR
@@ -466,6 +497,8 @@ begin
 			s_1_i :	
 				state_nxt = s_18;
 			s_5 :
+				state_nxt = s_18;
+			s_5_i :
 				state_nxt = s_18;
 			s_9 :
 				state_nxt = s_18;
