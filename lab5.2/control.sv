@@ -218,7 +218,8 @@ module control (
 		
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
-		 
+
+			  //add sr2_in
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; //select ir[11:9]
 			  sr1_select = 1'b1; //select ir[8:6]
@@ -241,7 +242,7 @@ module control (
 		 
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; //select ir[11:9]
-			  sr1_select = 1'b1; //select ir[8:6]
+			  sr1_select = 1'b0; //select ir[11:9]
 			  sr2_mux_select = 1'b1; //ir[5] = 1
 			  aluk_in = 2'b01;   //select AND
 			  data_select = 4'b0010; //GateALU
@@ -365,35 +366,43 @@ begin
 			
 			s_4 :
 			begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
-		          ld_ir = 1'b0;
-		          ld_pc = 1'b0;
+		          ld_ir = 1'b1; //load ir
+		          ld_pc = 1'b1; //load pc
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
+			  ld_cc = 1'b0;
+				
 		
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
 		 
-		          pcmux = 2'b00;
+		          pcmux = 2'b10; //select adder result
+			  addr1_mux_select = 1'b0; //select pc
+			  addr2_mux_select = 2'b11; //select sext [10:0]
 			end
 			
 			s_21 :
 			begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b1; //load reg file
 		
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
+			  dr_select = 1'b1; //select 111
+			  data_select = 4'b0100; //GatePC
 			end
 			
 			s_12 :
 			begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
