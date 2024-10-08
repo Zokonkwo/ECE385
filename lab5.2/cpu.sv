@@ -56,7 +56,8 @@ logic [1:0] aluk_in;
     
 logic n, z, p, n_in, z_in, p_in;
     
-logic dr_select, sr1_select, sr2_mux_select, addr1_mux_select, data_select; 
+logic dr_select, sr1_select, sr2_mux_select, addr1_mux_select; 
+logic [3:0] data_select; 
     
 logic ben;
 
