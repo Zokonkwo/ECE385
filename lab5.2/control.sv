@@ -373,13 +373,8 @@ module control (
 			
 			s_7 :  //start of STR
 			begin
-			  sr1_select = 1b'1; //SR1MUX select chooses output 1 being IR[8:6]
-			  addr1_mux_select = 1'b1; //addr1mux select chooses input 1 being sr1 out
-			  addr2_mux_select = 2'b01; //addr2 mux select chooses sext[5:0]
-			  data_select = 4'b1000; //bus mux drives bus with gateMarMux data
 			  //mdr_in = bus;//we dont need to include bus logic at top since cpu handles it
 			  ld_mar = 1'b1; //set laod mar high to load bus data to mar register
-				
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
@@ -393,12 +388,12 @@ module control (
 		 
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; 
-			  sr1_select = 1'b0; 
+			  sr1_select = 1'b1; //SR1MUX select chooses output 1 being IR[8:6]
 			  sr2_mux_select = 1'b0; 
-			  addr1_mux_select = 1'b0;
-			  addr2_mux_select = 2'b00;
+			  addr1_mux_select = 1'b1; //addr1mux select chooses input 1 being sr1 out
+			  addr2_mux_select = 2'b01; //addr2 mux select chooses sext[5:0]
 			  aluk_in = 2'b00;   
-			  data_select = 4'b0000; //Default x
+			  data_select = 4'b1000; //Default GateMARMUX
 			end
 			
 			s_23 :
