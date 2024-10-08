@@ -73,7 +73,9 @@ module control (
 		s_5,
 		s_9,
 		s_6,
-		s_25,
+		s_25_1,
+		s_25_2,
+		s_25_3,
 		s_27,
 		s_7,
 		s_23,
@@ -204,9 +206,13 @@ module control (
 			
 			s_6 :
 			begin
-			     ld_mar = 1'b0;
+			  sr1_select = 1b'1; //SR1MUX select chooses output 1 being IR[8:6]
+			  addr1_mux_select = 1'b1; //addr1mux select chooses input 1 being sr1 out
+				addr2_mux_select = 2'b01; //addr2mux selects the [5:0] sign extension
+				data_select = 4'b1000;
+			     ld_mar = 1'b1;
 		          ld_mdr = 1'b0;
-		          ld_ir = 1'b0;
+		          ld_ir = 1'b1;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		
@@ -214,12 +220,13 @@ module control (
 		          gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
+				
 			end
 			
 			s_25 :
 			begin
 			     ld_mar = 1'b0;
-		          ld_mdr = 1'b0;
+		          ld_mdr = 1'b1;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
@@ -429,11 +436,15 @@ begin
 			s_9 :
 			
 			s_6 :
-			
-			s_25 :
-			
+			state_nxt = s_25_1;
+			s_25_1 :
+			state_nxt = s_25_2;
+			s_25_2 :
+			state_nxt = s_25_3;
+			s_25_3 :
+			state_nxt = s_27;
 			s_27:
-			
+			state_nxt = s_18;
 			s_7 :
 			state_nxt = s_23;
 			s_23 :
