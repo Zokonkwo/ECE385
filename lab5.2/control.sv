@@ -44,8 +44,8 @@ module control (
 	output logic 		ld_reg,
 	output logic 		ld_cc
 						
-	output logic		gate_pc,
-	output logic		gate_mdr,
+	//output logic		gate_pc,
+	//output logic		gate_mdr,
 						
 	output logic [1:0]	pcmux,//select signal for pc mux
 	
@@ -115,8 +115,8 @@ module control (
 		ld_pc = 1'b0;
 		ld_led = 1'b0;
 		
-		gate_pc = 1'b0;
-		gate_mdr = 1'b0;
+		// gate_pc = 1'b0;
+		// gate_mdr = 1'b0;
 		 
 		pcmux = 2'b00;
 		
@@ -159,8 +159,8 @@ module control (
 		   	  ld_led = 1'b0;
 			  ld_ben = 1'b1;
 		
-			  gate_pc = 1'b0;
-			  gate_mdr = 1'b0;
+			  // gate_pc = 1'b0;
+			  // gate_mdr = 1'b0;
 		 
 			  pcmux = 2'b00;
 			end
@@ -174,8 +174,8 @@ module control (
 		          ld_led = 1'b0;
 			  ld_reg = 1'b1; //load into register file
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 
 			  //add in sr2_in	 
 		          pcmux = 2'b00;
@@ -195,8 +195,8 @@ module control (
 		          ld_led = 1'b0;
 		          ld_reg = 1'b1; //load into register file
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 			
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; //select ir[11:9]
@@ -215,8 +215,8 @@ module control (
 		          ld_led = 1'b0;
 			  ld_reg = 1'b0; //load reg file
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 
 			  //add sr2_in
 		          pcmux = 2'b00;
@@ -236,8 +236,8 @@ module control (
 		          ld_led = 1'b0;
 			  ld_reg = 1'b0; //load reg file
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; //select ir[11:9]
@@ -256,8 +256,8 @@ module control (
 		          ld_led = 1'b0;
 			  ld_reg = 1'b1; //load into register file
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; //select ir[11:9]
@@ -279,8 +279,8 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 				
@@ -294,8 +294,8 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			end
@@ -308,8 +308,8 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			end
@@ -329,8 +329,8 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			end
@@ -343,8 +343,8 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			end
@@ -374,8 +374,8 @@ begin
 			  ld_cc = 1'b0;
 				
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b10; //select adder result
 			  addr1_mux_select = 1'b0; //select pc
@@ -391,8 +391,8 @@ begin
 		          ld_led = 1'b0;
 			  ld_reg = 1'b1; //load reg file
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			  dr_select = 1'b1; //select 111
@@ -407,8 +407,8 @@ begin
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			end
@@ -421,8 +421,8 @@ begin
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			end
@@ -435,8 +435,8 @@ begin
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+		          // gate_pc = 1'b0;
+		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			end
