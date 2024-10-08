@@ -150,7 +150,6 @@ module control (
 			pause_ir2: ld_led = 1'b1; 
 			// you need to finish the rest of state output logic..... 
 			
-			
 			s_32 :
 			begin
 			  ld_mar = 1'b0;
@@ -469,36 +468,33 @@ begin
 			s_33_3 : 
 				state_nxt = s_35;
 			s_35 : 
-				state_nxt = 32;
-				
-				
-				
+				state_nxt = s_32;	
 			s_32 :
 				begin
-				if (ir[15:12] == 4'b0001 & ir[5] == 1'b0)//ADD
+				  if (ir[15:12] == 4'b0001 & ir[5] == 1'b0)//ADD
 					state_nxt = s_1;
-			else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1) //ADDi
+				  else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1) //ADDi
 					state_nxt = s_1_i;
-			else if (ir[15:12] == 4'b0101 & ir[5] == 1'b0) //AND
+				  else if (ir[15:12] == 4'b0101 & ir[5] == 1'b0) //AND
 					state_nxt = s_5;
-			else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1)  // ANDi
+				  else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1)  // ANDi
 					state_nxt = s_5_i;
-			else if (ir[15:12] == 4'b1001) //NOT
+				  else if (ir[15:12] == 4'b1001) //NOT
 					state_nxt = s_9;
-			else if (ir[15:12] == 4'b0110) //LDR
+				  else if (ir[15:12] == 4'b0110) //LDR
 					state_nxt = s_6;
-			else if (ir[15:12] == 4'0111) //STR
+				  else if (ir[15:12] == 4'0111) //STR
 					state_nxt = s_7;
-			else if (ir[15:12] == 4'b0100) //JSR
+				  else if (ir[15:12] == 4'b0100) //JSR
 					state_nxt = s_4;
-			else if (ir[15:12] == 4'b1100) //JMP
+				  else if (ir[15:12] == 4'b1100) //JMP
 					state_nxt = s_12;
-			else if (ir[15:12] == 4'b0000) //BR
+				  else if (ir[15:12] == 4'b0000) //BR
 					state_nxt = s_0;
-			else if (ir[15:12] == 4'b1101) //PSE
+				  else if (ir[15:12] == 4'b1101) //PSE
 					state_nxt = pause_ir1;
-			else 
-				state_nxt = s_18;
+				  else 
+					state_nxt = s_18;
 				end
 			
 			s_1 :	
