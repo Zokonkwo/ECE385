@@ -218,7 +218,7 @@ module control (
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
-			  ld_reg = 1'b0; //load reg file
+			  ld_reg = 1'b1; //load reg file
 		          ld_cc = 1'b0;
 			  ld_ben = 1'b0;
 		          // gate_pc = 1'b0;
@@ -240,7 +240,7 @@ module control (
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
-			  ld_reg = 1'b0; //load reg file
+			  ld_reg = 1'b1; //load reg file
 		          ld_cc = 1'b0;
 			  ld_ben = 1'b0;
 		          // gate_pc = 1'b0;
@@ -286,6 +286,7 @@ module control (
 		          ld_ir = 1'b1;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
 			  ld_cc = 1'b0;
 			  ld_ben = 1'b0;
 		
@@ -298,11 +299,14 @@ module control (
 			
 			s_25 :
 			begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b1;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
+			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 			  
 		
 		          // gate_pc = 1'b0;
@@ -313,11 +317,14 @@ module control (
 			
 			s_27 :
 			begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
+			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 		
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
@@ -334,11 +341,13 @@ module control (
 			  //mdr_in = bus;//we dont need to include bus logic at top since cpu handles it
 			  ld_mar = 1'b1; //set laod mar high to load bus data to mar register
 				
-			
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
+			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 		
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
@@ -353,6 +362,9 @@ module control (
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
+			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 		
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
@@ -361,12 +373,15 @@ module control (
 			end
 			
 			s_16_1, s_16_2, s_16_3 :
-begin
-			     ld_mar = 1'b0;
+			begin
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
+			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 		
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
@@ -383,6 +398,7 @@ begin
 		          ld_led = 1'b0;
 			  ld_reg = 1'b0;
 			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 				
 		
 		          // gate_pc = 1'b0;
@@ -401,6 +417,8 @@ begin
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 			  ld_reg = 1'b1; //load reg file
+			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 		
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
@@ -417,6 +435,9 @@ begin
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
+			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 		
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
@@ -426,11 +447,14 @@ begin
 			
 			s_0 :
 			begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
+			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 		
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
@@ -440,11 +464,14 @@ begin
 			
 			s_22 :
 			begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b0;
+			  ld_cc = 1'b0;
+			  ld_ben = 1'b0;
 		
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
