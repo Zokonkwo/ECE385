@@ -412,10 +412,14 @@ begin
 			
 			s_12 :
 			begin
-			     ld_mar = 1'b0;
+				sr1_select = 1'b1;
+				data_select = 4'b0010; //bus mux chooses GateALU 
+				//<- here the ALUK should be set to pass through SR1///////////////////////////////
+			   	pcmux = 2'b01;
+				ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
-		          ld_pc = 1'b0;
+		          ld_pc = 1'b1;
 		          ld_led = 1'b0;
 		
 		          gate_pc = 1'b0;
