@@ -317,9 +317,10 @@ module control (
 		          pcmux = 2'b00;
 			end
 			
-			s_27 :
+			s_27 :///////////////how to handle general purpose register loading to destination reg
 			begin
 				data_select = 4'b0001; //bus data mux chooses GateMDR data 
+				//set mux that directs bus data to destination register
 			     ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
@@ -541,11 +542,17 @@ begin
 			s_21 :
 			
 			s_12 :
-			
-			s_0 :
-			
+			state_nxt = s_18;
+			s_0 :begin
+				if (ben == 0)
+					state_nxt = s_18;
+				else if (ben == 1)
+					state_nxt = s_22
+				else
+					state_nxt = state; //loop here until ben is defined
+				end 
 			s_22 :
-			
+			state_nxt = s_18;
 			
 			
 				
