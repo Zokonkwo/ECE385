@@ -61,6 +61,8 @@ logic [3:0] data_select;
     
 logic ben;
 
+assign sr2_in = ir[2:0];
+
 assign pc_1 = pc + 1; 
 
 assign mem_addr = mar;
