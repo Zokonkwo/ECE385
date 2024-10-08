@@ -54,7 +54,7 @@ module control (
 	output logic		mem_mem_ena, // Mem Operation Enable
 	output logic		mem_wr_ena,  // Mem Write Enable
 
-	output logic 		sr1_select, addr1_mux_select,
+	output logic 		sr1_select, addr1_mux_select, dr_select, sr2_mux_select
 	output logic [1:0]	addr2_mux_select,
 	output logic [3:0]	data_select,
 
@@ -72,6 +72,7 @@ module control (
 		s_35,
 		s_32,
 		s_1,
+		s_1_i,
 		s_5,
 		s_9,
 		s_6,
@@ -151,36 +152,60 @@ module control (
 			
 			s_32 :
 			begin
-			ld_mar = 1'b0;
-		ld_mdr = 1'b0;
-		ld_ir = 1'b0;
-		ld_pc = 1'b0;
-		ld_led = 1'b0;
-		ld_ben = 1'b1;
+			  ld_mar = 1'b0;
+			  ld_mdr = 1'b0;
+			  ld_ir = 1'b0;
+			  ld_pc = 1'b0;
+		   	  ld_led = 1'b0;
+			  ld_ben = 1'b1;
 		
-		gate_pc = 1'b0;
-		gate_mdr = 1'b0;
+			  gate_pc = 1'b0;
+			  gate_mdr = 1'b0;
 		 
-		pcmux = 2'b00;
+			  pcmux = 2'b00;
 			end
 			
 			s_1 :
 			 begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b1; //load into register file
 		
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
+			  dr_select = 1'b0; //select ir[11:9]
+			  sr1_select = 1'b1; //select ir[8:6]
+			  sr2_mux_select = 1'b0; //ir[5] = 0
+			  data_select = 4'b0010; //add
+			end
+			
+			s_1_i :
+			 begin
+			  ld_mar = 1'b0;
+		          ld_mdr = 1'b0;
+		          ld_ir = 1'b0;
+		          ld_pc = 1'b0;
+		          ld_led = 1'b0;
+		          ld_reg = 1'b1; //load into register file
+		
+		          gate_pc = 1'b0;
+		          gate_mdr = 1'b0;
+		 
+		          pcmux = 2'b00;
+			  dr_select = 1'b0; //select ir[11:9]
+			  sr1_select = 1'b1; //select ir[8:6]
+			  sr2_mux_select = 1'b1; //ir[5] = 1
+			  data_select = 4'b0010; //addi
 			end
 			
 			s_5 :
 			begin
-			     ld_mar = 1'b0;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
@@ -413,7 +438,7 @@ begin
 				if (ir[15:12] == 4'b0001 & ir[5] == 1'b0)//ADD
 					state_nxt = s_1;
 			else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1) //ADDi
-					state_nxt = s_1;
+					state_nxt = s_1_i;
 			else if (ir[15:12] == 4'b0101 & ir[5] == 1'b0) //AND
 					state_nxt = s_5;
 			else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1)  // ANDi
@@ -437,6 +462,8 @@ begin
 				end
 			
 			s_1 :	
+				state_nxt = s_18;
+			s_1_i :	
 				state_nxt = s_18;
 			s_5 :
 				state_nxt = s_18;
