@@ -206,10 +206,11 @@ module control (
 			halted: ; 
 			s_18 : 
 				begin 
-					gate_pc = 1'b1;
+					gate_pc = 1'b0;
 					ld_mar = 1'b1;
 					pcmux = 2'b00;
 					ld_pc = 1'b1;
+					data_select = 4'b0100; //GatePC
 				end
 			s_33_1, s_33_2, s_33_3 : //you may have to think about this as well to adapt to ram with wait-states
 				begin
@@ -218,7 +219,8 @@ module control (
 				end
 			s_35 : 
 				begin 
-					gate_mdr = 1'b1;
+					data_select = 4'b0001; //GateMDR
+					gate_mdr = 1'b0;
 					ld_ir = 1'b1;
 				end
 			pause_ir1: ld_led = 1'b1; 
@@ -305,6 +307,7 @@ module control (
 			s_25_1, s_25_2, 2_25_3 ://?????????????how to handle cpu_to_io pins????????????????????
 			begin
 			////what to set?
+			mem_mem_ena = 1'b1;
 			
 			
 			//////	
@@ -372,7 +375,7 @@ module control (
 			end
 			
 			s_16_1, s_16_2, s_16_3 :
-begin
+			begin		
 			     ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
@@ -428,7 +431,7 @@ begin
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
 		 
-		          pcmux = 2'b00;
+		         
 			end
 			
 			s_0 :
