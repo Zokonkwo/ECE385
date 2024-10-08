@@ -52,7 +52,7 @@ module control (
 	output logic		mem_mem_ena, // Mem Operation Enable
 	output logic		mem_wr_ena,  // Mem Write Enable
 
-	output logic 		sr1_select, addr1_mux_select, dr_select, sr2_mux_select //2 bit mux selections
+	output logic 		sr1_select, addr1_mux_select, dr_select, sr2_mux_select, //2 bit mux selections
 	output logic [1:0]	pcmux, addr2_mux_select, aluk_in,  //3 bit mux selections
 	output logic [3:0]	data_select, //data bus selection
 
