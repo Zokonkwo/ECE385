@@ -11,7 +11,7 @@ load_reg #(.DATA_WIDTH(16)) gp1_reg (
     .reset(reset),
 
     .load(),
-  .data_i(bus),
+    .data_i(),
 
     .data_q()
 );
@@ -20,7 +20,7 @@ load_reg #(.DATA_WIDTH(16)) gp2_reg (
     .reset(reset),
 
     .load(),
-    .data_i(bus),
+    .data_i(),
 
     .data_q()
 );
@@ -29,7 +29,7 @@ load_reg #(.DATA_WIDTH(16)) gp3_reg (
     .reset(reset),
 
     .load(),
-    .data_i(bus),
+    .data_i(),
 
     .data_q()
 );
@@ -38,7 +38,7 @@ load_reg #(.DATA_WIDTH(16)) gp4_reg (
     .reset(reset),
 
     .load(),
-    .data_i(bus),
+    .data_i(),
 
     .data_q()
 );
@@ -47,7 +47,7 @@ load_reg #(.DATA_WIDTH(16)) gp5_reg (
     .reset(reset),
 
     .load(),
-    .data_i(bus),
+    .data_i(),
 
     .data_q()
 );
@@ -56,7 +56,7 @@ load_reg #(.DATA_WIDTH(16)) gp6_reg (
     .reset(reset),
 
     .load(),
-    .data_i(bus),
+    .data_i(),
 
     .data_q()
 );
@@ -65,7 +65,7 @@ load_reg #(.DATA_WIDTH(16)) gp7_reg (
     .reset(reset),
 
     .load(),
-    .data_i(bus),
+    .data_i(),
 
     .data_q()
 );
@@ -74,7 +74,7 @@ load_reg #(.DATA_WIDTH(16)) gp8_reg (
     .reset(reset),
 
     .load(),
-    .data_i(bus),
+    .data_i(),
 
     .data_q()
 );
