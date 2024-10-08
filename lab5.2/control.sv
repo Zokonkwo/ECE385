@@ -77,7 +77,9 @@ module control (
 		s_27,
 		s_7,
 		s_23,
-		s_16,
+		s_16_1,
+		s_16_2,
+		s_16_3,
 		s_4,
 		s_21,
 		s_12,
@@ -277,7 +279,7 @@ module control (
 		          pcmux = 2'b00;
 			end
 			
-			s_16 :
+			s_16_1, s_16_2, s_16_3 :
 begin
 			     ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
@@ -433,11 +435,15 @@ begin
 			s_27:
 			
 			s_7 :
-			
+			state_nxt = s_23;
 			s_23 :
-			
-			s_16 :
-			
+			state_nxt = s_16_1;
+			s_16_1 :
+			state_nxt = s_16_2;
+			s_16_2 :
+			state_nxt = s_16_3
+			s_16_3 :
+			state_nxt = s_18;
 			s_4 :
 			
 			s_21 :
