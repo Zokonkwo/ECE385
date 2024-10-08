@@ -287,9 +287,9 @@ module control (
 			begin
 			  sr1_select = 1b'1; //SR1MUX select chooses output 1 being IR[8:6]
 			  addr1_mux_select = 1'b1; //addr1mux select chooses input 1 being sr1 out
-				addr2_mux_select = 2'b01; //addr2mux selects the [5:0] sign extension
-				databus_select = 4'b1000;
-			     ld_mar = 1'b1;
+			  addr2_mux_select = 2'b01; //addr2mux selects the [5:0] sign extension
+			  databus_select = 4'b1000;
+			  ld_mar = 1'b1;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b1;
 		          ld_pc = 1'b0;
@@ -304,8 +304,11 @@ module control (
 			
 			s_25_1, s_25_2, 2_25_3 ://?????????????how to handle cpu_to_io pins????????????????????
 			begin
-				
-			     ld_mar = 1'b0;
+			////what to set?
+			
+			
+			//////	
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b1;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
