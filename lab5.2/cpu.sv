@@ -56,7 +56,7 @@ logic [1:0] aluk_in;
     
 logic n, z, p, n_in, z_in, p_in;
     
-logic dr_select, sr1_select, sr2_mux_select, addr1_mux_select; 
+logic dr_select, sr1_select, sr2_mux_select, addr1_mux_select, mio_en; 
 logic [3:0] data_select; 
     
 logic ben;
@@ -120,7 +120,7 @@ assign hex_display_debug = ir;
 
 //16 bits 2:1 muxes
 mux_2_1 mio_mux(
-    .select         (mem_mem_ena), 
+    .select         (mio_en), 
 
     .input1         (bus),
     .input2         (cpu_rdata), 
