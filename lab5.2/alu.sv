@@ -10,7 +10,7 @@ module alu (input logic [15:0] sr2mux, sr1out,
           else if(aluk == 2'b01) //AND
             alu_out = sr2_mux & sr1_out;
           else if (aluk == 2'b10) //PASSA
-            alu_out = sr2_mux;
+            alu_out = sr1out;
           else if (aluk == 2'b11) //NOT
             alu_out =  ~(sr1_out);
         end
