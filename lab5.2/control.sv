@@ -24,11 +24,11 @@
 //------------------------------------------------------------------------------
 
 module control (
-	input logic			clk, 
-	input logic			reset,
+	input logic		clk, 
+	input logic		reset,
 
 	input logic  [15:0]	ir,
-	input logic			ben,
+	input logic		ben,
 
 	input logic 		continue_i,
 	input logic 		run_i,
@@ -39,8 +39,10 @@ module control (
 	output logic		ld_mdr,
 	output logic		ld_ir,
 	output logic		ld_pc,
-	output logic           ld_led,
-	output logic  	       ld_ben,//added
+	output logic            ld_led,
+	output logic  	        ld_ben,//added
+	output logic 		ld_reg,
+	output logic 		ld_cc
 						
 	output logic		gate_pc,
 	output logic		gate_mdr,
@@ -192,16 +194,21 @@ module control (
 			
 			s_9 :
 			begin
-			  ld_mar = 1'b1;
+			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
+			  ld_reg = 1'b1; //load into register file
 		
 		          gate_pc = 1'b0;
 		          gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
+			  dr_select = 1'b0; //select ir[11:9]
+			  sr1_select = 1'b1; //select ir[8:6]
+			  aluk_in = 2'b11;   //select NOT
+			  data_select = 4'b0010;  //activate GateALU
 			end
 			
 			s_6 :
@@ -430,40 +437,41 @@ begin
 				end
 			
 			s_1 :	
-			
+				state_nxt = s_18;
 			s_5 :
-			
+				state_nxt = s_18;
 			s_9 :
-			
+				state_nxt = s_18;
 			s_6 :
-			state_nxt = s_25_1;
+				state_nxt = s_25_1;
 			s_25_1 :
-			state_nxt = s_25_2;
+				state_nxt = s_25_2;
 			s_25_2 :
-			state_nxt = s_25_3;
+				state_nxt = s_25_3;
 			s_25_3 :
-			state_nxt = s_27;
+				state_nxt = s_27;
 			s_27:
-			state_nxt = s_18;
+				state_nxt = s_18;
 			s_7 :
-			state_nxt = s_23;
+				state_nxt = s_23;
 			s_23 :
-			state_nxt = s_16_1;
+				state_nxt = s_16_1;
 			s_16_1 :
-			state_nxt = s_16_2;
+				state_nxt = s_16_2;
 			s_16_2 :
-			state_nxt = s_16_3
+				state_nxt = s_16_3
 			s_16_3 :
-			state_nxt = s_18;
+				state_nxt = s_18;
 			s_4 :
-			
+				state_nxt = s_21;
 			s_21 :
-			
+				state_nxt = s_18;
 			s_12 :
-			
+				state_nxt = s_18;
 			s_0 :
 			
 			s_22 :
+				state_nxt = s_18;
 			
 			
 			
