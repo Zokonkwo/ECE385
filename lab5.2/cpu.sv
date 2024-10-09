@@ -101,7 +101,7 @@ logic logic_unit(
 //sign extension
 sext #(.IN_WIDTH(11), .OUT_WIDTH(16)) sext1(
     .in             (ir[10:0]),
-    .out           (sext1_in)
+    .out           (sext3_in)
 );
 sext #(.IN_WIDTH(9), .OUT_WIDTH(16)) sext2(
     .in             (ir[8:0]),
@@ -109,7 +109,7 @@ sext #(.IN_WIDTH(9), .OUT_WIDTH(16)) sext2(
 );
 sext #(.IN_WIDTH(6), .OUT_WIDTH(16)) sext3(
     .in             (ir[5:0]),
-    .out           (sext3_in)
+    .out           (sext1_in)
 );
 sext #(.IN_WIDTH(5), .OUT_WIDTH(16)) sext4(
     .in             (ir[4:0]),
