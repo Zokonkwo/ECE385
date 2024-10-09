@@ -67,9 +67,10 @@ initial begin: TEST_VECTORS
 	#10
 	run_i <= 1'b0;
 	#10 
-	
-	
-	
+	continue_i <= 1'b1;
+	#10
+	continue_i <= 1'b0;
+	#100
 
 $finish(); 
 end
