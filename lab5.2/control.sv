@@ -186,7 +186,7 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 			  ld_reg = 1'b1; //load into register file
-			  ld_cc = 1'b1;
+			  ld_cc = 1'b1; //load cc
 			  ld_ben = 1'b0;
 		
 		          // gate_pc = 1'b0;
@@ -211,8 +211,9 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 		          ld_reg = 1'b1; //load into register file
-			  ld_cc = 1'b1;
+			  ld_cc = 1'b1; //load cc
 			  ld_ben = 1'b0;
+				 
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
 			
@@ -236,7 +237,7 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 			  ld_reg = 1'b1; //load reg file
-		          ld_cc = 1'b1;
+		          ld_cc = 1'b1; //load cc
 			  ld_ben = 1'b0;
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
@@ -260,7 +261,7 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 			  ld_reg = 1'b1; //load reg file
-		          ld_cc = 1'b1;
+		          ld_cc = 1'b1; //load cc
 			  ld_ben = 1'b0;
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
@@ -283,7 +284,7 @@ module control (
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 			  ld_reg = 1'b1; //load into register file
-		          ld_cc = 1'b1;
+		          ld_cc = 1'b1; //load cc
 			  ld_ben = 1'b0;
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
@@ -546,7 +547,7 @@ module control (
 			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
-		          ld_pc = 1'b0;
+		          ld_pc = 1'b1;
 		          ld_led = 1'b0;
 			  ld_reg = 1'b0;
 			  ld_cc = 1'b0;
