@@ -1,4 +1,4 @@
-module bit3__mux_2_1(input logic select
+module bit3_mux_2_1(input logic select
                      input logic [2:0] input1, input2,
                      output logic [2:0] mux_2_1_out);
 
