@@ -99,6 +99,10 @@ logic logic_unit(
     .p      (p_in)
 );
 //sign extension
+sext #(.IN_WIDTH(5), .OUT_WIDTH(16)) sext4(
+    .in             (ir[4:0]),
+    .out           (sr2_mux_in2)
+);
 sext #(.IN_WIDTH(11), .OUT_WIDTH(16)) sext3(
     .in             (ir[10:0]),
     .out           (sext3_in)
@@ -111,10 +115,7 @@ sext #(.IN_WIDTH(6), .OUT_WIDTH(16)) sext1(
     .in             (ir[5:0]),
     .out           (sext1_in)
 );
-sext #(.IN_WIDTH(5), .OUT_WIDTH(16)) sext4(
-    .in             (ir[4:0]),
-    .out           (sr2_mux_in2)
-);
+
 assign led_o = ir;
 assign hex_display_debug = ir;
 
