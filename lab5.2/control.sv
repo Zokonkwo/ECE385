@@ -660,6 +660,10 @@ module control (
 			s_12 :
 				state_nxt = s_18;
 			s_0 :
+			  if(ben == 1)
+				state_nxt = s_22;
+			  else
+				state_next = s_18;
 			
 			s_22 :
 				state_nxt = s_18;
