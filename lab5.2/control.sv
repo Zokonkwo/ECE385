@@ -597,13 +597,13 @@ module control (
 				state_nxt = s_32;	
 			s_32 :
 				begin
-				  if (ir[15:12] == 4'b0001 & ir[5] == 1'b0)//ADD
+				  if (ir[15:12] == 4'b0001 && ir[5] == 1'b0)//ADD
 					state_nxt = s_1;
-				  else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1) //ADDi
+				  else if (ir[15:12] == 4'b0001 && ir[5] == 1'b1) //ADDi
 					state_nxt = s_1_i;
-				  else if (ir[15:12] == 4'b0101 & ir[5] == 1'b0) //AND
+				  else if (ir[15:12] == 4'b0101 && ir[5] == 1'b0) //AND
 					state_nxt = s_5;
-				  else if (ir[15:12] == 4'b0001 & ir[5] == 1'b1)  // ANDi
+				  else if (ir[15:12] == 4'b0001 && ir[5] == 1'b1)  // ANDi
 					state_nxt = s_5_i;
 				  else if (ir[15:12] == 4'b1001) //NOT
 					state_nxt = s_9;
