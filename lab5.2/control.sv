@@ -301,9 +301,9 @@ module control (
 			
 			s_6 :
 			begin
-			  ld_mar = 1'b1;
+			  ld_mar = 1'b1; //load mar
 		          ld_mdr = 1'b0;
-		          ld_ir = 1'b1;
+		          ld_ir = 1'b1; //load ir
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
 			  ld_reg = 1'b0;
@@ -326,7 +326,7 @@ module control (
 			s_25_1, s_25_2, s_25_3 :
 			begin
 			  ld_mar = 1'b0;
-		          ld_mdr = 1'b1;
+		          ld_mdr = 1'b1; //load mdr
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
@@ -334,7 +334,7 @@ module control (
 			  ld_cc = 1'b0;
 			  ld_ben = 1'b0;
 			  
-		
+			  mem_mem_ena = 1'b1;
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
 		 
@@ -355,7 +355,7 @@ module control (
 		          ld_ir = 1'b0;
 		          ld_pc = 1'b0;
 		          ld_led = 1'b0;
-			  ld_reg = 1'b0;
+			  ld_reg = 1'b1; //load reg
 			  ld_cc = 1'b0;
 			  ld_ben = 1'b0;
 		
@@ -363,8 +363,8 @@ module control (
 		          // gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
-			  dr_select = 1'b0; 
-			  sr1_select = 1'b0; 
+			  dr_select = 1'b0;  //select ir[11:9]
+			  sr1_select = 1'b1; //select ir[8:6] 
 			  sr2_mux_select = 1'b0; 
 			  addr1_mux_select = 1'b0;
 			  addr2_mux_select = 2'b00;
@@ -407,7 +407,8 @@ module control (
 			  ld_reg = 1'b0;
 			  ld_cc = 1'b0;
 			  ld_ben = 1'b0;
-		
+
+			  mem_mem_ena = 1'b0;
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
 		 
@@ -417,7 +418,7 @@ module control (
 			  sr2_mux_select = 1'b0; 
 			  addr1_mux_select = 1'b0;
 			  addr2_mux_select = 2'b00;
-			  aluk_in = 2'b10; ALUK 10 = pass  
+			  aluk_in = 2'b10; //ALUK 10 = pass  
 			  data_select = 4'b0010; //GateALU
 			end
 			
@@ -449,10 +450,10 @@ module control (
 			begin
 			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
-		          ld_ir = 1'b1; //load ir
-		          ld_pc = 1'b1; //load pc
+		          ld_ir = 1'b0; 
+		          ld_pc = 1'b0; 
 		          ld_led = 1'b0;
-			  ld_reg = 1'b0;
+			  ld_reg = 1'b1; //load reg
 			  ld_cc = 1'b0;
 			  ld_ben = 1'b0;
 				
@@ -460,38 +461,38 @@ module control (
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
 		 
-		          pcmux = 2'b10; //select adder result
-			  dr_select = 1'b0; 
+		          pcmux = 2'b00; 
+			  dr_select = 1'b1;  //select 111
 			  sr1_select = 1'b0; 
 			  sr2_mux_select = 1'b0; 
-			  addr1_mux_select = 1'b0; //select pc
-			  addr2_mux_select = 2'b11; //select sext [10:0]
-			  aluk_in = 2'b00;   
-			  data_select = 4'b0000; //Default x
+			  addr1_mux_select = 1'b0; 
+			  addr2_mux_select = 2'b00; 
+			  aluk_in = 2'b00;  
+			  data_select = 4'b0100; //GatePC
 			end
 			
 			s_21 :
 			begin
 			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
-		          ld_ir = 1'b0;
-		          ld_pc = 1'b0;
+		          ld_ir = 1'b1; //load ir
+		          ld_pc = 1'b1; //load pc
 		          ld_led = 1'b0;
-			  ld_reg = 1'b1; //load reg file
+			  ld_reg = 1'b1; 
 			  ld_cc = 1'b0;
 			  ld_ben = 1'b0;
 		
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
 		 
-		          pcmux = 2'b00;
-			  dr_select = 1'b1; //select 111
+		          pcmux = 2'b01; //select adder result
+			  dr_select = 1'b0; 
 			  sr1_select = 1'b0; 
 			  sr2_mux_select = 1'b0; 
-			  addr1_mux_select = 1'b0;
-			  addr2_mux_select = 2'b00;
+			  addr1_mux_select = 1'b0; //select pc
+			  addr2_mux_select = 2'b11; //select sext3
 			  aluk_in = 2'b00;   
-			  data_select = 4'b0100; //GatePC
+			 data_select = 4'b0000; //Default x
 			end
 			
 			s_12 :
@@ -499,7 +500,7 @@ module control (
 			  ld_mar = 1'b0;
 		          ld_mdr = 1'b0;
 		          ld_ir = 1'b0;
-		          ld_pc = 1'b1;
+		          ld_pc = 1'b1; //load pc
 		          ld_led = 1'b0;
 			  ld_reg = 1'b0;
 			  ld_cc = 1'b0;
@@ -508,9 +509,9 @@ module control (
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
 		 
-		          pcmux = 2'b01;
+		          pcmux = 2'b10;
 			  dr_select = 1'b0; 
-			  sr1_select = 1'b0; 
+			  sr1_select = 1'b1; 
 			  sr2_mux_select = 1'b0; 
 			  addr1_mux_select = 1'b0;
 			  addr2_mux_select = 2'b00;
@@ -556,12 +557,12 @@ module control (
 		          // gate_pc = 1'b0;
 		          // gate_mdr = 1'b0;
 		 
-		          pcmux = 2'b00;
+		          pcmux = 2'b01;
 			  dr_select = 1'b0; 
 			  sr1_select = 1'b0; 
 			  sr2_mux_select = 1'b0; 
 			  addr1_mux_select = 1'b0;
-			  addr2_mux_select = 2'b00;
+			  addr2_mux_select = 2'10;
 			  aluk_in = 2'b00;   
 			  data_select = 4'b0000; //Default x
 			end
