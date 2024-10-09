@@ -52,17 +52,23 @@ end
 // same simulation timestep. The exception is for reset, which we want to make sure
 // happens first. 
 initial begin: TEST_VECTORS
-    continue_i = 0;
+    sw_i <= 16'b0000000000000000;
+    continue_i <= 0;
     run_i <= 0;
 	reset <= 0;
 	#10
-	
-	
-	
+	sw_i <= 16'b0000000000000011;
+	#10
 	reset <= 1; 
 	#10
 	reset <= 0;
 	#10
+	run_i <= 1'b1;
+	#10
+	run_i <= 1'b0;
+	#10 
+	
+	
 	
 
 $finish(); 
