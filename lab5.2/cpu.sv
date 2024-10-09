@@ -188,7 +188,7 @@ data_bus bus_mux(
     .gateMARMUX (gate_marmux),
     .gatePC     (gate_pc),
     .gateALU    (gate_alu),
-    .default_x  (),
+    .default_x  (x),
     
     .databus_out (bus)   
 );
