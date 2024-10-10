@@ -1,3 +1,4 @@
+
 //------------------------------------------------------------------------------
 // Company:          UIUC ECE Dept.
 // Engineer:         Stephen Kempf
@@ -433,8 +434,8 @@ module control (
 			  ld_cc = 1'b0;
 			  ld_ben = 1'b0;
 		
-		          gate_pc = 1'b0;
-		          gate_mdr = 1'b0;
+//		          gate_pc = 1'b0;
+//		          gate_mdr = 1'b0;
 		 
 		          pcmux = 2'b00;
 			  dr_select = 1'b0; 
@@ -562,7 +563,7 @@ module control (
 			  sr1_select = 1'b0; 
 			  sr2_mux_select = 1'b0; 
 			  addr1_mux_select = 1'b0;
-			  addr2_mux_select = 2'10;
+			  addr2_mux_select = 2'b10;
 			  aluk_in = 2'b00;   
 			  data_select = 4'b0000; //Default x
 			end
@@ -609,7 +610,7 @@ module control (
 					state_nxt = s_9;
 				  else if (ir[15:12] == 4'b0110) //LDR
 					state_nxt = s_6;
-				  else if (ir[15:12] == 4'0111) //STR
+				  else if (ir[15:12] == 4'b0111) //STR
 					state_nxt = s_7;
 				  else if (ir[15:12] == 4'b0100) //JSR
 					state_nxt = s_4;
@@ -650,7 +651,7 @@ module control (
 			s_16_1 :
 				state_nxt = s_16_2;
 			s_16_2 :
-				state_nxt = s_16_3
+				state_nxt = s_16_3;
 			s_16_3 :
 				state_nxt = s_18;
 			s_4 :
@@ -663,7 +664,7 @@ module control (
 			  if(ben == 1)
 				state_nxt = s_22;
 			  else
-				state_next = s_18;
+				state_nxt = s_18;
 			
 			s_22 :
 				state_nxt = s_18;
