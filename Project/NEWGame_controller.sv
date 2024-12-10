@@ -90,6 +90,7 @@ logic finish_line_reached;
                     end
 		    else
 			    next_state = LEVEL1;
+		    	    reset_player = 0;
             end
             LEVEL2: begin
                 if (sprite_collision) 
@@ -99,6 +100,7 @@ logic finish_line_reached;
                     reset_player = 1;
 		   	end else
 			     next_state = LEVEL2;
+		    	     reset_player = 0;
             end
             LEVEL3: begin
                 if (sprite_collision) 
@@ -107,6 +109,7 @@ logic finish_line_reached;
                     next_state = GAME_OVER;
 		       else
 			     next_state = LEVEL3;
+		    	     reset_player = 0;
             end
             GAME_OVER: begin
                 // Handle Game Over logic (restart or idle)
